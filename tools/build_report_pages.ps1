@@ -177,7 +177,8 @@ $PAGE_LIST = @(
   @{ name = 'customers01'; label = 'Customers' },
   @{ name = 'fleet01'; label = 'Fleet' },
   @{ name = 'service01'; label = 'Service' },
-  @{ name = 'cost01'; label = 'Cost' }
+  @{ name = 'cost01'; label = 'Cost' },
+  @{ name = 'summary01'; label = 'Summary & Actions' }
 )
 
 function Sidebar($page) {
@@ -314,6 +315,60 @@ Visual $p 'costTrend' 'lineChart' $LEAD_X $R1_Y $LEAD_W $R1_H ([ordered]@{ Categ
 $c = Cols @(400, 642)
 Visual $p 'costState' 'clusteredBarChart' $c[0][0] $R2_Y $c[0][1] $R2_H ([ordered]@{ Category = @((C 'fuel_purchases' 'location_state')); Y = @((M 'Avg Fuel Price per Gallon')) }) 'Fuel Price per Gallon by State' (M 'Avg Fuel Price per Gallon')
 Visual $p 'costRoutes' 'tableEx' $c[1][0] $R2_Y $c[1][1] $R2_H ([ordered]@{ Values = @((C 'routes' 'origin_city'), (C 'routes' 'destination_city'), (M 'Total Revenue'), (M 'Revenue per Mile'), (M 'Total Fuel Cost'), (M 'Margin after Fuel'), (M 'Margin after Fuel %')) }) 'Route Margin after Fuel' (M 'Margin after Fuel')
+
+# ---------------- Summary & Actions ----------------
+# Plain-language findings and recommendations for the full 2022-2024 period.
+# Figures are fixed text (they do not respond to filters); the source analysis is
+# in docs/Executive_Summary.md - update both together.
+$p = 'summary01'; Page $p 'Summary & Actions' 'What the data says and what to do next - full period, January 2022 to December 2024'
+TextBox $p "${p}_about" 12 ($FILTER_Y + 34) 176 150 @(
+  @{ t = 'Figures on this page cover the full three years and do not change with filters.'; font = 'Segoe UI'; size = '9pt'; color = $LABEL },
+  @{ t = ' '; font = 'Segoe UI'; size = '6pt'; color = $LABEL },
+  @{ t = 'Use the other pages to explore any number in detail.'; font = 'Segoe UI'; size = '9pt'; color = $LABEL }
+)
+$CARD = [ordered]@{ padding = (Pad 10 14 10 14) }
+function Heading($t, $hex) { @{ t = $t; font = 'Segoe UI'; size = '12pt'; color = $hex; bold = $true } }
+function Bullet($lead, $rest) { @{ runs = @(@{ t = "- $lead"; font = 'Segoe UI'; size = '9.5pt'; color = $INK; bold = $true }, @{ t = " $rest"; font = 'Segoe UI'; size = '9.5pt'; color = $LABEL }) } }
+function Spacer() { @{ t = ' '; font = 'Segoe UI'; size = '5pt'; color = $LABEL } }
+$FW = 318; $FH = 315
+TextBox $p "${p}_customers" $MX $R1_Y $FW $FH @(
+  (Heading 'Customers: room to grow' $TEAL), (Spacer),
+  (Bullet '$262.5M revenue' 'from 85,410 loads for 200 customers.'),
+  (Bullet 'No single customer dominates:' 'the top 10 bring in only 5.7% of revenue, so losing one account is low risk.'),
+  (Bullet 'Only about 16% of potential captured:' 'customers say they could give us far more freight than they do.'),
+  (Bullet '32 inactive accounts' 'still produced $42.6M (16%) of revenue - they are worth winning back.')
+) $CARD
+TextBox $p "${p}_fleet" ($MX + $FW + $GAP) $R1_Y $FW $FH @(
+  (Heading 'Fleet: busy, but idling' $TEAL), (Spacer),
+  (Bullet '93 trucks and 125 drivers' 'ran 122 million miles.'),
+  (Bullet 'Trucks are in use 83% of the time,' 'and fuel economy is the same (6.45 MPG) for every make.'),
+  (Bullet 'Engines idle 28% of trip time:' 'about 599,000 hours of burning fuel without moving.'),
+  (Bullet '1 in 3 repairs is an emergency.' '2018 trucks cost the most to maintain ($0.07 a mile, twice the 2020 trucks).')
+) $CARD
+TextBox $p "${p}_service" $MX ($R1_Y + $FH + $GAP) $FW $FH @(
+  (Heading 'Service: the biggest problem' $AMBER), (Spacer),
+  (Bullet 'Only 56% of stops are on time' '- 45% of deliveries and 67% of pickups.'),
+  (Bullet 'Late stops are about 3 hours late,' 'and 9,382 stops flagged late were over 2 hours early, so appointment times do not match real drive times.'),
+  (Bullet 'Drivers wait 92 minutes per stop' 'at customer docks; 36% of stops wait over 2 hours.'),
+  (Bullet '170 safety incidents,' '33 injuries and $2.65M in claims; 38% were preventable.')
+) $CARD
+TextBox $p "${p}_cost" ($MX + $FW + $GAP) ($R1_Y + $FH + $GAP) $FW $FH @(
+  (Heading 'Cost: fuel is almost everything' $TEAL), (Spacer),
+  (Bullet 'Cost per load fell 12%' '($1,272 in 2022 to $1,114 in 2024), mainly because diesel fell from $4.20 to $3.65 a gallon.'),
+  (Bullet 'Fuel is 92% of tracked cost,' 'and prices differ by only 2 cents between states, so savings must come from using less fuel.'),
+  (Bullet 'Margins look high (61%)' 'because the data has no driver pay, insurance or overheads.')
+) $CARD
+$RX = $MX + 2 * ($FW + $GAP)
+TextBox $p "${p}_actions" $RX $R1_Y ($MX + $MW - $RX) (2 * $FH + $GAP) @(
+  (Heading 'Recommended actions' $INK), (Spacer),
+  (Bullet '1. Fix delivery times first.' 'Set appointments from real drive times and track on-time weekly by customer. Target: 75% within 12 months.'), (Spacer),
+  (Bullet '2. Charge for waiting time.' 'Agree 2 hours free time, then bill. Waiting beyond 2 hours came to 49,800 hours - about $3.7M at $75 an hour.'), (Spacer),
+  (Bullet '3. Cut idling.' 'Idle limits, driver coaching and cab heaters/coolers. Halving idle time saves roughly 240,000 gallons (about $0.9M) over three years.'), (Spacer),
+  (Bullet '4. Coach high-risk drivers.' '18 drivers had 3 or more incidents. Preventable incidents cost $0.9M in claims.'), (Spacer),
+  (Bullet '5. Win back and grow accounts.' 'Call the 32 inactive customers, and target the 36 customers giving us under 10% of their potential.'), (Spacer),
+  (Bullet '6. Plan maintenance, do not react.' 'Move emergency repairs into scheduled service and review the 2018 trucks for replacement.'), (Spacer),
+  (Bullet '7. Complete the data.' 'Add driver pay and insurance to see true profit; 1,672 trips (2%) have no truck recorded.')
+) $CARD
 
 # ---------------- Page order ----------------
 Save "$PAGES\pages.json" ([ordered]@{ '$schema' = $PGS; pageOrder = @($PAGE_LIST | ForEach-Object { $_.name }); activePageName = 'b388af99db000d0b50c6' })
