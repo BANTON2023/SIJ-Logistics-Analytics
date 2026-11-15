@@ -8,7 +8,8 @@ The queries are written for PostgreSQL. A few PostgreSQL-only expressions are
 translated to SQLite on the fly (see TRANSLATIONS); everything else runs as written.
 
 Usage:
-    python tools/verify_sql.py "<folder with the CSV files>" [--show N]
+    python tools/verify_sql.py                      # uses the repo's data/ folder
+    python tools/verify_sql.py "<CSV folder>" [--show N]
 Exit code 0 = all queries ran and the reconciliation matches Power BI.
 """
 import csv
@@ -142,9 +143,10 @@ def translate(sql):
 
 
 def main():
-    if len(sys.argv) < 2:
-        sys.exit(__doc__)
-    data_dir = sys.argv[1]
+    args = [a for a in sys.argv[1:] if not a.startswith("--") and not a.isdigit()]
+    data_dir = args[0] if args else os.path.join(REPO, "data")
+    if not os.path.isdir(data_dir):
+        sys.exit(f"Data folder not found: {data_dir}\n{__doc__}")
     show = int(sys.argv[sys.argv.index("--show") + 1]) if "--show" in sys.argv else 3
     tables = parse_schema(os.path.join(SQL_DIR, "01_schema.sql"))
     db = sqlite3.connect(":memory:")

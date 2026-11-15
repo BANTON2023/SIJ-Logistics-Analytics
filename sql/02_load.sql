@@ -4,8 +4,8 @@
 -- Run from the folder that holds the CSV files, because \copy paths are
 -- relative to where psql is started:
 --
---   cd "<folder with the CSV files>"
---   psql -d sij_logistics -f "<repo>/sql/02_load.sql"
+--   cd data
+--   psql -d sij_logistics -f ../sql/02_load.sql
 --
 -- Tables load in dependency order (dimensions first) so foreign keys hold.
 -- In CSV format, empty fields load as NULL; "True"/"False" load as BOOLEAN.

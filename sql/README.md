@@ -26,9 +26,10 @@ Needs PostgreSQL 14 or later and `psql`.
 ```powershell
 createdb sij_logistics
 psql -d sij_logistics -f sql/01_schema.sql
-cd "<folder with the CSV files>"
-psql -d sij_logistics -f "<repo>/sql/02_load.sql"
-psql -d sij_logistics -f "<repo>/sql/questions/01_customers.sql"
+cd data
+psql -d sij_logistics -f ../sql/02_load.sql
+cd ..
+psql -d sij_logistics -f sql/questions/01_customers.sql
 ```
 
 ## Check without a database server
@@ -39,7 +40,7 @@ reconciliation query with the Power BI figures. It uses only the Python standard
 library.
 
 ```powershell
-python tools/verify_sql.py "<folder with the CSV files>"
+python tools/verify_sql.py
 ```
 
 It prints each query's first rows and ends with `RESULT: PASS` when all queries run,
