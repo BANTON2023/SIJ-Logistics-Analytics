@@ -1,0 +1,148 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "svcRoutes",
+  "position": {
+    "x": 10,
+    "y": 420,
+    "z": 9000,
+    "width": 820,
+    "height": 290,
+    "tabOrder": 9000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "routes"
+                    }
+                  },
+                  "Property": "origin_city"
+                }
+              },
+              "nativeQueryRef": "origin_city",
+              "queryRef": "routes.origin_city"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "routes"
+                    }
+                  },
+                  "Property": "destination_city"
+                }
+              },
+              "nativeQueryRef": "destination_city",
+              "queryRef": "routes.destination_city"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Total Loads"
+                }
+              },
+              "nativeQueryRef": "Total Loads",
+              "queryRef": "_Measures.Total Loads"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "On-Time %"
+                }
+              },
+              "nativeQueryRef": "On-Time %",
+              "queryRef": "_Measures.On-Time %"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Avg Actual Transit Days"
+                }
+              },
+              "nativeQueryRef": "Avg Actual Transit Days",
+              "queryRef": "_Measures.Avg Actual Transit Days"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Avg Planned Transit Days"
+                }
+              },
+              "nativeQueryRef": "Avg Planned Transit Days",
+              "queryRef": "_Measures.Avg Planned Transit Days"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_Measures"
+                  }
+                },
+                "Property": "Total Loads"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Route Service Levels'"
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

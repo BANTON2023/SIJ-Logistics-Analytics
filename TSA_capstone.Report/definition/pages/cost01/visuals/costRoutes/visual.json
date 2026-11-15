@@ -1,0 +1,162 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "costRoutes",
+  "position": {
+    "x": 10,
+    "y": 420,
+    "z": 9000,
+    "width": 1260,
+    "height": 290,
+    "tabOrder": 9000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "routes"
+                    }
+                  },
+                  "Property": "origin_city"
+                }
+              },
+              "nativeQueryRef": "origin_city",
+              "queryRef": "routes.origin_city"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "routes"
+                    }
+                  },
+                  "Property": "destination_city"
+                }
+              },
+              "nativeQueryRef": "destination_city",
+              "queryRef": "routes.destination_city"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Total Revenue"
+                }
+              },
+              "nativeQueryRef": "Total Revenue",
+              "queryRef": "_Measures.Total Revenue"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Revenue per Mile"
+                }
+              },
+              "nativeQueryRef": "Revenue per Mile",
+              "queryRef": "_Measures.Revenue per Mile"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Total Fuel Cost"
+                }
+              },
+              "nativeQueryRef": "Total Fuel Cost",
+              "queryRef": "_Measures.Total Fuel Cost"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Margin after Fuel"
+                }
+              },
+              "nativeQueryRef": "Margin after Fuel",
+              "queryRef": "_Measures.Margin after Fuel"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Margin after Fuel %"
+                }
+              },
+              "nativeQueryRef": "Margin after Fuel %",
+              "queryRef": "_Measures.Margin after Fuel %"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_Measures"
+                  }
+                },
+                "Property": "Margin after Fuel"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Route Margin after Fuel'"
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
