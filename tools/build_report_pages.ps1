@@ -132,9 +132,11 @@ function Panel($page, $id, $x, $y, $w, $h, $hex) {
   $v = [ordered]@{
     visualType = 'shape'
     objects = [ordered]@{
-      shape = @(@{ properties = @{ tileShape = (Lit "'rectangle'") } })
-      fill = @(@{ properties = [ordered]@{ show = (Lit 'true'); fillColor = (Col $hex); transparency = (Lit '0D') } })
-      outline = (Off)
+      # Shape formatting takes the 'default' selector; without it Power BI ignores the
+      # fill and paints the shape in the theme's first data colour.
+      shape = @(@{ properties = @{ tileShape = (Lit "'rectangle'") }; selector = @{ id = 'default' } })
+      fill = @(@{ properties = [ordered]@{ show = (Lit 'true'); fillColor = (Col $hex); transparency = (Lit '0D') }; selector = @{ id = 'default' } })
+      outline = @(@{ properties = @{ show = (Lit 'false') }; selector = @{ id = 'default' } })
     }
     visualContainerObjects = (Bare)
   }
@@ -178,8 +180,8 @@ function Button($page, $id, $x, $y, $w, $h, $label, $action, $target, $fill, $te
 }
 
 # ---------- Layout (1280 x 720 canvas) ----------
-# Sidebar (x 0-200): white brand and navigation panel on top, grey filter panel
-#   from FILTER_Y down to the bottom edge, thin divider on the right.
+# Sidebar (x 0-200): theme-blue brand and navigation panel on top, grey filter panel
+#   from FILTER_Y down to the bottom edge.
 # Header (x 200-1280, y 0-58): white full-width title bar.
 # Main area (x 212-1268): 12 px margin on both sides and at the bottom; KPI tiles
 #   beside the lead chart, then the detail visuals.
@@ -204,11 +206,10 @@ $PAGE_LIST = @(
 )
 
 function Sidebar($page) {
-  Panel $page "${page}_panel" 0 0 $SIDE_W 720 $WHITE
+  # Theme-blue panel behind the brand and navigation, grey filter panel to the bottom edge
+  Panel $page "${page}_panel" 0 0 $SIDE_W $FILTER_Y $BRAND_BLUE
   Panel $page "${page}_filterPanel" 0 $FILTER_Y $SIDE_W (720 - $FILTER_Y) $PANEL_GREY
-  Panel $page "${page}_divider" ($SIDE_W - 1) 0 1 $FILTER_Y $PANEL_GREY
-  # Brand banner: white name on theme blue, aligned with the title bar height
-  Panel $page "${page}_brandPanel" 0 0 $SIDE_W $HEAD_H $BRAND_BLUE
+  # Brand: white name on the blue panel
   TextBox $page "${page}_brand" 12 6 176 48 @(
     @{ t = 'SIJ Logistics'; font = 'Segoe UI'; size = '15pt'; color = $WHITE; bold = $true },
     @{ t = '& Analytics'; font = 'Segoe UI'; size = '10pt'; color = $TEAL_PALE; bold = $true }

@@ -124,7 +124,7 @@ trucks, not loads, so customers and routes are compared on `Margin after Fuel`.
 Six pages: **Executive Overview**, **Customers**, **Fleet**, **Service**, **Cost** and
 **Summary & Actions**, in the custom `SIJ Logistics & Analytics` theme.
 
-- **Sidebar:** brand banner, navigation buttons for every page (current page in teal),
+- **Sidebar:** blue panel with the brand in white and navigation buttons for every page (current page in teal),
   and a grey filter panel with Year, Quarter and Month (synced across pages), two
   page-specific slicers and **Clear all filters**.
 - **KPI cards:** six per page. Each shows the value (green when it meets its target,

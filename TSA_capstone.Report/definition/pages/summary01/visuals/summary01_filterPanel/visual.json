@@ -14,6 +14,9 @@
     "objects": {
       "shape": [
         {
+          "selector": {
+            "id": "default"
+          },
           "properties": {
             "tileShape": {
               "expr": {
@@ -27,6 +30,9 @@
       ],
       "fill": [
         {
+          "selector": {
+            "id": "default"
+          },
           "properties": {
             "show": {
               "expr": {
@@ -58,6 +64,9 @@
       ],
       "outline": [
         {
+          "selector": {
+            "id": "default"
+          },
           "properties": {
             "show": {
               "expr": {

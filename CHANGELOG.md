@@ -45,6 +45,9 @@ First complete release.
 
 - Report formatting objects written as arrays, as the PBIR schema requires.
 - Navigation button labels and dropdown slicers sized so they render and work.
+- Sidebar panels ignored their colour and showed the theme blue; shape fill now uses
+  the required `default` selector, so the grey filter panel renders.
+- KPI comparisons show "No change" instead of "▲ 0.0%" when a value is unchanged.
 - Fuel share and customer concentration figures corrected after SQL reconciliation.
 
 [Unreleased]: ../../compare/v1.0.0...HEAD
