@@ -3,11 +3,11 @@
   "name": "summary01_about",
   "position": {
     "x": 12,
-    "y": 346,
-    "z": 12000,
+    "y": 340,
+    "z": 13000,
     "width": 176,
     "height": 150,
-    "tabOrder": 12000
+    "tabOrder": 13000
   },
   "visual": {
     "visualType": "textbox",

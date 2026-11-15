@@ -3,11 +3,11 @@
   "name": "summary01_filtersLabel",
   "position": {
     "x": 12,
-    "y": 320,
-    "z": 10000,
+    "y": 313,
+    "z": 11000,
     "width": 176,
-    "height": 22,
-    "tabOrder": 10000
+    "height": 20,
+    "tabOrder": 11000
   },
   "visual": {
     "visualType": "textbox",

@@ -3,20 +3,17 @@
   "name": "customers01_nav1",
   "position": {
     "x": 12,
-    "y": 112,
-    "z": 5000,
+    "y": 102,
+    "z": 6000,
     "width": 176,
-    "height": 32,
-    "tabOrder": 5000
+    "height": 36,
+    "tabOrder": 6000
   },
   "visual": {
     "visualType": "actionButton",
     "objects": {
       "icon": [
         {
-          "selector": {
-            "id": "default"
-          },
           "properties": {
             "show": {
               "expr": {
@@ -26,13 +23,24 @@
               }
             }
           }
-        }
-      ],
-      "text": [
+        },
         {
           "selector": {
             "id": "default"
           },
+          "properties": {
+            "placement": {
+              "expr": {
+                "Literal": {
+                  "Value": "'left'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "text": [
+        {
           "properties": {
             "show": {
               "expr": {
@@ -40,7 +48,14 @@
                   "Value": "true"
                 }
               }
-            },
+            }
+          }
+        },
+        {
+          "selector": {
+            "id": "default"
+          },
+          "properties": {
             "text": {
               "expr": {
                 "Literal": {
@@ -62,7 +77,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "11D"
+                  "Value": "10D"
                 }
               }
             },
@@ -83,7 +98,32 @@
             "leftMargin": {
               "expr": {
                 "Literal": {
-                  "Value": "14D"
+                  "Value": "12D"
+                }
+              }
+            }
+          }
+        },
+        {
+          "selector": {
+            "id": "hover"
+          },
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Customers'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
                 }
               }
             }
@@ -92,9 +132,6 @@
       ],
       "fill": [
         {
-          "selector": {
-            "id": "default"
-          },
           "properties": {
             "show": {
               "expr": {
@@ -102,7 +139,14 @@
                   "Value": "true"
                 }
               }
-            },
+            }
+          }
+        },
+        {
+          "selector": {
+            "id": "default"
+          },
+          "properties": {
             "fillColor": {
               "solid": {
                 "color": {
@@ -128,19 +172,12 @@
             "id": "hover"
           },
           "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
             "fillColor": {
               "solid": {
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1E3A5F'"
+                      "Value": "'#0F8A8A'"
                     }
                   }
                 }
@@ -158,9 +195,6 @@
       ],
       "outline": [
         {
-          "selector": {
-            "id": "default"
-          },
           "properties": {
             "show": {
               "expr": {
@@ -178,10 +212,10 @@
             "id": "default"
           },
           "properties": {
-            "roundEdge": {
+            "tileShape": {
               "expr": {
                 "Literal": {
-                  "Value": "8L"
+                  "Value": "'rectangleRounded'"
                 }
               }
             }

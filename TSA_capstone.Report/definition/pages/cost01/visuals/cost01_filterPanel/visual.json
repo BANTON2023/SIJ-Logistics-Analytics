@@ -3,10 +3,10 @@
   "name": "cost01_filterPanel",
   "position": {
     "x": 0,
-    "y": 312,
+    "y": 306,
     "z": 2000,
     "width": 200,
-    "height": 408,
+    "height": 414,
     "tabOrder": 2000
   },
   "visual": {

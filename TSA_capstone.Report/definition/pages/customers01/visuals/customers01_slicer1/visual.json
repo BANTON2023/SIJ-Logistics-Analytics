@@ -3,11 +3,11 @@
   "name": "customers01_slicer1",
   "position": {
     "x": 12,
-    "y": 408,
-    "z": 19000,
+    "y": 400,
+    "z": 20000,
     "width": 176,
-    "height": 56,
-    "tabOrder": 19000
+    "height": 64,
+    "tabOrder": 20000
   },
   "visual": {
     "visualType": "slicer",
@@ -46,10 +46,8 @@
             }
           }
         }
-      ]
-    },
-    "visualContainerObjects": {
-      "title": [
+      ],
+      "header": [
         {
           "properties": {
             "show": {
@@ -76,6 +74,28 @@
                   }
                 }
               }
+            },
+            "textSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
             }
           }
         }
@@ -99,28 +119,28 @@
             "top": {
               "expr": {
                 "Literal": {
-                  "Value": "4D"
+                  "Value": "0D"
                 }
               }
             },
             "right": {
               "expr": {
                 "Literal": {
-                  "Value": "8D"
+                  "Value": "0D"
                 }
               }
             },
             "bottom": {
               "expr": {
                 "Literal": {
-                  "Value": "4D"
+                  "Value": "0D"
                 }
               }
             },
             "left": {
               "expr": {
                 "Literal": {
-                  "Value": "8D"
+                  "Value": "0D"
                 }
               }
             }

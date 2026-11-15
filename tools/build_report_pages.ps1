@@ -1,4 +1,4 @@
-# Generates the TSA_capstone report pages (PBIR) from the semantic model's measures.
+# Generates the SIJ Logistics & Analytics report pages (TSA_capstone project) (PBIR) from the semantic model's measures.
 # Close Power BI Desktop before running, then reopen TSA_capstone.pbip.
 #   powershell -ExecutionPolicy Bypass -File tools\build_report_pages.ps1 -Repo .
 param([string]$Repo = '.')
@@ -78,6 +78,7 @@ function Bare() { [ordered]@{ background = (Off); border = (Off); dropShadow = (
 $NAVY = '#0F2A44'; $NAVY_HOVER = '#1E3A5F'; $TEAL = '#14A3A3'; $AMBER = '#F59E0B'
 $WHITE = '#FFFFFF'; $MUTED = '#CBD5E1'; $INK = '#0F2A44'; $SUBTLE = '#64748B'
 $PANEL_GREY = '#E2E8F0'; $LABEL = '#334155'
+$BTN_GREY = '#F1F5F9'; $TEAL_PALE = '#CCEFEF'; $TEAL_DARK = '#0F8A8A'
 
 # ---------- Visual builders ----------
 $script:vis = @()
@@ -134,23 +135,37 @@ function Panel($page, $id, $x, $y, $w, $h, $hex) {
   }
   Emit $page $id $x $y $w $h $v @()
 }
-# Button: PageNavigation (target page) or ClearAllSlicers
-function Button($page, $id, $x, $y, $w, $h, $label, $action, $target, $fill, $fillT, $text, $hover) {
-  $sel = @{ id = 'default' }
+# Button: PageNavigation (target page) or ClearAllSlicers.
+# Power BI button formatting uses separate entries: one without a selector that only
+# turns the setting on ("show"), then "default" (resting) and "hover" styling.
+# Putting "show" together with the styling makes the formatting silently fail, and
+# buttons under about 36 px tall clip their label.
+function Button($page, $id, $x, $y, $w, $h, $label, $action, $target, $fill, $text, $hoverFill, $hoverText) {
+  $def = @{ id = 'default' }; $hov = @{ id = 'hover' }
+  $on = @{ properties = @{ show = (Lit 'true') } }
   $link = [ordered]@{ show = (Lit 'true'); type = (Lit "'$action'") }
   if ($target) { $link.navigationSection = (Lit "'$target'") }
   $vco = Bare; $vco.visualLink = @(@{ properties = $link })
+  $txt = [ordered]@{ text = (Lit "'$label'"); fontColor = (Col $text); fontSize = (Lit '10D'); fontFamily = (Lit "'Segoe UI Semibold'"); horizontalAlignment = (Lit "'left'"); leftMargin = (Lit '12D') }
   $v = [ordered]@{
     visualType = 'actionButton'
     objects = [ordered]@{
-      icon = @(@{ properties = @{ show = (Lit 'false') }; selector = $sel })
-      text = @(@{ properties = [ordered]@{ show = (Lit 'true'); text = (Lit "'$label'"); fontColor = (Col $text); fontSize = (Lit '11D'); fontFamily = (Lit "'Segoe UI Semibold'"); horizontalAlignment = (Lit "'left'"); leftMargin = (Lit '14D') }; selector = $sel })
-      fill = @(
-        @{ properties = [ordered]@{ show = (Lit 'true'); fillColor = (Col $fill); transparency = (Lit "${fillT}D") }; selector = $sel },
-        @{ properties = [ordered]@{ show = (Lit 'true'); fillColor = (Col $hover); transparency = (Lit '0D') }; selector = @{ id = 'hover' } }
+      icon = @(
+        @{ properties = @{ show = (Lit 'false') } },
+        @{ properties = @{ placement = (Lit "'left'") }; selector = $def }
       )
-      outline = @(@{ properties = @{ show = (Lit 'false') }; selector = $sel })
-      shape = @(@{ properties = @{ roundEdge = (Lit '8L') }; selector = $sel })
+      text = @(
+        $on,
+        @{ properties = $txt; selector = $def },
+        @{ properties = [ordered]@{ text = (Lit "'$label'"); fontColor = (Col $hoverText) }; selector = $hov }
+      )
+      fill = @(
+        $on,
+        @{ properties = [ordered]@{ fillColor = (Col $fill); transparency = (Lit '0D') }; selector = $def },
+        @{ properties = [ordered]@{ fillColor = (Col $hoverFill); transparency = (Lit '0D') }; selector = $hov }
+      )
+      outline = @(@{ properties = @{ show = (Lit 'false') } })
+      shape = @(@{ properties = @{ tileShape = (Lit "'rectangleRounded'") }; selector = $def })
     }
     visualContainerObjects = $vco
   }
@@ -158,8 +173,8 @@ function Button($page, $id, $x, $y, $w, $h, $label, $action, $target, $fill, $fi
 }
 
 # ---------- Layout (1280 x 720 canvas) ----------
-# Sidebar (x 0-200): navy brand and navigation panel on top, grey filter panel
-#   from FILTER_Y down to the bottom edge.
+# Sidebar (x 0-200): white brand and navigation panel on top, grey filter panel
+#   from FILTER_Y down to the bottom edge, thin divider on the right.
 # Header (x 200-1280, y 0-58): white full-width title bar.
 # Main area (x 212-1268): 12 px margin on both sides and at the bottom; KPI tiles
 #   beside the lead chart, then the detail visuals.
@@ -169,8 +184,10 @@ $R1_Y = 68;  $R1_H = 232     # KPI tiles (3 x 2) + lead chart
 $R2_Y = 310; $R2_H = 398     # detail visuals (ends at 708)
 $KPI_W = 166; $KPI_H = 111   # 3 tiles + 2 gaps = 518
 $LEAD_X = $MX + 3 * $KPI_W + 3 * $GAP; $LEAD_W = $MX + $MW - $LEAD_X
-$NAV_Y = 74; $NAV_H = 32; $NAV_STEP = 38
-$FILTER_Y = 312              # grey filter panel top
+$NAV_Y = 62; $NAV_H = 36; $NAV_STEP = 40   # buttons below ~36 px clip their label
+$FILTER_Y = 306              # grey filter panel top
+$SLICER_Y = 334; $SLICER_H = 64; $SLICER_STEP = 66   # dropdown slicers need 64 px with no padding
+$CLEAR_Y = 672; $CLEAR_H = 36
 
 $PAGE_LIST = @(
   @{ name = 'b388af99db000d0b50c6'; label = 'Executive Overview' },
@@ -182,21 +199,24 @@ $PAGE_LIST = @(
 )
 
 function Sidebar($page) {
-  Panel $page "${page}_panel" 0 0 $SIDE_W 720 $NAVY
+  Panel $page "${page}_panel" 0 0 $SIDE_W 720 $WHITE
   Panel $page "${page}_filterPanel" 0 $FILTER_Y $SIDE_W (720 - $FILTER_Y) $PANEL_GREY
-  TextBox $page "${page}_brand" 12 10 176 54 @(
-    @{ t = 'SIJ Logistics'; font = 'Segoe UI'; size = '16pt'; color = $WHITE; bold = $true },
-    @{ t = 'Fleet & freight analytics'; font = 'Segoe UI'; size = '9pt'; color = $MUTED }
+  Panel $page "${page}_divider" ($SIDE_W - 1) 0 1 $FILTER_Y $PANEL_GREY
+  TextBox $page "${page}_brand" 12 8 176 48 @(
+    @{ t = 'SIJ Logistics'; font = 'Segoe UI'; size = '15pt'; color = $INK; bold = $true },
+    @{ t = '& Analytics'; font = 'Segoe UI'; size = '10pt'; color = $TEAL; bold = $true }
   )
-  # Navigation: one button per page; the current page is highlighted
+  # Navigation: one button per page, labelled with the page title; the current
+  # page is solid teal, the others light grey and turn pale teal on hover
   $y = $NAV_Y
   for ($i = 0; $i -lt $PAGE_LIST.Count; $i++) {
     $entry = $PAGE_LIST[$i]
-    if ($entry.name -eq $page) { $fill = $TEAL; $fillT = 0; $txt = $WHITE } else { $fill = $NAVY; $fillT = 100; $txt = $MUTED }
-    Button $page "${page}_nav$i" 12 $y 176 $NAV_H $entry.label 'PageNavigation' $entry.name $fill $fillT $txt $NAVY_HOVER
+    if ($entry.name -eq $page) { $fill = $TEAL; $txt = $WHITE; $hf = $TEAL_DARK; $ht = $WHITE }
+    else { $fill = $BTN_GREY; $txt = $INK; $hf = $TEAL_PALE; $ht = $INK }
+    Button $page "${page}_nav$i" 12 $y 176 $NAV_H $entry.label 'PageNavigation' $entry.name $fill $txt $hf $ht
     $y += $NAV_STEP
   }
-  TextBox $page "${page}_filtersLabel" 12 ($FILTER_Y + 8) 176 22 @(@{ t = 'FILTERS'; font = 'Segoe UI'; size = '9pt'; color = $INK; bold = $true })
+  TextBox $page "${page}_filtersLabel" 12 ($FILTER_Y + 7) 176 20 @(@{ t = 'FILTERS'; font = 'Segoe UI'; size = '9pt'; color = $INK; bold = $true })
 }
 # Slicer panel: Year, Quarter and Month are synced across pages (the selection
 # carries over between pages); two slicers follow for the page's own categories.
@@ -207,23 +227,30 @@ function Slicers($page, $extra) {
     @{ f = (C 'Calendar' 'Quarter'); t = 'Quarter'; sync = 'SyncQuarter' },
     @{ f = (C 'Calendar' 'Month');   t = 'Month';   sync = 'SyncMonth' }
   ) + $extra
-  $y = $FILTER_Y + 34
+  $y = $SLICER_Y
   for ($i = 0; $i -lt $list.Count; $i++) {
     $s = $list[$i]
-    # White rounded card on the grey panel (theme style), without the shadow
-    $vco = [ordered]@{ title = (Title $s.t $LABEL); dropShadow = (Off); padding = (Pad 4 8 4 8) }
+    # One label per slicer: the slicer's own header carries the name, so the
+    # container title is switched off (otherwise the name shows twice).
+    # White rounded card on the grey panel (theme style), without the shadow.
+    # Padding is declared explicitly: any per-visual container setting drops the
+    # theme padding, and a 64 px dropdown has no room for more.
+    $vco = [ordered]@{ title = (Off); dropShadow = (Off); padding = (Pad 0 0 0 0) }
     $v = [ordered]@{
       visualType = 'slicer'
       query = [ordered]@{ queryState = [ordered]@{ Values = @{ projections = @((Proj $s.f)) } } }
-      objects = @{ data = @(@{ properties = @{ mode = (Lit "'Dropdown'") } }) }
+      objects = [ordered]@{
+        data = @(@{ properties = @{ mode = (Lit "'Dropdown'") } })
+        header = @(@{ properties = [ordered]@{ show = (Lit 'true'); text = (Lit "'$($s.t)'"); fontColor = (Col $LABEL); textSize = (Lit '9D') } })
+      }
       visualContainerObjects = $vco
       drillFilterOtherVisuals = $true
     }
     if ($s.sync) { $v.syncGroup = [ordered]@{ groupName = $s.sync; fieldChanges = $true; filterChanges = $true } }
-    Emit $page "${page}_slicer$i" 12 $y 176 56 $v @($s.f)
-    $y += 62
+    Emit $page "${page}_slicer$i" 12 $y 176 $SLICER_H $v @($s.f)
+    $y += $SLICER_STEP
   }
-  Button $page "${page}_clear" 12 668 176 36 'Clear all filters' 'ClearAllSlicers' $null $AMBER 0 $INK '#FBBF24'
+  Button $page "${page}_clear" 12 $CLEAR_Y 176 $CLEAR_H 'Clear all filters' 'ClearAllSlicers' $null $AMBER $INK '#FBBF24' $INK
 }
 # Full-width title bar: bold page title with a one-line description underneath
 function Header($page, $title, $subtitle) {

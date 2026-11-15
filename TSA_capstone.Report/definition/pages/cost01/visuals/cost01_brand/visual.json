@@ -3,11 +3,11 @@
   "name": "cost01_brand",
   "position": {
     "x": 12,
-    "y": 10,
-    "z": 3000,
+    "y": 8,
+    "z": 4000,
     "width": 176,
-    "height": 54,
-    "tabOrder": 3000
+    "height": 48,
+    "tabOrder": 4000
   },
   "visual": {
     "visualType": "textbox",
@@ -22,8 +22,8 @@
                     "value": "SIJ Logistics",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
-                      "fontSize": "16pt",
-                      "color": "#FFFFFF",
+                      "fontSize": "15pt",
+                      "color": "#0F2A44",
                       "fontWeight": "bold"
                     }
                   }
@@ -32,11 +32,12 @@
               {
                 "textRuns": [
                   {
-                    "value": "Fleet & freight analytics",
+                    "value": "& Analytics",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
-                      "fontSize": "9pt",
-                      "color": "#CBD5E1"
+                      "fontSize": "10pt",
+                      "color": "#14A3A3",
+                      "fontWeight": "bold"
                     }
                   }
                 ]
