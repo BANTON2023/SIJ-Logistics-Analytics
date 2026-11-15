@@ -59,11 +59,13 @@ function Field($f) { @{ $f.kind = @{ Expression = @{ SourceRef = @{ Entity = $f.
 function Proj($f) { [ordered]@{ field = (Field $f); queryRef = "$($f.entity).$($f.prop)"; nativeQueryRef = $f.prop } }
 function Lit($v) { @{ expr = @{ Literal = @{ Value = $v } } } }
 function Col($hex) { @{ solid = @{ color = (Lit "'$hex'") } } }
-function Off() { @(@{ properties = @{ show = (Lit 'false') } }) }
+# Formatting objects are arrays in PBIR. PowerShell unwraps a one-item array when
+# a function returns it, so these helpers return with the unary comma (,@(...)).
+function Off() { , @(@{ properties = @{ show = (Lit 'false') } }) }
 function Title($text, $color) {
   $props = [ordered]@{ show = (Lit 'true'); text = (Lit "'$text'") }
   if ($color) { $props.fontColor = (Col $color) }
-  @(@{ properties = $props })
+  , @(@{ properties = $props })
 }
 # Container with no card styling (used on the sidebar)
 function Bare() { [ordered]@{ background = (Off); border = (Off); dropShadow = (Off) } }

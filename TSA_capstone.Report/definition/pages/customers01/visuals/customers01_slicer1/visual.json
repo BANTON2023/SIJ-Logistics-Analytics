@@ -49,68 +49,76 @@
       ]
     },
     "visualContainerObjects": {
-      "background": {
-        "properties": {
-          "show": {
-            "expr": {
-              "Literal": {
-                "Value": "false"
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
               }
             }
           }
         }
-      },
-      "border": {
-        "properties": {
-          "show": {
-            "expr": {
-              "Literal": {
-                "Value": "false"
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
               }
             }
           }
         }
-      },
-      "dropShadow": {
-        "properties": {
-          "show": {
-            "expr": {
-              "Literal": {
-                "Value": "false"
+      ],
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
               }
             }
           }
         }
-      },
-      "title": {
-        "properties": {
-          "show": {
-            "expr": {
-              "Literal": {
-                "Value": "true"
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
               }
-            }
-          },
-          "text": {
-            "expr": {
-              "Literal": {
-                "Value": "'Quarter'"
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Quarter'"
+                }
               }
-            }
-          },
-          "fontColor": {
-            "solid": {
-              "color": {
-                "expr": {
-                  "Literal": {
-                    "Value": "'#CBD5E1'"
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#CBD5E1'"
+                    }
                   }
                 }
               }
             }
           }
         }
-      }
+      ]
     },
     "drillFilterOtherVisuals": true,
     "syncGroup": {

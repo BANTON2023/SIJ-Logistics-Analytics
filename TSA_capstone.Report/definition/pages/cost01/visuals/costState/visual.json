@@ -71,24 +71,26 @@
     },
     "drillFilterOtherVisuals": true,
     "visualContainerObjects": {
-      "title": {
-        "properties": {
-          "show": {
-            "expr": {
-              "Literal": {
-                "Value": "true"
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
               }
-            }
-          },
-          "text": {
-            "expr": {
-              "Literal": {
-                "Value": "'Fuel Price per Gallon by State'"
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Fuel Price per Gallon by State'"
+                }
               }
             }
           }
         }
-      }
+      ]
     }
   }
 }
