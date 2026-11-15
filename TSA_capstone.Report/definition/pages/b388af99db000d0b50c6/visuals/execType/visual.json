@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "execType",
   "position": {
-    "x": 840,
-    "y": 216,
-    "z": 14000,
-    "width": 430,
-    "height": 243,
-    "tabOrder": 14000
+    "x": 216,
+    "y": 308,
+    "z": 23000,
+    "width": 344,
+    "height": 402,
+    "tabOrder": 23000
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -71,26 +71,24 @@
     },
     "drillFilterOtherVisuals": true,
     "visualContainerObjects": {
-      "title": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
+      "title": {
+        "properties": {
+          "show": {
+            "expr": {
+              "Literal": {
+                "Value": "true"
               }
-            },
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Revenue by Customer Type'"
-                }
+            }
+          },
+          "text": {
+            "expr": {
+              "Literal": {
+                "Value": "'Revenue by Customer Type'"
               }
             }
           }
         }
-      ]
+      }
     }
   }
 }

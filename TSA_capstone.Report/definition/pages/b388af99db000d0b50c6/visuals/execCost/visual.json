@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "execCost",
   "position": {
-    "x": 10,
-    "y": 467,
-    "z": 15000,
-    "width": 620,
-    "height": 245,
-    "tabOrder": 15000
+    "x": 570,
+    "y": 308,
+    "z": 24000,
+    "width": 344,
+    "height": 402,
+    "tabOrder": 24000
   },
   "visual": {
     "visualType": "clusteredColumnChart",
@@ -81,26 +81,24 @@
     },
     "drillFilterOtherVisuals": true,
     "visualContainerObjects": {
-      "title": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
+      "title": {
+        "properties": {
+          "show": {
+            "expr": {
+              "Literal": {
+                "Value": "true"
               }
-            },
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Cost Mix by Year'"
-                }
+            }
+          },
+          "text": {
+            "expr": {
+              "Literal": {
+                "Value": "'Cost Mix by Year'"
               }
             }
           }
         }
-      ]
+      }
     }
   }
 }

@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "execOnTime",
   "position": {
-    "x": 640,
-    "y": 467,
-    "z": 16000,
-    "width": 630,
-    "height": 245,
-    "tabOrder": 16000
+    "x": 924,
+    "y": 308,
+    "z": 25000,
+    "width": 344,
+    "height": 402,
+    "tabOrder": 25000
   },
   "visual": {
     "visualType": "lineChart",
@@ -53,26 +53,24 @@
     },
     "drillFilterOtherVisuals": true,
     "visualContainerObjects": {
-      "title": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
+      "title": {
+        "properties": {
+          "show": {
+            "expr": {
+              "Literal": {
+                "Value": "true"
               }
-            },
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'On-Time Delivery % by Month'"
-                }
+            }
+          },
+          "text": {
+            "expr": {
+              "Literal": {
+                "Value": "'On-Time Delivery % by Month'"
               }
             }
           }
         }
-      ]
+      }
     }
   }
 }

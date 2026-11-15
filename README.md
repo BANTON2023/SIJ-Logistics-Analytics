@@ -64,15 +64,27 @@ All measures live in the `_Measures` table, in display folders:
 
 ## Report
 
-Five pages: **Executive Overview**, **Customers**, **Fleet**, **Service** and **Cost**.
-Every page uses the same layout, top to bottom:
+Five pages: **Executive Overview**, **Customers**, **Fleet**, **Service** and **Cost**,
+styled with the custom `SIJ_Logistics` theme
+(`TSA_capstone.Report/StaticResources/RegisteredResources/SIJ_Logistics_Theme.json`):
+navy and teal palette, white rounded cards with a soft shadow, light grey canvas.
 
-1. **Navigation bar** — a page navigator listing all five pages, with the current
-   page highlighted. Click a page name to go there (Ctrl+click in Power BI Desktop).
-2. **KPI cards** — six headline measures for the page.
-3. **Slicer panel** — Year, Quarter and Month dropdowns, synced across all pages so
-   a date selection carries over, plus two slicers for that page's topic.
-4. **Charts and scorecard tables** answering the page's business questions.
+Every page shares one layout:
+
+- **Sidebar (left)**
+  - Brand header.
+  - **Navigation buttons** for all five pages, with the current page highlighted in teal.
+    Click to switch pages (Ctrl+click while editing in Power BI Desktop).
+  - **Filters:** Year, Quarter and Month dropdowns, synced across all pages so a date
+    selection carries over, plus two slicers for the page's own categories
+    (for example Customer Type and Account Status on Customers).
+  - **Clear all filters** button.
+- **Main area**
+  - Page title and a one-line description.
+  - **Six KPI cards** in a 3 × 2 block beside the page's lead chart.
+  - Detail charts and scorecard tables below.
+
+KPI titles marked `*` use operating cost, which covers fuel and maintenance only.
 
 ## Business questions
 

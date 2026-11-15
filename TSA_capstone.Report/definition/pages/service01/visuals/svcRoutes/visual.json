@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "svcRoutes",
   "position": {
-    "x": 10,
-    "y": 467,
-    "z": 15000,
-    "width": 820,
-    "height": 245,
-    "tabOrder": 15000
+    "x": 796,
+    "y": 308,
+    "z": 25000,
+    "width": 472,
+    "height": 402,
+    "tabOrder": 25000
   },
   "visual": {
     "visualType": "tableEx",
@@ -123,26 +123,24 @@
     },
     "drillFilterOtherVisuals": true,
     "visualContainerObjects": {
-      "title": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
+      "title": {
+        "properties": {
+          "show": {
+            "expr": {
+              "Literal": {
+                "Value": "true"
               }
-            },
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Route Service Levels'"
-                }
+            }
+          },
+          "text": {
+            "expr": {
+              "Literal": {
+                "Value": "'Route Service Levels'"
               }
             }
           }
         }
-      ]
+      }
     }
   }
 }

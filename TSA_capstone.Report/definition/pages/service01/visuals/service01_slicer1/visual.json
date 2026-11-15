@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "service01_slicer1",
   "position": {
-    "x": 264,
-    "y": 152,
-    "z": 9000,
-    "width": 244,
+    "x": 12,
+    "y": 376,
+    "z": 17000,
+    "width": 176,
     "height": 56,
-    "tabOrder": 9000
+    "tabOrder": 17000
   },
   "visual": {
     "visualType": "slicer",
@@ -49,26 +49,68 @@
       ]
     },
     "visualContainerObjects": {
-      "title": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
+      "background": {
+        "properties": {
+          "show": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
               }
-            },
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Quarter'"
+            }
+          }
+        }
+      },
+      "border": {
+        "properties": {
+          "show": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
+        }
+      },
+      "dropShadow": {
+        "properties": {
+          "show": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
+        }
+      },
+      "title": {
+        "properties": {
+          "show": {
+            "expr": {
+              "Literal": {
+                "Value": "true"
+              }
+            }
+          },
+          "text": {
+            "expr": {
+              "Literal": {
+                "Value": "'Quarter'"
+              }
+            }
+          },
+          "fontColor": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#CBD5E1'"
+                  }
                 }
               }
             }
           }
         }
-      ]
+      }
     },
     "drillFilterOtherVisuals": true,
     "syncGroup": {

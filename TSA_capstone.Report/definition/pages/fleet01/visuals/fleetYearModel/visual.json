@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "fleetYearModel",
   "position": {
-    "x": 430,
-    "y": 216,
-    "z": 14000,
-    "width": 420,
-    "height": 243,
-    "tabOrder": 14000
+    "x": 744,
+    "y": 60,
+    "z": 22000,
+    "width": 524,
+    "height": 238,
+    "tabOrder": 22000
   },
   "visual": {
     "visualType": "clusteredColumnChart",
@@ -53,26 +53,24 @@
     },
     "drillFilterOtherVisuals": true,
     "visualContainerObjects": {
-      "title": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
+      "title": {
+        "properties": {
+          "show": {
+            "expr": {
+              "Literal": {
+                "Value": "true"
               }
-            },
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Maintenance Cost per Mile by Model Year'"
-                }
+            }
+          },
+          "text": {
+            "expr": {
+              "Literal": {
+                "Value": "'Maintenance Cost per Mile by Model Year'"
               }
             }
           }
         }
-      ]
+      }
     }
   }
 }

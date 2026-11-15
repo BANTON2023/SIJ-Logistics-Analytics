@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "cost01_kpi0",
   "position": {
-    "x": 10,
-    "y": 56,
-    "z": 2000,
-    "width": 201,
-    "height": 88,
-    "tabOrder": 2000
+    "x": 216,
+    "y": 60,
+    "z": 10000,
+    "width": 166,
+    "height": 114,
+    "tabOrder": 10000
   },
   "visual": {
     "visualType": "card",
@@ -35,26 +35,24 @@
     },
     "drillFilterOtherVisuals": true,
     "visualContainerObjects": {
-      "title": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
+      "title": {
+        "properties": {
+          "show": {
+            "expr": {
+              "Literal": {
+                "Value": "true"
               }
-            },
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Operating Cost (fuel + maint.)'"
-                }
+            }
+          },
+          "text": {
+            "expr": {
+              "Literal": {
+                "Value": "'Operating Cost*'"
               }
             }
           }
         }
-      ]
+      }
     }
   }
 }

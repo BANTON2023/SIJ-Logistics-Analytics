@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "service01_kpi5",
   "position": {
-    "x": 1065,
-    "y": 56,
-    "z": 7000,
-    "width": 201,
-    "height": 88,
-    "tabOrder": 7000
+    "x": 568,
+    "y": 184,
+    "z": 15000,
+    "width": 166,
+    "height": 114,
+    "tabOrder": 15000
   },
   "visual": {
     "visualType": "card",
@@ -35,26 +35,24 @@
     },
     "drillFilterOtherVisuals": true,
     "visualContainerObjects": {
-      "title": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
+      "title": {
+        "properties": {
+          "show": {
+            "expr": {
+              "Literal": {
+                "Value": "true"
               }
-            },
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Preventable Incidents %'"
-                }
+            }
+          },
+          "text": {
+            "expr": {
+              "Literal": {
+                "Value": "'Preventable Incidents'"
               }
             }
           }
         }
-      ]
+      }
     }
   }
 }

@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "customers01_kpi4",
   "position": {
-    "x": 854,
-    "y": 56,
-    "z": 6000,
-    "width": 201,
-    "height": 88,
-    "tabOrder": 6000
+    "x": 392,
+    "y": 184,
+    "z": 14000,
+    "width": 166,
+    "height": 114,
+    "tabOrder": 14000
   },
   "visual": {
     "visualType": "card",
@@ -35,26 +35,24 @@
     },
     "drillFilterOtherVisuals": true,
     "visualContainerObjects": {
-      "title": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
+      "title": {
+        "properties": {
+          "show": {
+            "expr": {
+              "Literal": {
+                "Value": "true"
               }
-            },
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Revenue vs Annual Potential'"
-                }
+            }
+          },
+          "text": {
+            "expr": {
+              "Literal": {
+                "Value": "'Revenue vs Potential'"
               }
             }
           }
         }
-      ]
+      }
     }
   }
 }

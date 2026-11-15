@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "fleetTable",
   "position": {
-    "x": 10,
-    "y": 467,
-    "z": 16000,
-    "width": 1260,
-    "height": 245,
-    "tabOrder": 16000
+    "x": 756,
+    "y": 308,
+    "z": 25000,
+    "width": 512,
+    "height": 402,
+    "tabOrder": 25000
   },
   "visual": {
     "visualType": "tableEx",
@@ -45,20 +45,6 @@
             },
             {
               "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "trucks"
-                    }
-                  },
-                  "Property": "model_year"
-                }
-              },
-              "queryRef": "trucks.model_year",
-              "nativeQueryRef": "model_year"
-            },
-            {
-              "field": {
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
@@ -84,34 +70,6 @@
               },
               "queryRef": "_Measures.Avg MPG",
               "nativeQueryRef": "Avg MPG"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Measures"
-                    }
-                  },
-                  "Property": "Idle %"
-                }
-              },
-              "queryRef": "_Measures.Idle %",
-              "nativeQueryRef": "Idle %"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Measures"
-                    }
-                  },
-                  "Property": "Total Maintenance Cost"
-                }
-              },
-              "queryRef": "_Measures.Total Maintenance Cost",
-              "nativeQueryRef": "Total Maintenance Cost"
             },
             {
               "field": {
@@ -168,7 +126,7 @@
                     "Entity": "_Measures"
                   }
                 },
-                "Property": "Total Maintenance Cost"
+                "Property": "Total Miles"
               }
             },
             "direction": "Descending"
@@ -179,26 +137,24 @@
     },
     "drillFilterOtherVisuals": true,
     "visualContainerObjects": {
-      "title": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
+      "title": {
+        "properties": {
+          "show": {
+            "expr": {
+              "Literal": {
+                "Value": "true"
               }
-            },
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Truck Scorecard'"
-                }
+            }
+          },
+          "text": {
+            "expr": {
+              "Literal": {
+                "Value": "'Truck Scorecard'"
               }
             }
           }
         }
-      ]
+      }
     }
   }
 }

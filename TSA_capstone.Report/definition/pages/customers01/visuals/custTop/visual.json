@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "custTop",
   "position": {
-    "x": 10,
-    "y": 216,
-    "z": 13000,
-    "width": 520,
-    "height": 496,
-    "tabOrder": 13000
+    "x": 216,
+    "y": 308,
+    "z": 23000,
+    "width": 380,
+    "height": 402,
+    "tabOrder": 23000
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -71,26 +71,24 @@
     },
     "drillFilterOtherVisuals": true,
     "visualContainerObjects": {
-      "title": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
+      "title": {
+        "properties": {
+          "show": {
+            "expr": {
+              "Literal": {
+                "Value": "true"
               }
-            },
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Revenue by Customer'"
-                }
+            }
+          },
+          "text": {
+            "expr": {
+              "Literal": {
+                "Value": "'Revenue by Customer'"
               }
             }
           }
         }
-      ]
+      }
     }
   }
 }
