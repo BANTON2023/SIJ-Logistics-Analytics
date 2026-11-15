@@ -115,7 +115,7 @@ table maintenance_records
 		mode: import
 		source =
 				let
-				    Source = Csv.Document(File.Contents("C:\Users\BIG AUSTIN\Downloads\drive-download-20260913T170633Z-1-001\maintenance_records.csv"),[Delimiter=",", Columns=12, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    Source = Csv.Document((if Text.StartsWith(DataSource, "http") then Web.Contents(DataSource, [RelativePath = "maintenance_records.csv"]) else File.Contents(DataSource & "maintenance_records.csv")),[Delimiter=",", Columns=12, Encoding=1252, QuoteStyle=QuoteStyle.None]),
 				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
 				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"maintenance_id", type text}, {"truck_id", type text}, {"maintenance_date", type date}, {"maintenance_type", type text}, {"odometer_reading", Int64.Type}, {"labor_hours", type number}, {"labor_cost", type number}, {"parts_cost", type number}, {"total_cost", type number}, {"facility_location", type text}, {"downtime_hours", type number}, {"service_description", type text}})
 				in

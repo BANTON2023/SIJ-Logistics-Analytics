@@ -1,0 +1,6 @@
+/// Where the 14 source CSV files are read from: a web address ending in "/" (default:
+/// the data folder of the public GitHub repository) or a local folder ending in "\".
+expression DataSource = "https://raw.githubusercontent.com/BANTON2023/SIJ-Logistics-Analytics/main/data/" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 0ed3cb9b-4747-7bb6-218e-8c6fd800ee64
+
+	annotation PBI_ResultType = Text
