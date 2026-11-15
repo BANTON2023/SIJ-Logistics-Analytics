@@ -1,0 +1,109 @@
+table driver_monthly_metrics
+	lineageTag: 149ed1b8-99ab-4708-866c-1277f5930de7
+
+	column driver_id
+		dataType: string
+		lineageTag: 3475c9b3-6c45-422a-855a-6ba5d53156e4
+		summarizeBy: none
+		sourceColumn: driver_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column month
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 8e98d055-6367-47a4-800e-52b233b9fe48
+		summarizeBy: none
+		sourceColumn: month
+
+		variation Variation
+			isDefault
+			relationship: c23fffe9-0cab-46b5-9a6d-166b6f1908f8
+			defaultHierarchy: LocalDateTable_ef3f5720-9df5-47bd-8fa1-56fb0f986ec0.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column trips_completed
+		dataType: int64
+		formatString: 0
+		lineageTag: c677d62c-8dd0-4df1-81fb-92bdcbd72489
+		summarizeBy: sum
+		sourceColumn: trips_completed
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_miles
+		dataType: int64
+		formatString: 0
+		lineageTag: 41157b24-cd2e-487f-bb50-c03e8c30b2d7
+		summarizeBy: sum
+		sourceColumn: total_miles
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_revenue
+		dataType: double
+		lineageTag: 6f9522c6-8dd3-48a9-beab-c5532fbf95fd
+		summarizeBy: sum
+		sourceColumn: total_revenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column average_mpg
+		dataType: double
+		lineageTag: b0542c7e-459f-4bea-8612-cba2bfd0d701
+		summarizeBy: sum
+		sourceColumn: average_mpg
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_fuel_gallons
+		dataType: double
+		lineageTag: 016e64c8-cf0f-4819-bf5e-87ed0c395027
+		summarizeBy: sum
+		sourceColumn: total_fuel_gallons
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column on_time_delivery_rate
+		dataType: double
+		lineageTag: c079a331-01b7-4995-bf35-4b036600ee07
+		summarizeBy: sum
+		sourceColumn: on_time_delivery_rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column average_idle_hours
+		dataType: double
+		lineageTag: 6263457a-7a1c-4aa8-ae8d-04093dd830db
+		summarizeBy: sum
+		sourceColumn: average_idle_hours
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition driver_monthly_metrics = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\BIG AUSTIN\Downloads\drive-download-20260913T170633Z-1-001\driver_monthly_metrics.csv"),[Delimiter=",", Columns=9, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"driver_id", type text}, {"month", type date}, {"trips_completed", Int64.Type}, {"total_miles", Int64.Type}, {"total_revenue", type number}, {"average_mpg", type number}, {"total_fuel_gallons", type number}, {"on_time_delivery_rate", type number}, {"average_idle_hours", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

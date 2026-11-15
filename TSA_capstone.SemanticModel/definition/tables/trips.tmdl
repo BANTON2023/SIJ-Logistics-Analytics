@@ -1,0 +1,144 @@
+table trips
+	lineageTag: 836ca41f-cb88-44b6-89bf-aab2fc2349f4
+
+	measure 'Total Trips' = DISTINCTCOUNT(trips[trip_id])
+		formatString: 0
+		lineageTag: 23ff09f1-236f-42a9-b168-cf363ae7f766
+
+	measure trips_per_load = [Total Trips] / [Total Loads]
+		lineageTag: e3a3bc3f-7449-4aea-8bf9-222688cfb914
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure average_trip_duration = AVERAGE(trips[actual_duration_hours])
+		lineageTag: a754b99c-8fba-40e5-a62f-bae49fecf7a8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column trip_id
+		dataType: string
+		lineageTag: bc31b1df-5288-4147-87bf-6ce7803a7eab
+		summarizeBy: none
+		sourceColumn: trip_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column load_id
+		dataType: string
+		lineageTag: 739ee3e0-0e5c-46eb-9487-fff620ec523c
+		summarizeBy: none
+		sourceColumn: load_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column driver_id
+		dataType: string
+		lineageTag: f7f4640d-19ae-4e47-82b7-aac645dfb927
+		summarizeBy: none
+		sourceColumn: driver_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column truck_id
+		dataType: string
+		lineageTag: c3d11826-ab2f-4a98-9057-3e897fdd018e
+		summarizeBy: none
+		sourceColumn: truck_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column trailer_id
+		dataType: string
+		lineageTag: 1208e813-79cc-448b-9049-cd95c63c6e96
+		summarizeBy: none
+		sourceColumn: trailer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column dispatch_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d555b4ed-3d76-4725-b02b-79411dbcba1b
+		summarizeBy: none
+		sourceColumn: dispatch_date
+
+		variation Variation
+			isDefault
+			relationship: 397b4a7e-6aaa-4faf-812e-e4ef8184d791
+			defaultHierarchy: LocalDateTable_e4501167-9f64-451b-b915-98ae4939b44e.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column actual_distance_miles
+		dataType: int64
+		formatString: 0
+		lineageTag: 963b2ea4-f25f-4160-b7b8-5e86b9f003bc
+		summarizeBy: sum
+		sourceColumn: actual_distance_miles
+
+		annotation SummarizationSetBy = Automatic
+
+	column actual_duration_hours
+		dataType: double
+		lineageTag: 13e5bc61-973f-4b54-aae1-38c796757238
+		summarizeBy: sum
+		sourceColumn: actual_duration_hours
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column fuel_gallons_used
+		dataType: double
+		lineageTag: b3b1e1d7-9e6b-470d-bb39-61818a33ded3
+		summarizeBy: sum
+		sourceColumn: fuel_gallons_used
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column average_mpg
+		dataType: double
+		lineageTag: 6ae30546-c969-4a48-91d2-7f5b5eedb5da
+		summarizeBy: sum
+		sourceColumn: average_mpg
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column idle_time_hours
+		dataType: double
+		lineageTag: 5d60b56d-e288-45c8-aa9c-ca8e28a8bc16
+		summarizeBy: sum
+		sourceColumn: idle_time_hours
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column trip_status
+		dataType: string
+		lineageTag: 2b3a92a2-ce74-4b9e-822b-05c2a41f09e1
+		summarizeBy: none
+		sourceColumn: trip_status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition trips = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\BIG AUSTIN\Downloads\drive-download-20260913T170633Z-1-001\trips.csv"),[Delimiter=",", Columns=12, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"trip_id", type text}, {"load_id", type text}, {"driver_id", type text}, {"truck_id", type text}, {"trailer_id", type text}, {"dispatch_date", type date}, {"actual_distance_miles", Int64.Type}, {"actual_duration_hours", type number}, {"fuel_gallons_used", type number}, {"average_mpg", type number}, {"idle_time_hours", type number}, {"trip_status", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

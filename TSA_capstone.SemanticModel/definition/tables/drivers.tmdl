@@ -1,0 +1,138 @@
+table drivers
+	lineageTag: d5bb3154-0cc2-45cd-9dbe-1fb4d922f983
+
+	column driver_id
+		dataType: string
+		lineageTag: f0a0b561-eb28-4cc9-9ffe-b2a29e0abc2d
+		summarizeBy: none
+		sourceColumn: driver_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_name
+		dataType: string
+		lineageTag: bd6545d9-117e-41bd-9133-bc5048ea17df
+		summarizeBy: none
+		sourceColumn: first_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_name
+		dataType: string
+		lineageTag: 842404bb-ee1d-4ae6-9472-16ac0c774edf
+		summarizeBy: none
+		sourceColumn: last_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column hire_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: eb7b9f94-0b5e-4db4-ae3c-0f5733534890
+		summarizeBy: none
+		sourceColumn: hire_date
+
+		variation Variation
+			isDefault
+			relationship: 66bbf02c-0d98-4e8f-a51d-c51d56699471
+			defaultHierarchy: LocalDateTable_2d9707b8-7362-41d0-8a14-e622f781c900.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column termination_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 035ffbf0-05d1-4a4e-978a-437ee9fc797a
+		summarizeBy: none
+		sourceColumn: termination_date
+
+		variation Variation
+			isDefault
+			relationship: eac9add2-33c3-48a2-94e4-4f2fdfffd1c0
+			defaultHierarchy: LocalDateTable_40866fdd-c6e9-44c6-84ae-5e4c754d037d.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column license_number
+		dataType: string
+		lineageTag: e0426675-c233-421f-9272-45f9899700f1
+		summarizeBy: none
+		sourceColumn: license_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column license_state
+		dataType: string
+		lineageTag: 6acdc8bc-6f3b-4b98-a812-1c5e615542f7
+		summarizeBy: none
+		sourceColumn: license_state
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_of_birth
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1cfda736-e850-48cd-81dd-7397af5cc9eb
+		summarizeBy: none
+		sourceColumn: date_of_birth
+
+		variation Variation
+			isDefault
+			relationship: 5f5f1cb1-0107-4395-ace1-cc8bc48e8183
+			defaultHierarchy: LocalDateTable_d4c9e566-d31e-47e5-b87e-614ae8a467db.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column home_terminal
+		dataType: string
+		lineageTag: 4b625528-c6a3-4f50-bc40-79b1c8794733
+		summarizeBy: none
+		sourceColumn: home_terminal
+
+		annotation SummarizationSetBy = Automatic
+
+	column employment_status
+		dataType: string
+		lineageTag: aeaddfe4-ffdd-4f39-bac1-9cb09ccbe130
+		summarizeBy: none
+		sourceColumn: employment_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column cdl_class
+		dataType: string
+		lineageTag: 6b9cbe98-b7a7-49f3-a4e4-d1932832ab8c
+		summarizeBy: none
+		sourceColumn: cdl_class
+
+		annotation SummarizationSetBy = Automatic
+
+	column years_experience
+		dataType: int64
+		formatString: 0
+		lineageTag: 92d57339-7f88-419e-bec5-1acf22ec083b
+		summarizeBy: sum
+		sourceColumn: years_experience
+
+		annotation SummarizationSetBy = Automatic
+
+	partition drivers = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\BIG AUSTIN\Downloads\drive-download-20260913T170633Z-1-001\drivers.csv"),[Delimiter=",", Columns=12, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"driver_id", type text}, {"first_name", type text}, {"last_name", type text}, {"hire_date", type date}, {"termination_date", type date}, {"license_number", type text}, {"license_state", type text}, {"date_of_birth", type date}, {"home_terminal", type text}, {"employment_status", type text}, {"cdl_class", type text}, {"years_experience", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

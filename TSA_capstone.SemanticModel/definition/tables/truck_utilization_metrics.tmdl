@@ -1,0 +1,118 @@
+table truck_utilization_metrics
+	lineageTag: 6fb21370-2791-4a91-aaf5-9aba88087dc1
+
+	column truck_id
+		dataType: string
+		lineageTag: 17bf1900-364a-42aa-9aa1-35ff7f8b3291
+		summarizeBy: none
+		sourceColumn: truck_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column month
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a65f2167-2cce-4d64-a9bc-77fc54fa9b86
+		summarizeBy: none
+		sourceColumn: month
+
+		variation Variation
+			isDefault
+			relationship: 2d4b45b8-2265-4b57-a085-fa6d7971096a
+			defaultHierarchy: LocalDateTable_a3ea1056-438b-40d0-a0d0-d533e667ac2e.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column trips_completed
+		dataType: int64
+		formatString: 0
+		lineageTag: 3a3cd816-3d25-4071-8f9e-bcb621135784
+		summarizeBy: sum
+		sourceColumn: trips_completed
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_miles
+		dataType: int64
+		formatString: 0
+		lineageTag: f37a9f70-0442-4167-8fb0-98488d2b73c8
+		summarizeBy: sum
+		sourceColumn: total_miles
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_revenue
+		dataType: double
+		lineageTag: ed0622f4-2fe7-483a-8df3-853ba436bdb2
+		summarizeBy: sum
+		sourceColumn: total_revenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column average_mpg
+		dataType: double
+		lineageTag: aaacd4dc-f08b-4035-aef9-15e69cc70007
+		summarizeBy: sum
+		sourceColumn: average_mpg
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column maintenance_events
+		dataType: int64
+		formatString: 0
+		lineageTag: 428c3dc7-6bae-4b28-81a7-89dabe6b584b
+		summarizeBy: sum
+		sourceColumn: maintenance_events
+
+		annotation SummarizationSetBy = Automatic
+
+	column maintenance_cost
+		dataType: double
+		lineageTag: 231571ae-a826-4d2d-a3b1-2f978df6d3a3
+		summarizeBy: sum
+		sourceColumn: maintenance_cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column downtime_hours
+		dataType: double
+		lineageTag: c16c700c-f31b-4681-9254-1c76130ceb66
+		summarizeBy: sum
+		sourceColumn: downtime_hours
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column utilization_rate
+		dataType: double
+		lineageTag: 36d0981f-c0ba-4b08-a4d3-386231fc4ed0
+		summarizeBy: sum
+		sourceColumn: utilization_rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition truck_utilization_metrics = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\BIG AUSTIN\Downloads\drive-download-20260913T170633Z-1-001\truck_utilization_metrics.csv"),[Delimiter=",", Columns=10, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"truck_id", type text}, {"month", type date}, {"trips_completed", Int64.Type}, {"total_miles", Int64.Type}, {"total_revenue", type number}, {"average_mpg", type number}, {"maintenance_events", Int64.Type}, {"maintenance_cost", type number}, {"downtime_hours", type number}, {"utilization_rate", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

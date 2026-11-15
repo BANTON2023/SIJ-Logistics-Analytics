@@ -1,0 +1,122 @@
+table fuel_purchases
+	lineageTag: 525b552a-d764-470a-9762-76b9ccb7bbe5
+
+	measure total_fuel_cost = SUM(fuel_purchases[total_cost])
+		lineageTag: 799cb2be-5c4e-427c-a7fe-cb1e3e2fd93e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column fuel_purchase_id
+		dataType: string
+		lineageTag: cbba80bb-0563-41ae-abb2-9ef91f0c6934
+		summarizeBy: none
+		sourceColumn: fuel_purchase_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column trip_id
+		dataType: string
+		lineageTag: 97dbfd60-5a5c-4d47-b71b-1062f10f87ea
+		summarizeBy: none
+		sourceColumn: trip_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column truck_id
+		dataType: string
+		lineageTag: d2344fdf-834e-43b4-9735-7e4e4cab6568
+		summarizeBy: none
+		sourceColumn: truck_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column driver_id
+		dataType: string
+		lineageTag: 8ab145bb-2390-44b5-9576-a978b71467c1
+		summarizeBy: none
+		sourceColumn: driver_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column purchase_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 27742192-8b5e-4056-8c44-e0c20e6fd4e4
+		summarizeBy: none
+		sourceColumn: purchase_date
+
+		variation Variation
+			isDefault
+			relationship: 6f09b528-2ca9-43a7-8fbb-774ea2b8bc77
+			defaultHierarchy: LocalDateTable_59fe3df8-b519-4976-93b8-c0da56f57ce5.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column location_city
+		dataType: string
+		lineageTag: b82e1f8e-3389-4f3f-bf83-16eca00b73f9
+		summarizeBy: none
+		sourceColumn: location_city
+
+		annotation SummarizationSetBy = Automatic
+
+	column location_state
+		dataType: string
+		lineageTag: 16752f50-2066-4ba9-b826-b1af8ab4e0df
+		summarizeBy: none
+		sourceColumn: location_state
+
+		annotation SummarizationSetBy = Automatic
+
+	column gallons
+		dataType: double
+		lineageTag: 86a673e0-db9a-4ae2-8219-a8a372094384
+		summarizeBy: sum
+		sourceColumn: gallons
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column price_per_gallon
+		dataType: double
+		lineageTag: b2075c4b-55f5-4596-b4a5-4c977f99765a
+		summarizeBy: sum
+		sourceColumn: price_per_gallon
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_cost
+		dataType: double
+		lineageTag: 3b2ac8c2-6697-4a91-89fa-f1b824c60c2a
+		summarizeBy: sum
+		sourceColumn: total_cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column fuel_card_number
+		dataType: string
+		lineageTag: d5f9dc9b-29bf-4d5a-aa26-303cfc3d96a6
+		summarizeBy: none
+		sourceColumn: fuel_card_number
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fuel_purchases = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\BIG AUSTIN\Downloads\drive-download-20260913T170633Z-1-001\fuel_purchases.csv"),[Delimiter=",", Columns=11, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"fuel_purchase_id", type text}, {"trip_id", type text}, {"truck_id", type text}, {"driver_id", type text}, {"purchase_date", type datetime}, {"location_city", type text}, {"location_state", type text}, {"gallons", type number}, {"price_per_gallon", type number}, {"total_cost", type number}, {"fuel_card_number", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,116 @@
+table delivery_events
+	lineageTag: 4bd37dce-9078-40a7-a6ff-73ab72a19991
+
+	measure total_delievery_events = DISTINCTCOUNT(delivery_events[event_id])
+		formatString: 0
+		lineageTag: 104ace0e-dfc6-4d9e-914f-3eb27838c175
+
+	column event_id
+		dataType: string
+		lineageTag: 8bb2953f-e02f-40d4-b72e-386e3783fa9c
+		summarizeBy: none
+		sourceColumn: event_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column load_id
+		dataType: string
+		lineageTag: 8c67d495-28e0-4a2b-b14c-0bc460dc084b
+		summarizeBy: none
+		sourceColumn: load_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column trip_id
+		dataType: string
+		lineageTag: 5ef57b26-3edb-4037-860d-aa24669ba07d
+		summarizeBy: none
+		sourceColumn: trip_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column event_type
+		dataType: string
+		lineageTag: 06f3883a-9a8f-43f2-9979-5fd0113273a5
+		summarizeBy: none
+		sourceColumn: event_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column facility_id
+		dataType: string
+		lineageTag: 42f4f834-8641-4f99-8f0a-6f5aa0778a15
+		summarizeBy: none
+		sourceColumn: facility_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column scheduled_datetime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1ed75f7e-392e-4e56-b8aa-22119c63ced6
+		summarizeBy: none
+		sourceColumn: scheduled_datetime
+
+		variation Variation
+			isDefault
+			relationship: d630f41c-db63-41fb-8a5e-e9708945b8fa
+			defaultHierarchy: LocalDateTable_04f1b425-c30a-4ce0-a482-9573f379e20b.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column actual_datetime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4d60adb2-0556-4723-8bab-cc1f70896c0f
+		summarizeBy: none
+		sourceColumn: actual_datetime
+
+		variation Variation
+			isDefault
+			relationship: a41095e4-7a18-43fc-8f4c-380585a2c8c1
+			defaultHierarchy: LocalDateTable_f5813920-0b7f-48ed-aecb-412c049bcf6e.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column detention_minutes
+		dataType: int64
+		formatString: 0
+		lineageTag: ed5291dd-ff90-4812-8648-fef4ce65390b
+		summarizeBy: sum
+		sourceColumn: detention_minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column on_time_flag
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: b89dfcb4-358e-4186-bbdd-275d807f356a
+		summarizeBy: none
+		sourceColumn: on_time_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column location_city
+		dataType: string
+		lineageTag: 428178e3-7db5-4b98-840b-f461b39c0f78
+		summarizeBy: none
+		sourceColumn: location_city
+
+		annotation SummarizationSetBy = Automatic
+
+	partition delivery_events = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\BIG AUSTIN\Downloads\drive-download-20260913T170633Z-1-001\delivery_events.csv"),[Delimiter=",", Columns=11, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"event_id", type text}, {"load_id", type text}, {"trip_id", type text}, {"event_type", type text}, {"facility_id", type text}, {"scheduled_datetime", type datetime}, {"actual_datetime", type datetime}, {"detention_minutes", Int64.Type}, {"on_time_flag", type logical}, {"location_city", type text}, {"location_state", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"location_state"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

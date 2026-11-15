@@ -1,0 +1,88 @@
+table facilities
+	lineageTag: bf994dff-fa1d-42f4-9082-929315511589
+
+	column facility_id
+		dataType: string
+		lineageTag: f082717a-6299-4b32-8757-d0e7a1c09110
+		summarizeBy: none
+		sourceColumn: facility_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column facility_name
+		dataType: string
+		lineageTag: ea87e9a6-3145-4948-9024-7811716dc1b0
+		summarizeBy: none
+		sourceColumn: facility_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column facility_type
+		dataType: string
+		lineageTag: a4986670-cd4d-4d34-a27b-c113a92398b3
+		summarizeBy: none
+		sourceColumn: facility_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: 0e439823-2017-4331-9fec-18a4a1bfd14c
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		lineageTag: b6bcc494-a3bd-45f4-bc56-d94237c6757a
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column latitude
+		dataType: string
+		lineageTag: 7e7148ae-64c3-4067-b00e-2b8ded750b25
+		summarizeBy: none
+		sourceColumn: latitude
+
+		annotation SummarizationSetBy = Automatic
+
+	column longitude
+		dataType: string
+		lineageTag: 40485902-c08f-4d27-a01a-7cb564247dac
+		summarizeBy: none
+		sourceColumn: longitude
+
+		annotation SummarizationSetBy = Automatic
+
+	column dock_doors
+		dataType: string
+		lineageTag: 0de15c0c-a583-4a52-8049-f4aa9e54735d
+		summarizeBy: none
+		sourceColumn: dock_doors
+
+		annotation SummarizationSetBy = Automatic
+
+	column operating_hours
+		dataType: string
+		lineageTag: f7213910-dff8-403d-be24-c066846cf64b
+		summarizeBy: none
+		sourceColumn: operating_hours
+
+		annotation SummarizationSetBy = Automatic
+
+	partition facilities = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\BIG AUSTIN\Downloads\drive-download-20260913T170633Z-1-001\facilities.csv"),[Delimiter=",", Columns=9, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
+				in
+				    #"Promoted Headers"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

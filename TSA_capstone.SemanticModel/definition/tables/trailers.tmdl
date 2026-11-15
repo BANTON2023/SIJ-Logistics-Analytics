@@ -1,0 +1,100 @@
+table trailers
+	lineageTag: 82e2c423-659f-4319-b7d4-06de6de516d0
+
+	column trailer_id
+		dataType: string
+		lineageTag: f6ed13a5-3252-4be7-8147-ac1eac2baac8
+		summarizeBy: none
+		sourceColumn: trailer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column trailer_number
+		dataType: int64
+		formatString: 0
+		lineageTag: 31d9c5e8-0bf3-498b-ba7e-4fa5a1706234
+		summarizeBy: sum
+		sourceColumn: trailer_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column trailer_type
+		dataType: string
+		lineageTag: 541cccf0-54b0-420c-aeb7-3927be7d12ab
+		summarizeBy: none
+		sourceColumn: trailer_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column length_feet
+		dataType: int64
+		formatString: 0
+		lineageTag: 4c72da9a-79a1-44d9-9248-52a5d800d5a7
+		summarizeBy: sum
+		sourceColumn: length_feet
+
+		annotation SummarizationSetBy = Automatic
+
+	column model_year
+		dataType: int64
+		formatString: 0
+		lineageTag: 88835f7c-f0b6-419d-bf4a-a194b06c4b29
+		summarizeBy: sum
+		sourceColumn: model_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column vin
+		dataType: string
+		lineageTag: f7044f94-f910-4234-81a8-d644ada9545b
+		summarizeBy: none
+		sourceColumn: vin
+
+		annotation SummarizationSetBy = Automatic
+
+	column acquisition_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: f232f43c-fa05-463e-99df-a2d524a08cbf
+		summarizeBy: none
+		sourceColumn: acquisition_date
+
+		variation Variation
+			isDefault
+			relationship: a2125da9-7564-4d2f-a0b7-93e645541a3b
+			defaultHierarchy: LocalDateTable_360d10f7-a350-4a65-980e-ef2dc9009adf.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column status
+		dataType: string
+		lineageTag: 6c46db0b-d6da-44b2-9bab-68a3370d9f20
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column current_location
+		dataType: string
+		lineageTag: 93ffbed3-c0b2-4798-8745-6adc0f5f5c34
+		summarizeBy: none
+		sourceColumn: current_location
+
+		annotation SummarizationSetBy = Automatic
+
+	partition trailers = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\BIG AUSTIN\Downloads\drive-download-20260913T170633Z-1-001\trailers.csv"),[Delimiter=",", Columns=9, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"trailer_id", type text}, {"trailer_number", Int64.Type}, {"trailer_type", type text}, {"length_feet", Int64.Type}, {"model_year", Int64.Type}, {"vin", type text}, {"acquisition_date", type date}, {"status", type text}, {"current_location", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

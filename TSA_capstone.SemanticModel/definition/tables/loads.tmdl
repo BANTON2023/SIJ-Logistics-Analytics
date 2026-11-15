@@ -1,0 +1,142 @@
+table loads
+	lineageTag: a7a9294d-d918-49a6-9498-1b7c930480e1
+
+	measure 'Total Loads' = DISTINCTCOUNT(loads[load_id])
+		formatString: 0
+		lineageTag: 369ee193-74d1-474a-a2af-3d896b9dba1a
+
+	measure 'Total Revenue' = SUM(loads[revenue])
+		lineageTag: 95b32f4b-47b6-4861-8284-37d1ff335967
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure AVG_Rev/Load = [Total Revenue] / [Total Loads]
+		lineageTag: 57c8ee94-7053-45da-b14e-37c697f04df9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column load_id
+		dataType: string
+		lineageTag: e3f5ad52-2aa7-4ed2-8b48-f72b72eb5ed5
+		summarizeBy: none
+		sourceColumn: load_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_id
+		dataType: string
+		lineageTag: 2ee7e5ba-b300-4e06-b54a-69cc02174193
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column route_id
+		dataType: string
+		lineageTag: 60c233a7-33d9-4e43-b5ec-fada7f0906c2
+		summarizeBy: none
+		sourceColumn: route_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column load_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e0308235-102d-4634-a8e2-0d9134828671
+		summarizeBy: none
+		sourceColumn: load_date
+
+		variation Variation
+			isDefault
+			relationship: 33d72633-f4c7-423f-89db-5ffa1e685efd
+			defaultHierarchy: LocalDateTable_2170b71f-a397-4fb7-8c80-004fad0df931.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column load_type
+		dataType: string
+		lineageTag: 1f08231e-8af8-4cb3-901a-aa0e4e18fc86
+		summarizeBy: none
+		sourceColumn: load_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column weight_lbs
+		dataType: int64
+		formatString: 0
+		lineageTag: 856e6e28-b8d4-4fb6-bbac-dda43702fdc3
+		summarizeBy: sum
+		sourceColumn: weight_lbs
+
+		annotation SummarizationSetBy = Automatic
+
+	column pieces
+		dataType: int64
+		formatString: 0
+		lineageTag: 8bb71ecd-fa2c-439f-b965-d389565ad63d
+		summarizeBy: sum
+		sourceColumn: pieces
+
+		annotation SummarizationSetBy = Automatic
+
+	column revenue
+		dataType: double
+		lineageTag: 2e779bf0-a707-4a50-8453-a5b16c33a51c
+		summarizeBy: sum
+		sourceColumn: revenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column fuel_surcharge
+		dataType: double
+		lineageTag: 15182acc-1e9f-49fd-bf38-27aaea964cef
+		summarizeBy: sum
+		sourceColumn: fuel_surcharge
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column accessorial_charges
+		dataType: int64
+		formatString: 0
+		lineageTag: 73e6364d-37c0-477c-8b99-bd0c6c9e414f
+		summarizeBy: sum
+		sourceColumn: accessorial_charges
+
+		annotation SummarizationSetBy = Automatic
+
+	column load_status
+		dataType: string
+		lineageTag: 8fc69f61-1899-4ac7-a99a-8b784306405c
+		summarizeBy: none
+		sourceColumn: load_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column booking_type
+		dataType: string
+		lineageTag: dfc01591-f9be-4f22-a43c-eb98e275334e
+		summarizeBy: none
+		sourceColumn: booking_type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition loads = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\BIG AUSTIN\Downloads\drive-download-20260913T170633Z-1-001\loads.csv"),[Delimiter=",", Columns=12, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"load_id", type text}, {"customer_id", type text}, {"route_id", type text}, {"load_date", type date}, {"load_type", type text}, {"weight_lbs", Int64.Type}, {"pieces", Int64.Type}, {"revenue", type number}, {"fuel_surcharge", type number}, {"accessorial_charges", Int64.Type}, {"load_status", type text}, {"booking_type", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,95 @@
+table routes
+	lineageTag: 87af3a4d-fbd0-4c50-9b8f-21dcfa9cc422
+
+	column route_id
+		dataType: string
+		lineageTag: d2e5b937-6cda-4f15-96e1-6c100364771a
+		summarizeBy: none
+		sourceColumn: route_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column origin_city
+		dataType: string
+		lineageTag: 02961a4c-c835-467e-bd93-afd38d17873e
+		summarizeBy: none
+		sourceColumn: origin_city
+
+		annotation SummarizationSetBy = Automatic
+
+	column origin_state
+		dataType: string
+		lineageTag: dd35ea5b-4715-4753-b07f-ef37fb2d2756
+		summarizeBy: none
+		sourceColumn: origin_state
+
+		annotation SummarizationSetBy = Automatic
+
+	column destination_city
+		dataType: string
+		lineageTag: 4b9c57e9-4cbd-4123-bbd5-4cda155cbf54
+		summarizeBy: none
+		sourceColumn: destination_city
+
+		annotation SummarizationSetBy = Automatic
+
+	column destination_state
+		dataType: string
+		lineageTag: e73a13c3-b70b-47b3-a0c9-c19fc63d2e3d
+		summarizeBy: none
+		sourceColumn: destination_state
+
+		annotation SummarizationSetBy = Automatic
+
+	column typical_distance_miles
+		dataType: int64
+		formatString: 0
+		lineageTag: c7a7c810-ae5e-4183-8702-817a3df80810
+		summarizeBy: none
+		sourceColumn: typical_distance_miles
+
+		annotation SummarizationSetBy = Automatic
+
+	column base_rate_per_mile
+		dataType: double
+		lineageTag: de7b72ff-c5b3-4ece-b6b7-a6df41444ea4
+		summarizeBy: none
+		sourceColumn: base_rate_per_mile
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column fuel_surcharge_rate
+		dataType: double
+		lineageTag: 9460b2ec-e172-48a9-b2b9-30e87d4d1f01
+		summarizeBy: none
+		sourceColumn: fuel_surcharge_rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column typical_transit_days
+		dataType: int64
+		formatString: 0
+		lineageTag: 406d7a0f-3378-45bf-8dfe-c3d4d1b62904
+		summarizeBy: none
+		sourceColumn: typical_transit_days
+
+		annotation SummarizationSetBy = Automatic
+
+	partition routes = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\BIG AUSTIN\Downloads\drive-download-20260913T170633Z-1-001\routes.csv"),[Delimiter=",", Columns=9, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"route_id", type text}, {"origin_city", type text}, {"origin_state", type text}, {"destination_city", type text}, {"destination_state", type text}, {"typical_distance_miles", Int64.Type}, {"base_rate_per_mile", type number}, {"fuel_surcharge_rate", type number}, {"typical_transit_days", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

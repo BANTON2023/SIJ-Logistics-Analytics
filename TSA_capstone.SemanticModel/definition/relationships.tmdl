@@ -1,0 +1,135 @@
+relationship 9b76895c-d1c1-43d6-b40f-b8ada3a79fa9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: customers.contract_start_date
+	toColumn: LocalDateTable_70b9bdfe-cfab-4011-b815-7644fdf95daf.Date
+
+relationship d630f41c-db63-41fb-8a5e-e9708945b8fa
+	joinOnDateBehavior: datePartOnly
+	fromColumn: delivery_events.scheduled_datetime
+	toColumn: LocalDateTable_04f1b425-c30a-4ce0-a482-9573f379e20b.Date
+
+relationship a41095e4-7a18-43fc-8f4c-380585a2c8c1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: delivery_events.actual_datetime
+	toColumn: LocalDateTable_f5813920-0b7f-48ed-aecb-412c049bcf6e.Date
+
+relationship c23fffe9-0cab-46b5-9a6d-166b6f1908f8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: driver_monthly_metrics.month
+	toColumn: LocalDateTable_ef3f5720-9df5-47bd-8fa1-56fb0f986ec0.Date
+
+relationship 66bbf02c-0d98-4e8f-a51d-c51d56699471
+	joinOnDateBehavior: datePartOnly
+	fromColumn: drivers.hire_date
+	toColumn: LocalDateTable_2d9707b8-7362-41d0-8a14-e622f781c900.Date
+
+relationship eac9add2-33c3-48a2-94e4-4f2fdfffd1c0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: drivers.termination_date
+	toColumn: LocalDateTable_40866fdd-c6e9-44c6-84ae-5e4c754d037d.Date
+
+relationship 5f5f1cb1-0107-4395-ace1-cc8bc48e8183
+	joinOnDateBehavior: datePartOnly
+	fromColumn: drivers.date_of_birth
+	toColumn: LocalDateTable_d4c9e566-d31e-47e5-b87e-614ae8a467db.Date
+
+relationship 6f09b528-2ca9-43a7-8fbb-774ea2b8bc77
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fuel_purchases.purchase_date
+	toColumn: LocalDateTable_59fe3df8-b519-4976-93b8-c0da56f57ce5.Date
+
+relationship 33d72633-f4c7-423f-89db-5ffa1e685efd
+	joinOnDateBehavior: datePartOnly
+	fromColumn: loads.load_date
+	toColumn: LocalDateTable_2170b71f-a397-4fb7-8c80-004fad0df931.Date
+
+relationship 5823cbc6-6c13-4d68-8d20-c0ccb28157f7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: maintenance_records.maintenance_date
+	toColumn: LocalDateTable_c5b0fcdc-8782-4554-8dad-bf3a6d955afc.Date
+
+relationship 92177ddb-0b3e-49d0-886f-40e746c35acc
+	joinOnDateBehavior: datePartOnly
+	fromColumn: safety_incidents.incident_date
+	toColumn: LocalDateTable_1eb90646-e102-4cfe-a6da-afc16cb9d52e.Date
+
+relationship a2125da9-7564-4d2f-a0b7-93e645541a3b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: trailers.acquisition_date
+	toColumn: LocalDateTable_360d10f7-a350-4a65-980e-ef2dc9009adf.Date
+
+relationship 397b4a7e-6aaa-4faf-812e-e4ef8184d791
+	joinOnDateBehavior: datePartOnly
+	fromColumn: trips.dispatch_date
+	toColumn: LocalDateTable_e4501167-9f64-451b-b915-98ae4939b44e.Date
+
+relationship 2d4b45b8-2265-4b57-a085-fa6d7971096a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: truck_utilization_metrics.month
+	toColumn: LocalDateTable_a3ea1056-438b-40d0-a0d0-d533e667ac2e.Date
+
+relationship a3aa1b96-cad8-4eb7-a015-5428a0b3f5a8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: trucks.acquisition_date
+	toColumn: LocalDateTable_fea259d5-b9b5-47e6-8bf5-fdae49d19e7b.Date
+
+relationship AutoDetected_124a02e6-cd59-4577-a308-d3145131eb6b
+	fromColumn: loads.customer_id
+	toColumn: customers.customer_id
+
+relationship AutoDetected_585aa063-8992-46cb-bfdc-7dc838bd7dc5
+	fromColumn: delivery_events.load_id
+	toColumn: loads.load_id
+
+relationship AutoDetected_0e19d90e-fcd9-4b9d-87ec-dd956fde583b
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: trips.load_id
+	toColumn: loads.load_id
+
+relationship AutoDetected_481cd032-5669-457f-a810-eacd30fb7b17
+	isActive: false
+	fromColumn: delivery_events.trip_id
+	toColumn: trips.trip_id
+
+relationship AutoDetected_ed042b58-6c8d-4ae0-b45a-9d269adde66b
+	fromColumn: fuel_purchases.trip_id
+	toColumn: trips.trip_id
+
+relationship AutoDetected_3a24491b-2683-48be-9637-da5c723f3e31
+	crossFilteringBehavior: bothDirections
+	fromColumn: safety_incidents.trip_id
+	toColumn: trips.trip_id
+
+relationship AutoDetected_6dc95381-5a6d-43a3-ba0a-ab2e29dc6bab
+	fromColumn: delivery_events.facility_id
+	toColumn: facilities.facility_id
+
+relationship AutoDetected_494553b1-50d6-46b5-8bc2-5113dcc2597e
+	fromColumn: driver_monthly_metrics.driver_id
+	toColumn: drivers.driver_id
+
+relationship AutoDetected_11c6c9c3-d2fe-44b9-bbe9-b4db471b38dc
+	fromColumn: maintenance_records.truck_id
+	toColumn: trucks.truck_id
+
+relationship AutoDetected_70117e52-2359-41f0-8405-f7a7b59b336b
+	fromColumn: truck_utilization_metrics.truck_id
+	toColumn: trucks.truck_id
+
+relationship AutoDetected_c79a65df-a6c6-4b9e-b28e-8fb76e40eab1
+	fromColumn: loads.route_id
+	toColumn: routes.route_id
+
+relationship cffd3d8a-8230-73d1-2278-2ee81ea292b0
+	fromColumn: trips.trailer_id
+	toColumn: trailers.trailer_id
+
+relationship 1db17a3a-1127-fb84-a760-3539cf0cdc90
+	fromColumn: trips.truck_id
+	toColumn: trucks.truck_id
+
+relationship 2d4e01e3-7b0d-6b28-51b2-fdd98371720a
+	fromColumn: trips.driver_id
+	toColumn: drivers.driver_id
+

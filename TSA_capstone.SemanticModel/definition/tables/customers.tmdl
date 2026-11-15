@@ -1,0 +1,89 @@
+table customers
+	lineageTag: 28342f30-42da-456f-a86f-833233e93f0e
+
+	column customer_id
+		dataType: string
+		lineageTag: 9c9c6887-e5d2-4f3e-b1c0-813a4538b0ad
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_name
+		dataType: string
+		lineageTag: 139d5463-435a-4c64-a250-133d44e98ca2
+		summarizeBy: none
+		sourceColumn: customer_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_type
+		dataType: string
+		lineageTag: e7e52077-420b-422a-b3d0-4ba99b79f959
+		summarizeBy: none
+		sourceColumn: customer_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column credit_terms_days
+		dataType: int64
+		formatString: 0
+		lineageTag: 790a4d2d-7b20-4b7c-9646-31881b68f61e
+		summarizeBy: sum
+		sourceColumn: credit_terms_days
+
+		annotation SummarizationSetBy = Automatic
+
+	column primary_freight_type
+		dataType: string
+		lineageTag: dcb940b0-cc41-4d21-bb6d-bd65a7525f22
+		summarizeBy: none
+		sourceColumn: primary_freight_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_status
+		dataType: string
+		lineageTag: 16d7cd4a-a6a5-452f-820d-2e073cb4ae20
+		summarizeBy: none
+		sourceColumn: account_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column contract_start_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a40c54dc-5b28-45d8-b670-a87350eae487
+		summarizeBy: none
+		sourceColumn: contract_start_date
+
+		variation Variation
+			isDefault
+			relationship: 9b76895c-d1c1-43d6-b40f-b8ada3a79fa9
+			defaultHierarchy: LocalDateTable_70b9bdfe-cfab-4011-b815-7644fdf95daf.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column annual_revenue_potential
+		dataType: int64
+		formatString: 0
+		lineageTag: 2593e625-f843-4415-9d58-5e3f0586268d
+		summarizeBy: sum
+		sourceColumn: annual_revenue_potential
+
+		annotation SummarizationSetBy = Automatic
+
+	partition customers = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\BIG AUSTIN\Downloads\drive-download-20260913T170633Z-1-001\customers.csv"),[Delimiter=",", Columns=8, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"customer_id", type text}, {"customer_name", type text}, {"customer_type", type text}, {"credit_terms_days", Int64.Type}, {"primary_freight_type", type text}, {"account_status", type text}, {"contract_start_date", type date}, {"annual_revenue_potential", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

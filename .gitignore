@@ -1,0 +1,12 @@
+# Power BI local, per-user files
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+
+# Binary Power BI files - the PBIP folders are the source of truth
+*.pbix
+
+# Pre-cleanup export used to seed the first commit; kept out of the repo
+TSA_original/
+
+# Unrelated workbook (Products/Sales), not part of the TSA capstone
+PowerBI_projectdata.xlsx
