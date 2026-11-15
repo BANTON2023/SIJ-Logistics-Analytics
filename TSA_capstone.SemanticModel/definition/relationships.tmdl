@@ -22,7 +22,6 @@ relationship AutoDetected_ed042b58-6c8d-4ae0-b45a-9d269adde66b
 	toColumn: trips.trip_id
 
 relationship AutoDetected_3a24491b-2683-48be-9637-da5c723f3e31
-	crossFilteringBehavior: bothDirections
 	fromColumn: safety_incidents.trip_id
 	toColumn: trips.trip_id
 
