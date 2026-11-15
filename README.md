@@ -17,6 +17,8 @@ Author: Mbaji Austin
 | `tools/build_report_pages.ps1` | Regenerates the report pages (close Power BI Desktop first) |
 | `docs/Executive_Summary.md` | Plain-language findings and recommendations for management |
 | `docs/Business_Questions.md` | Each business question, where the report answers it, and the answer |
+| `sql/` | PostgreSQL schema, CSV load script and queries answering the 16 questions ([details](sql/README.md)) |
+| `tools/verify_sql.py` | Runs all SQL against the CSV files and reconciles the totals with Power BI |
 
 There is no `.pbix` in this project: `TSA_capstone.pbip` and its folders are the only
 working copy. (`.pbix` files are also ignored by Git.)

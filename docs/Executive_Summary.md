@@ -87,7 +87,7 @@ every customer, and it is mostly a planning problem that can be fixed without bu
 
 ### 4. Cost: fuel drives almost everything
 
-- **Fuel is 92% of tracked operating cost** ($93.1M of $101.3M).
+- **Fuel is 94% of operating cost** ($95.6M of $101.3M), and 92% once incident claims are included.
 - **Cost per load fell 12%**, from $1,272 in 2022 to $1,114 in 2024. Over the same period
   diesel fell from $4.20 to $3.65 a gallon. The improvement came from the market, not from
   efficiency, and would reverse if fuel prices rise again.
@@ -115,7 +115,7 @@ In order of priority. Estimates are rough and meant to show scale.
 | 4 | **Coach high-risk drivers.** Start with the 18 drivers who had 3 or more incidents. | Risk is concentrated, and 38% of incidents were preventable. | Fewer injuries and part of the **$0.9M** in preventable claims. |
 | 5 | **Grow existing accounts and win back lost ones.** Contact the 32 inactive customers, and give sales a target list of the 36 customers using us for under 10% of their freight. | We capture only 16% of customers' stated potential. | Growing capture from 16% to 20% would add about **$20M a year** in revenue. |
 | 6 | **Move from emergency to planned maintenance**, and review the 2018 model-year trucks for replacement. | 1 in 3 jobs is an emergency, and the 2018 trucks cost the most per mile. | Less unplanned downtime and fewer roadside breakdowns. |
-| 7 | **Complete the data.** Add driver pay, insurance and overheads, and record a truck for every trip. | Profit margins (61%) are overstated without these costs, and 1,672 trips (2%) have no truck recorded. | A true profit figure and reliable cost per truck. |
+| 7 | **Complete the data.** Add driver pay, insurance and overheads, record a truck for every trip, and give every customer account a unique name. | Profit margins (61%) are overstated without these costs, 1,672 trips (2%) have no truck recorded, and 200 accounts share only 107 names. | A true profit figure and reliable cost per truck. |
 
 \* Assumes a parked truck burns about 0.8 gallons an hour at $3.90 a gallon.
 
