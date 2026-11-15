@@ -3,11 +3,11 @@
   "name": "costRoutes",
   "position": {
     "x": 10,
-    "y": 420,
-    "z": 9000,
+    "y": 467,
+    "z": 15000,
     "width": 1260,
-    "height": 290,
-    "tabOrder": 9000
+    "height": 245,
+    "tabOrder": 15000
   },
   "visual": {
     "visualType": "tableEx",
@@ -26,8 +26,8 @@
                   "Property": "origin_city"
                 }
               },
-              "nativeQueryRef": "origin_city",
-              "queryRef": "routes.origin_city"
+              "queryRef": "routes.origin_city",
+              "nativeQueryRef": "origin_city"
             },
             {
               "field": {
@@ -40,8 +40,8 @@
                   "Property": "destination_city"
                 }
               },
-              "nativeQueryRef": "destination_city",
-              "queryRef": "routes.destination_city"
+              "queryRef": "routes.destination_city",
+              "nativeQueryRef": "destination_city"
             },
             {
               "field": {
@@ -54,8 +54,8 @@
                   "Property": "Total Revenue"
                 }
               },
-              "nativeQueryRef": "Total Revenue",
-              "queryRef": "_Measures.Total Revenue"
+              "queryRef": "_Measures.Total Revenue",
+              "nativeQueryRef": "Total Revenue"
             },
             {
               "field": {
@@ -68,8 +68,8 @@
                   "Property": "Revenue per Mile"
                 }
               },
-              "nativeQueryRef": "Revenue per Mile",
-              "queryRef": "_Measures.Revenue per Mile"
+              "queryRef": "_Measures.Revenue per Mile",
+              "nativeQueryRef": "Revenue per Mile"
             },
             {
               "field": {
@@ -82,8 +82,8 @@
                   "Property": "Total Fuel Cost"
                 }
               },
-              "nativeQueryRef": "Total Fuel Cost",
-              "queryRef": "_Measures.Total Fuel Cost"
+              "queryRef": "_Measures.Total Fuel Cost",
+              "nativeQueryRef": "Total Fuel Cost"
             },
             {
               "field": {
@@ -96,8 +96,8 @@
                   "Property": "Margin after Fuel"
                 }
               },
-              "nativeQueryRef": "Margin after Fuel",
-              "queryRef": "_Measures.Margin after Fuel"
+              "queryRef": "_Measures.Margin after Fuel",
+              "nativeQueryRef": "Margin after Fuel"
             },
             {
               "field": {
@@ -110,8 +110,8 @@
                   "Property": "Margin after Fuel %"
                 }
               },
-              "nativeQueryRef": "Margin after Fuel %",
-              "queryRef": "_Measures.Margin after Fuel %"
+              "queryRef": "_Measures.Margin after Fuel %",
+              "nativeQueryRef": "Margin after Fuel %"
             }
           ]
         }
@@ -140,17 +140,17 @@
       "title": [
         {
           "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Route Margin after Fuel'"
-                }
-              }
-            },
             "show": {
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Route Margin after Fuel'"
                 }
               }
             }

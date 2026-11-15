@@ -3,11 +3,11 @@
   "name": "custTable",
   "position": {
     "x": 540,
-    "y": 380,
-    "z": 8000,
+    "y": 467,
+    "z": 15000,
     "width": 730,
-    "height": 330,
-    "tabOrder": 8000
+    "height": 245,
+    "tabOrder": 15000
   },
   "visual": {
     "visualType": "tableEx",
@@ -26,8 +26,8 @@
                   "Property": "customer_name"
                 }
               },
-              "nativeQueryRef": "customer_name",
-              "queryRef": "customers.customer_name"
+              "queryRef": "customers.customer_name",
+              "nativeQueryRef": "customer_name"
             },
             {
               "field": {
@@ -40,8 +40,8 @@
                   "Property": "customer_type"
                 }
               },
-              "nativeQueryRef": "customer_type",
-              "queryRef": "customers.customer_type"
+              "queryRef": "customers.customer_type",
+              "nativeQueryRef": "customer_type"
             },
             {
               "field": {
@@ -54,8 +54,8 @@
                   "Property": "account_status"
                 }
               },
-              "nativeQueryRef": "account_status",
-              "queryRef": "customers.account_status"
+              "queryRef": "customers.account_status",
+              "nativeQueryRef": "account_status"
             },
             {
               "field": {
@@ -68,8 +68,8 @@
                   "Property": "Total Revenue"
                 }
               },
-              "nativeQueryRef": "Total Revenue",
-              "queryRef": "_Measures.Total Revenue"
+              "queryRef": "_Measures.Total Revenue",
+              "nativeQueryRef": "Total Revenue"
             },
             {
               "field": {
@@ -82,8 +82,8 @@
                   "Property": "Customer Revenue Share %"
                 }
               },
-              "nativeQueryRef": "Customer Revenue Share %",
-              "queryRef": "_Measures.Customer Revenue Share %"
+              "queryRef": "_Measures.Customer Revenue Share %",
+              "nativeQueryRef": "Customer Revenue Share %"
             },
             {
               "field": {
@@ -96,8 +96,8 @@
                   "Property": "Revenue vs Potential %"
                 }
               },
-              "nativeQueryRef": "Revenue vs Potential %",
-              "queryRef": "_Measures.Revenue vs Potential %"
+              "queryRef": "_Measures.Revenue vs Potential %",
+              "nativeQueryRef": "Revenue vs Potential %"
             },
             {
               "field": {
@@ -110,8 +110,8 @@
                   "Property": "On-Time %"
                 }
               },
-              "nativeQueryRef": "On-Time %",
-              "queryRef": "_Measures.On-Time %"
+              "queryRef": "_Measures.On-Time %",
+              "nativeQueryRef": "On-Time %"
             },
             {
               "field": {
@@ -124,8 +124,8 @@
                   "Property": "Margin after Fuel %"
                 }
               },
-              "nativeQueryRef": "Margin after Fuel %",
-              "queryRef": "_Measures.Margin after Fuel %"
+              "queryRef": "_Measures.Margin after Fuel %",
+              "nativeQueryRef": "Margin after Fuel %"
             }
           ]
         }
@@ -154,17 +154,17 @@
       "title": [
         {
           "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Customer Scorecard'"
-                }
-              }
-            },
             "show": {
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Customer Scorecard'"
                 }
               }
             }

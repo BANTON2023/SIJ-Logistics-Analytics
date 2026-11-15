@@ -3,11 +3,11 @@
   "name": "execOnTime",
   "position": {
     "x": 640,
-    "y": 420,
-    "z": 10000,
+    "y": 467,
+    "z": 16000,
     "width": 630,
-    "height": 290,
-    "tabOrder": 10000
+    "height": 245,
+    "tabOrder": 16000
   },
   "visual": {
     "visualType": "lineChart",
@@ -26,8 +26,8 @@
                   "Property": "Year Month"
                 }
               },
-              "nativeQueryRef": "Year Month",
-              "queryRef": "Calendar.Year Month"
+              "queryRef": "Calendar.Year Month",
+              "nativeQueryRef": "Year Month"
             }
           ]
         },
@@ -44,8 +44,8 @@
                   "Property": "On-Time %"
                 }
               },
-              "nativeQueryRef": "On-Time %",
-              "queryRef": "_Measures.On-Time %"
+              "queryRef": "_Measures.On-Time %",
+              "nativeQueryRef": "On-Time %"
             }
           ]
         }
@@ -56,17 +56,17 @@
       "title": [
         {
           "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'On-Time Delivery % by Month'"
-                }
-              }
-            },
             "show": {
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'On-Time Delivery % by Month'"
                 }
               }
             }

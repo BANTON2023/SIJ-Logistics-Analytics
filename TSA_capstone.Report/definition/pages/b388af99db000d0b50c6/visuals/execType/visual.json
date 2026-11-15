@@ -3,11 +3,11 @@
   "name": "execType",
   "position": {
     "x": 840,
-    "y": 120,
-    "z": 8000,
+    "y": 216,
+    "z": 14000,
     "width": 430,
-    "height": 290,
-    "tabOrder": 8000
+    "height": 243,
+    "tabOrder": 14000
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -26,8 +26,8 @@
                   "Property": "customer_type"
                 }
               },
-              "nativeQueryRef": "customer_type",
-              "queryRef": "customers.customer_type"
+              "queryRef": "customers.customer_type",
+              "nativeQueryRef": "customer_type"
             }
           ]
         },
@@ -44,8 +44,8 @@
                   "Property": "Total Revenue"
                 }
               },
-              "nativeQueryRef": "Total Revenue",
-              "queryRef": "_Measures.Total Revenue"
+              "queryRef": "_Measures.Total Revenue",
+              "nativeQueryRef": "Total Revenue"
             }
           ]
         }
@@ -74,17 +74,17 @@
       "title": [
         {
           "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Revenue by Customer Type'"
-                }
-              }
-            },
             "show": {
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Revenue by Customer Type'"
                 }
               }
             }

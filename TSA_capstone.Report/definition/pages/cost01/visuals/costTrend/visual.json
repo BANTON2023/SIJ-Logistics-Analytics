@@ -3,11 +3,11 @@
   "name": "costTrend",
   "position": {
     "x": 10,
-    "y": 120,
-    "z": 7000,
+    "y": 216,
+    "z": 13000,
     "width": 620,
-    "height": 290,
-    "tabOrder": 7000
+    "height": 243,
+    "tabOrder": 13000
   },
   "visual": {
     "visualType": "lineChart",
@@ -26,8 +26,8 @@
                   "Property": "Year Month"
                 }
               },
-              "nativeQueryRef": "Year Month",
-              "queryRef": "Calendar.Year Month"
+              "queryRef": "Calendar.Year Month",
+              "nativeQueryRef": "Year Month"
             }
           ]
         },
@@ -44,8 +44,8 @@
                   "Property": "Cost per Mile"
                 }
               },
-              "nativeQueryRef": "Cost per Mile",
-              "queryRef": "_Measures.Cost per Mile"
+              "queryRef": "_Measures.Cost per Mile",
+              "nativeQueryRef": "Cost per Mile"
             },
             {
               "field": {
@@ -58,8 +58,8 @@
                   "Property": "Fuel Cost per Mile"
                 }
               },
-              "nativeQueryRef": "Fuel Cost per Mile",
-              "queryRef": "_Measures.Fuel Cost per Mile"
+              "queryRef": "_Measures.Fuel Cost per Mile",
+              "nativeQueryRef": "Fuel Cost per Mile"
             }
           ]
         }
@@ -70,17 +70,17 @@
       "title": [
         {
           "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Cost per Mile by Month'"
-                }
-              }
-            },
             "show": {
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Cost per Mile by Month'"
                 }
               }
             }

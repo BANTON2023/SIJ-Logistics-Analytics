@@ -3,11 +3,11 @@
   "name": "fleetDrivers",
   "position": {
     "x": 860,
-    "y": 120,
-    "z": 9000,
+    "y": 216,
+    "z": 15000,
     "width": 410,
-    "height": 290,
-    "tabOrder": 9000
+    "height": 243,
+    "tabOrder": 15000
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -26,8 +26,8 @@
                   "Property": "home_terminal"
                 }
               },
-              "nativeQueryRef": "home_terminal",
-              "queryRef": "drivers.home_terminal"
+              "queryRef": "drivers.home_terminal",
+              "nativeQueryRef": "home_terminal"
             }
           ]
         },
@@ -44,8 +44,8 @@
                   "Property": "Avg MPG"
                 }
               },
-              "nativeQueryRef": "Avg MPG",
-              "queryRef": "_Measures.Avg MPG"
+              "queryRef": "_Measures.Avg MPG",
+              "nativeQueryRef": "Avg MPG"
             }
           ]
         }
@@ -74,17 +74,17 @@
       "title": [
         {
           "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'MPG by Driver Home Terminal'"
-                }
-              }
-            },
             "show": {
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'MPG by Driver Home Terminal'"
                 }
               }
             }

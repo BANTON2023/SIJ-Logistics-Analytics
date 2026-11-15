@@ -3,11 +3,11 @@
   "name": "fleetMake",
   "position": {
     "x": 10,
-    "y": 120,
-    "z": 7000,
+    "y": 216,
+    "z": 13000,
     "width": 410,
-    "height": 290,
-    "tabOrder": 7000
+    "height": 243,
+    "tabOrder": 13000
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -26,8 +26,8 @@
                   "Property": "make"
                 }
               },
-              "nativeQueryRef": "make",
-              "queryRef": "trucks.make"
+              "queryRef": "trucks.make",
+              "nativeQueryRef": "make"
             }
           ]
         },
@@ -44,8 +44,8 @@
                   "Property": "Avg Utilization Rate"
                 }
               },
-              "nativeQueryRef": "Avg Utilization Rate",
-              "queryRef": "_Measures.Avg Utilization Rate"
+              "queryRef": "_Measures.Avg Utilization Rate",
+              "nativeQueryRef": "Avg Utilization Rate"
             }
           ]
         }
@@ -74,17 +74,17 @@
       "title": [
         {
           "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Utilization by Make'"
-                }
-              }
-            },
             "show": {
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Utilization by Make'"
                 }
               }
             }

@@ -1,0 +1,60 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "b388af99db000d0b50c6_kpi4",
+  "position": {
+    "x": 854,
+    "y": 56,
+    "z": 6000,
+    "width": 201,
+    "height": 88,
+    "tabOrder": 6000
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Incidents per 100 Trips"
+                }
+              },
+              "queryRef": "_Measures.Incidents per 100 Trips",
+              "nativeQueryRef": "Incidents per 100 Trips"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Incidents per 100 Trips'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

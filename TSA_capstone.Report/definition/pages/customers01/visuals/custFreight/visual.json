@@ -3,11 +3,11 @@
   "name": "custFreight",
   "position": {
     "x": 540,
-    "y": 120,
-    "z": 7000,
+    "y": 216,
+    "z": 14000,
     "width": 730,
-    "height": 250,
-    "tabOrder": 7000
+    "height": 243,
+    "tabOrder": 14000
   },
   "visual": {
     "visualType": "clusteredColumnChart",
@@ -26,8 +26,8 @@
                   "Property": "primary_freight_type"
                 }
               },
-              "nativeQueryRef": "primary_freight_type",
-              "queryRef": "customers.primary_freight_type"
+              "queryRef": "customers.primary_freight_type",
+              "nativeQueryRef": "primary_freight_type"
             }
           ]
         },
@@ -44,8 +44,8 @@
                   "Property": "Avg Revenue per Load"
                 }
               },
-              "nativeQueryRef": "Avg Revenue per Load",
-              "queryRef": "_Measures.Avg Revenue per Load"
+              "queryRef": "_Measures.Avg Revenue per Load",
+              "nativeQueryRef": "Avg Revenue per Load"
             }
           ]
         }
@@ -74,17 +74,17 @@
       "title": [
         {
           "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Avg Revenue per Load by Freight Type'"
-                }
-              }
-            },
             "show": {
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Avg Revenue per Load by Freight Type'"
                 }
               }
             }

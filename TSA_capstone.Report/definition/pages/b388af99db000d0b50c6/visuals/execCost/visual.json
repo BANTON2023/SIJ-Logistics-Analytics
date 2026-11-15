@@ -3,11 +3,11 @@
   "name": "execCost",
   "position": {
     "x": 10,
-    "y": 420,
-    "z": 9000,
+    "y": 467,
+    "z": 15000,
     "width": 620,
-    "height": 290,
-    "tabOrder": 9000
+    "height": 245,
+    "tabOrder": 15000
   },
   "visual": {
     "visualType": "clusteredColumnChart",
@@ -26,8 +26,8 @@
                   "Property": "Year"
                 }
               },
-              "nativeQueryRef": "Year",
-              "queryRef": "Calendar.Year"
+              "queryRef": "Calendar.Year",
+              "nativeQueryRef": "Year"
             }
           ]
         },
@@ -44,8 +44,8 @@
                   "Property": "Total Fuel Cost"
                 }
               },
-              "nativeQueryRef": "Total Fuel Cost",
-              "queryRef": "_Measures.Total Fuel Cost"
+              "queryRef": "_Measures.Total Fuel Cost",
+              "nativeQueryRef": "Total Fuel Cost"
             },
             {
               "field": {
@@ -58,8 +58,8 @@
                   "Property": "Total Maintenance Cost"
                 }
               },
-              "nativeQueryRef": "Total Maintenance Cost",
-              "queryRef": "_Measures.Total Maintenance Cost"
+              "queryRef": "_Measures.Total Maintenance Cost",
+              "nativeQueryRef": "Total Maintenance Cost"
             },
             {
               "field": {
@@ -72,8 +72,8 @@
                   "Property": "Total Claim Amount"
                 }
               },
-              "nativeQueryRef": "Total Claim Amount",
-              "queryRef": "_Measures.Total Claim Amount"
+              "queryRef": "_Measures.Total Claim Amount",
+              "nativeQueryRef": "Total Claim Amount"
             }
           ]
         }
@@ -84,17 +84,17 @@
       "title": [
         {
           "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Cost Mix by Year'"
-                }
-              }
-            },
             "show": {
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Cost Mix by Year'"
                 }
               }
             }

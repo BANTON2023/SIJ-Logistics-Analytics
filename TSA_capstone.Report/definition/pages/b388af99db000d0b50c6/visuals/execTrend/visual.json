@@ -3,11 +3,11 @@
   "name": "execTrend",
   "position": {
     "x": 10,
-    "y": 120,
-    "z": 7000,
+    "y": 216,
+    "z": 13000,
     "width": 820,
-    "height": 290,
-    "tabOrder": 7000
+    "height": 243,
+    "tabOrder": 13000
   },
   "visual": {
     "visualType": "lineChart",
@@ -26,8 +26,8 @@
                   "Property": "Year Month"
                 }
               },
-              "nativeQueryRef": "Year Month",
-              "queryRef": "Calendar.Year Month"
+              "queryRef": "Calendar.Year Month",
+              "nativeQueryRef": "Year Month"
             }
           ]
         },
@@ -44,8 +44,8 @@
                   "Property": "Total Revenue"
                 }
               },
-              "nativeQueryRef": "Total Revenue",
-              "queryRef": "_Measures.Total Revenue"
+              "queryRef": "_Measures.Total Revenue",
+              "nativeQueryRef": "Total Revenue"
             },
             {
               "field": {
@@ -58,8 +58,8 @@
                   "Property": "Total Operating Cost"
                 }
               },
-              "nativeQueryRef": "Total Operating Cost",
-              "queryRef": "_Measures.Total Operating Cost"
+              "queryRef": "_Measures.Total Operating Cost",
+              "nativeQueryRef": "Total Operating Cost"
             }
           ]
         }
@@ -70,17 +70,17 @@
       "title": [
         {
           "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Revenue vs Operating Cost by Month'"
-                }
-              }
-            },
             "show": {
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Revenue vs Operating Cost by Month'"
                 }
               }
             }

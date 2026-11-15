@@ -3,11 +3,11 @@
   "name": "costState",
   "position": {
     "x": 640,
-    "y": 120,
-    "z": 8000,
+    "y": 216,
+    "z": 14000,
     "width": 630,
-    "height": 290,
-    "tabOrder": 8000
+    "height": 243,
+    "tabOrder": 14000
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -26,8 +26,8 @@
                   "Property": "location_state"
                 }
               },
-              "nativeQueryRef": "location_state",
-              "queryRef": "fuel_purchases.location_state"
+              "queryRef": "fuel_purchases.location_state",
+              "nativeQueryRef": "location_state"
             }
           ]
         },
@@ -44,8 +44,8 @@
                   "Property": "Avg Fuel Price per Gallon"
                 }
               },
-              "nativeQueryRef": "Avg Fuel Price per Gallon",
-              "queryRef": "_Measures.Avg Fuel Price per Gallon"
+              "queryRef": "_Measures.Avg Fuel Price per Gallon",
+              "nativeQueryRef": "Avg Fuel Price per Gallon"
             }
           ]
         }
@@ -74,17 +74,17 @@
       "title": [
         {
           "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Fuel Price per Gallon by State'"
-                }
-              }
-            },
             "show": {
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Fuel Price per Gallon by State'"
                 }
               }
             }

@@ -3,11 +3,11 @@
   "name": "fleetTable",
   "position": {
     "x": 10,
-    "y": 420,
-    "z": 10000,
+    "y": 467,
+    "z": 16000,
     "width": 1260,
-    "height": 290,
-    "tabOrder": 10000
+    "height": 245,
+    "tabOrder": 16000
   },
   "visual": {
     "visualType": "tableEx",
@@ -26,8 +26,8 @@
                   "Property": "unit_number"
                 }
               },
-              "nativeQueryRef": "unit_number",
-              "queryRef": "trucks.unit_number"
+              "queryRef": "trucks.unit_number",
+              "nativeQueryRef": "unit_number"
             },
             {
               "field": {
@@ -40,8 +40,8 @@
                   "Property": "make"
                 }
               },
-              "nativeQueryRef": "make",
-              "queryRef": "trucks.make"
+              "queryRef": "trucks.make",
+              "nativeQueryRef": "make"
             },
             {
               "field": {
@@ -54,8 +54,8 @@
                   "Property": "model_year"
                 }
               },
-              "nativeQueryRef": "model_year",
-              "queryRef": "trucks.model_year"
+              "queryRef": "trucks.model_year",
+              "nativeQueryRef": "model_year"
             },
             {
               "field": {
@@ -68,8 +68,8 @@
                   "Property": "Total Miles"
                 }
               },
-              "nativeQueryRef": "Total Miles",
-              "queryRef": "_Measures.Total Miles"
+              "queryRef": "_Measures.Total Miles",
+              "nativeQueryRef": "Total Miles"
             },
             {
               "field": {
@@ -82,8 +82,8 @@
                   "Property": "Avg MPG"
                 }
               },
-              "nativeQueryRef": "Avg MPG",
-              "queryRef": "_Measures.Avg MPG"
+              "queryRef": "_Measures.Avg MPG",
+              "nativeQueryRef": "Avg MPG"
             },
             {
               "field": {
@@ -96,8 +96,8 @@
                   "Property": "Idle %"
                 }
               },
-              "nativeQueryRef": "Idle %",
-              "queryRef": "_Measures.Idle %"
+              "queryRef": "_Measures.Idle %",
+              "nativeQueryRef": "Idle %"
             },
             {
               "field": {
@@ -110,8 +110,8 @@
                   "Property": "Total Maintenance Cost"
                 }
               },
-              "nativeQueryRef": "Total Maintenance Cost",
-              "queryRef": "_Measures.Total Maintenance Cost"
+              "queryRef": "_Measures.Total Maintenance Cost",
+              "nativeQueryRef": "Total Maintenance Cost"
             },
             {
               "field": {
@@ -124,8 +124,8 @@
                   "Property": "Maintenance Cost per Mile"
                 }
               },
-              "nativeQueryRef": "Maintenance Cost per Mile",
-              "queryRef": "_Measures.Maintenance Cost per Mile"
+              "queryRef": "_Measures.Maintenance Cost per Mile",
+              "nativeQueryRef": "Maintenance Cost per Mile"
             },
             {
               "field": {
@@ -138,8 +138,8 @@
                   "Property": "Downtime Hours"
                 }
               },
-              "nativeQueryRef": "Downtime Hours",
-              "queryRef": "_Measures.Downtime Hours"
+              "queryRef": "_Measures.Downtime Hours",
+              "nativeQueryRef": "Downtime Hours"
             },
             {
               "field": {
@@ -152,8 +152,8 @@
                   "Property": "Avg Utilization Rate"
                 }
               },
-              "nativeQueryRef": "Avg Utilization Rate",
-              "queryRef": "_Measures.Avg Utilization Rate"
+              "queryRef": "_Measures.Avg Utilization Rate",
+              "nativeQueryRef": "Avg Utilization Rate"
             }
           ]
         }
@@ -182,17 +182,17 @@
       "title": [
         {
           "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Truck Scorecard'"
-                }
-              }
-            },
             "show": {
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Truck Scorecard'"
                 }
               }
             }

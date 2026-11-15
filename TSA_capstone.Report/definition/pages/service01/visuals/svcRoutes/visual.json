@@ -3,11 +3,11 @@
   "name": "svcRoutes",
   "position": {
     "x": 10,
-    "y": 420,
-    "z": 9000,
+    "y": 467,
+    "z": 15000,
     "width": 820,
-    "height": 290,
-    "tabOrder": 9000
+    "height": 245,
+    "tabOrder": 15000
   },
   "visual": {
     "visualType": "tableEx",
@@ -26,8 +26,8 @@
                   "Property": "origin_city"
                 }
               },
-              "nativeQueryRef": "origin_city",
-              "queryRef": "routes.origin_city"
+              "queryRef": "routes.origin_city",
+              "nativeQueryRef": "origin_city"
             },
             {
               "field": {
@@ -40,8 +40,8 @@
                   "Property": "destination_city"
                 }
               },
-              "nativeQueryRef": "destination_city",
-              "queryRef": "routes.destination_city"
+              "queryRef": "routes.destination_city",
+              "nativeQueryRef": "destination_city"
             },
             {
               "field": {
@@ -54,8 +54,8 @@
                   "Property": "Total Loads"
                 }
               },
-              "nativeQueryRef": "Total Loads",
-              "queryRef": "_Measures.Total Loads"
+              "queryRef": "_Measures.Total Loads",
+              "nativeQueryRef": "Total Loads"
             },
             {
               "field": {
@@ -68,8 +68,8 @@
                   "Property": "On-Time %"
                 }
               },
-              "nativeQueryRef": "On-Time %",
-              "queryRef": "_Measures.On-Time %"
+              "queryRef": "_Measures.On-Time %",
+              "nativeQueryRef": "On-Time %"
             },
             {
               "field": {
@@ -82,8 +82,8 @@
                   "Property": "Avg Actual Transit Days"
                 }
               },
-              "nativeQueryRef": "Avg Actual Transit Days",
-              "queryRef": "_Measures.Avg Actual Transit Days"
+              "queryRef": "_Measures.Avg Actual Transit Days",
+              "nativeQueryRef": "Avg Actual Transit Days"
             },
             {
               "field": {
@@ -96,8 +96,8 @@
                   "Property": "Avg Planned Transit Days"
                 }
               },
-              "nativeQueryRef": "Avg Planned Transit Days",
-              "queryRef": "_Measures.Avg Planned Transit Days"
+              "queryRef": "_Measures.Avg Planned Transit Days",
+              "nativeQueryRef": "Avg Planned Transit Days"
             }
           ]
         }
@@ -126,17 +126,17 @@
       "title": [
         {
           "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Route Service Levels'"
-                }
-              }
-            },
             "show": {
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Route Service Levels'"
                 }
               }
             }

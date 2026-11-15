@@ -3,11 +3,11 @@
   "name": "fleetYearModel",
   "position": {
     "x": 430,
-    "y": 120,
-    "z": 8000,
+    "y": 216,
+    "z": 14000,
     "width": 420,
-    "height": 290,
-    "tabOrder": 8000
+    "height": 243,
+    "tabOrder": 14000
   },
   "visual": {
     "visualType": "clusteredColumnChart",
@@ -26,8 +26,8 @@
                   "Property": "model_year"
                 }
               },
-              "nativeQueryRef": "model_year",
-              "queryRef": "trucks.model_year"
+              "queryRef": "trucks.model_year",
+              "nativeQueryRef": "model_year"
             }
           ]
         },
@@ -44,8 +44,8 @@
                   "Property": "Maintenance Cost per Mile"
                 }
               },
-              "nativeQueryRef": "Maintenance Cost per Mile",
-              "queryRef": "_Measures.Maintenance Cost per Mile"
+              "queryRef": "_Measures.Maintenance Cost per Mile",
+              "nativeQueryRef": "Maintenance Cost per Mile"
             }
           ]
         }
@@ -56,17 +56,17 @@
       "title": [
         {
           "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Maintenance Cost per Mile by Model Year'"
-                }
-              }
-            },
             "show": {
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Maintenance Cost per Mile by Model Year'"
                 }
               }
             }

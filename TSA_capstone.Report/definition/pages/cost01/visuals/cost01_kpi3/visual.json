@@ -1,0 +1,60 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "cost01_kpi3",
+  "position": {
+    "x": 643,
+    "y": 56,
+    "z": 5000,
+    "width": 201,
+    "height": 88,
+    "tabOrder": 5000
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Avg Fuel Price per Gallon"
+                }
+              },
+              "queryRef": "_Measures.Avg Fuel Price per Gallon",
+              "nativeQueryRef": "Avg Fuel Price per Gallon"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Avg Fuel Price / Gallon'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

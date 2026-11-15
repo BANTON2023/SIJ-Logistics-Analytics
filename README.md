@@ -14,6 +14,7 @@ Author: Mbaji Austin
 | `TSA_capstone.SemanticModel/` | Data model in TMDL: tables, measures, relationships |
 | `TSA_capstone.Report/` | Report pages and visuals in PBIR (JSON) |
 | `TSA_capstone_new_measures.dax` | Readable list of the business-question measures |
+| `tools/build_report_pages.ps1` | Regenerates the report pages (close Power BI Desktop first) |
 
 Binary `.pbix` files are not tracked; the PBIP folders are the source of truth.
 
@@ -60,6 +61,18 @@ All measures live in the `_Measures` table, in display folders:
 - `Profit` and `Profit Margin %` are valid for the whole company or by time period.
   Maintenance is linked to trucks, not loads, so use `Margin after Fuel` when
   breaking down by customer or route.
+
+## Report
+
+Five pages: **Executive Overview**, **Customers**, **Fleet**, **Service** and **Cost**.
+Every page uses the same layout, top to bottom:
+
+1. **Navigation bar** — a page navigator listing all five pages, with the current
+   page highlighted. Click a page name to go there (Ctrl+click in Power BI Desktop).
+2. **KPI cards** — six headline measures for the page.
+3. **Slicer panel** — Year, Quarter and Month dropdowns, synced across all pages so
+   a date selection carries over, plus two slicers for that page's topic.
+4. **Charts and scorecard tables** answering the page's business questions.
 
 ## Business questions
 

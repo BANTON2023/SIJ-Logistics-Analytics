@@ -3,11 +3,11 @@
   "name": "svcTrend",
   "position": {
     "x": 10,
-    "y": 120,
-    "z": 7000,
+    "y": 216,
+    "z": 13000,
     "width": 620,
-    "height": 290,
-    "tabOrder": 7000
+    "height": 243,
+    "tabOrder": 13000
   },
   "visual": {
     "visualType": "lineChart",
@@ -26,8 +26,8 @@
                   "Property": "Year Month"
                 }
               },
-              "nativeQueryRef": "Year Month",
-              "queryRef": "Calendar.Year Month"
+              "queryRef": "Calendar.Year Month",
+              "nativeQueryRef": "Year Month"
             }
           ]
         },
@@ -44,8 +44,8 @@
                   "Property": "On-Time %"
                 }
               },
-              "nativeQueryRef": "On-Time %",
-              "queryRef": "_Measures.On-Time %"
+              "queryRef": "_Measures.On-Time %",
+              "nativeQueryRef": "On-Time %"
             }
           ]
         }
@@ -56,17 +56,17 @@
       "title": [
         {
           "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'On-Time Delivery % by Month'"
-                }
-              }
-            },
             "show": {
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'On-Time Delivery % by Month'"
                 }
               }
             }
