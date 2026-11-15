@@ -24,11 +24,6 @@ table maintenance_records
 		summarizeBy: none
 		sourceColumn: maintenance_date
 
-		variation Variation
-			isDefault
-			relationship: 5823cbc6-6c13-4d68-8d20-c0ccb28157f7
-			defaultHierarchy: LocalDateTable_c5b0fcdc-8782-4554-8dad-bf3a6d955afc.'Date Hierarchy'
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date

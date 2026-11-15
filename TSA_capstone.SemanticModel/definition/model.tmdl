@@ -7,43 +7,28 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation __PBI_TimeIntelligenceEnabled = 1
+annotation __PBI_TimeIntelligenceEnabled = 0
 
 annotation PBI_QueryOrder = ["customers","delivery_events","driver_monthly_metrics","drivers","facilities","fuel_purchases","loads","maintenance_records","routes","safety_incidents","trailers","trips","truck_utilization_metrics","trucks"]
 
 annotation PBI_ProTooling = ["DevMode","MCP-PBIModeling"]
 
 ref table customers
-ref table DateTableTemplate_3c1769f6-0d6a-4c04-9022-78c8062e5fe3
-ref table LocalDateTable_70b9bdfe-cfab-4011-b815-7644fdf95daf
 ref table delivery_events
-ref table LocalDateTable_04f1b425-c30a-4ce0-a482-9573f379e20b
-ref table LocalDateTable_f5813920-0b7f-48ed-aecb-412c049bcf6e
 ref table driver_monthly_metrics
-ref table LocalDateTable_ef3f5720-9df5-47bd-8fa1-56fb0f986ec0
 ref table drivers
-ref table LocalDateTable_2d9707b8-7362-41d0-8a14-e622f781c900
-ref table LocalDateTable_40866fdd-c6e9-44c6-84ae-5e4c754d037d
-ref table LocalDateTable_d4c9e566-d31e-47e5-b87e-614ae8a467db
 ref table facilities
 ref table fuel_purchases
-ref table LocalDateTable_59fe3df8-b519-4976-93b8-c0da56f57ce5
 ref table loads
-ref table LocalDateTable_2170b71f-a397-4fb7-8c80-004fad0df931
 ref table maintenance_records
-ref table LocalDateTable_c5b0fcdc-8782-4554-8dad-bf3a6d955afc
 ref table routes
 ref table safety_incidents
-ref table LocalDateTable_1eb90646-e102-4cfe-a6da-afc16cb9d52e
 ref table trailers
-ref table LocalDateTable_360d10f7-a350-4a65-980e-ef2dc9009adf
 ref table trips
-ref table LocalDateTable_e4501167-9f64-451b-b915-98ae4939b44e
 ref table truck_utilization_metrics
-ref table LocalDateTable_a3ea1056-438b-40d0-a0d0-d533e667ac2e
 ref table trucks
-ref table LocalDateTable_fea259d5-b9b5-47e6-8bf5-fdae49d19e7b
 ref table _Measures
+ref table Calendar
 
 ref cultureInfo en-US
 

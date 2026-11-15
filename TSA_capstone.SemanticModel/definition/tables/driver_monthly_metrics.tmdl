@@ -16,11 +16,6 @@ table driver_monthly_metrics
 		summarizeBy: none
 		sourceColumn: month
 
-		variation Variation
-			isDefault
-			relationship: c23fffe9-0cab-46b5-9a6d-166b6f1908f8
-			defaultHierarchy: LocalDateTable_ef3f5720-9df5-47bd-8fa1-56fb0f986ec0.'Date Hierarchy'
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date

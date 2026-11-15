@@ -40,11 +40,6 @@ table fuel_purchases
 		summarizeBy: none
 		sourceColumn: purchase_date
 
-		variation Variation
-			isDefault
-			relationship: 6f09b528-2ca9-43a7-8fbb-774ea2b8bc77
-			defaultHierarchy: LocalDateTable_59fe3df8-b519-4976-93b8-c0da56f57ce5.'Date Hierarchy'
-
 		annotation SummarizationSetBy = Automatic
 
 	column location_city

@@ -50,11 +50,6 @@ table trucks
 		summarizeBy: none
 		sourceColumn: acquisition_date
 
-		variation Variation
-			isDefault
-			relationship: a3aa1b96-cad8-4eb7-a015-5428a0b3f5a8
-			defaultHierarchy: LocalDateTable_fea259d5-b9b5-47e6-8bf5-fdae49d19e7b.'Date Hierarchy'
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date

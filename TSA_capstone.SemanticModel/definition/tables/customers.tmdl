@@ -57,11 +57,6 @@ table customers
 		summarizeBy: none
 		sourceColumn: contract_start_date
 
-		variation Variation
-			isDefault
-			relationship: 9b76895c-d1c1-43d6-b40f-b8ada3a79fa9
-			defaultHierarchy: LocalDateTable_70b9bdfe-cfab-4011-b815-7644fdf95daf.'Date Hierarchy'
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date

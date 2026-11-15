@@ -48,11 +48,6 @@ table trips
 		summarizeBy: none
 		sourceColumn: dispatch_date
 
-		variation Variation
-			isDefault
-			relationship: 397b4a7e-6aaa-4faf-812e-e4ef8184d791
-			defaultHierarchy: LocalDateTable_e4501167-9f64-451b-b915-98ae4939b44e.'Date Hierarchy'
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date

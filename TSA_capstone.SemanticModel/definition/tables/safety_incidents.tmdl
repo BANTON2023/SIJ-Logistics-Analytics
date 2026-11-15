@@ -40,11 +40,6 @@ table safety_incidents
 		summarizeBy: none
 		sourceColumn: incident_date
 
-		variation Variation
-			isDefault
-			relationship: 92177ddb-0b3e-49d0-886f-40e746c35acc
-			defaultHierarchy: LocalDateTable_1eb90646-e102-4cfe-a6da-afc16cb9d52e.'Date Hierarchy'
-
 		annotation SummarizationSetBy = Automatic
 
 	column incident_type

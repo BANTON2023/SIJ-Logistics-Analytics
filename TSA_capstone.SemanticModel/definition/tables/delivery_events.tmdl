@@ -48,11 +48,6 @@ table delivery_events
 		summarizeBy: none
 		sourceColumn: scheduled_datetime
 
-		variation Variation
-			isDefault
-			relationship: d630f41c-db63-41fb-8a5e-e9708945b8fa
-			defaultHierarchy: LocalDateTable_04f1b425-c30a-4ce0-a482-9573f379e20b.'Date Hierarchy'
-
 		annotation SummarizationSetBy = Automatic
 
 	column actual_datetime
@@ -61,11 +56,6 @@ table delivery_events
 		lineageTag: 4d60adb2-0556-4723-8bab-cc1f70896c0f
 		summarizeBy: none
 		sourceColumn: actual_datetime
-
-		variation Variation
-			isDefault
-			relationship: a41095e4-7a18-43fc-8f4c-380585a2c8c1
-			defaultHierarchy: LocalDateTable_f5813920-0b7f-48ed-aecb-412c049bcf6e.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 

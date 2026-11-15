@@ -59,11 +59,6 @@ table trailers
 		summarizeBy: none
 		sourceColumn: acquisition_date
 
-		variation Variation
-			isDefault
-			relationship: a2125da9-7564-4d2f-a0b7-93e645541a3b
-			defaultHierarchy: LocalDateTable_360d10f7-a350-4a65-980e-ef2dc9009adf.'Date Hierarchy'
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date

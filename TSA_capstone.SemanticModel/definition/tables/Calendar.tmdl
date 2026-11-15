@@ -1,0 +1,61 @@
+/// Shared date table. Active links: loads[load_date], maintenance_records[maintenance_date], driver_monthly_metrics[month], truck_utilization_metrics[month]. trips[dispatch_date] is inactive (use USERELATIONSHIP).
+table Calendar
+	lineageTag: 4977b0b3-c018-4748-8fcd-134ff80db4bc
+	dataCategory: Time
+
+	column Date
+		isUnique
+		formatString: yyyy-mm-dd
+		isNameInferred
+		sourceColumn: [Date]
+
+	column Year
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Year]
+
+	column Quarter
+		isNameInferred
+		sourceColumn: [Quarter]
+
+	column 'Month Number'
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Month Number]
+
+	column Month
+		isNameInferred
+		sourceColumn: [Month]
+		sortByColumn: 'Month Number'
+
+	column 'Year Month'
+		isNameInferred
+		sourceColumn: [Year Month]
+
+	column 'Weekday Number'
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Weekday Number]
+
+	column Weekday
+		isNameInferred
+		sourceColumn: [Weekday]
+		sortByColumn: 'Weekday Number'
+
+	partition Calendar = calculated
+		mode: import
+		source =
+				VAR _start = DATE(YEAR(MIN(loads[load_date])), 1, 1)
+				VAR _end = DATE(YEAR(MAX(loads[load_date])), 12, 31)
+				RETURN
+				ADDCOLUMNS(
+				    CALENDAR(_start, _end),
+				    "Year", YEAR([Date]),
+				    "Quarter", "Q" & QUARTER([Date]),
+				    "Month Number", MONTH([Date]),
+				    "Month", FORMAT([Date], "MMM"),
+				    "Year Month", FORMAT([Date], "YYYY-MM"),
+				    "Weekday Number", WEEKDAY([Date], 2),
+				    "Weekday", FORMAT([Date], "ddd")
+				)
+

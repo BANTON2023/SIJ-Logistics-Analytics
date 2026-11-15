@@ -32,11 +32,6 @@ table loads
 		summarizeBy: none
 		sourceColumn: load_date
 
-		variation Variation
-			isDefault
-			relationship: 33d72633-f4c7-423f-89db-5ffa1e685efd
-			defaultHierarchy: LocalDateTable_2170b71f-a397-4fb7-8c80-004fad0df931.'Date Hierarchy'
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date

@@ -32,11 +32,6 @@ table drivers
 		summarizeBy: none
 		sourceColumn: hire_date
 
-		variation Variation
-			isDefault
-			relationship: 66bbf02c-0d98-4e8f-a51d-c51d56699471
-			defaultHierarchy: LocalDateTable_2d9707b8-7362-41d0-8a14-e622f781c900.'Date Hierarchy'
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date
@@ -47,11 +42,6 @@ table drivers
 		lineageTag: 035ffbf0-05d1-4a4e-978a-437ee9fc797a
 		summarizeBy: none
 		sourceColumn: termination_date
-
-		variation Variation
-			isDefault
-			relationship: eac9add2-33c3-48a2-94e4-4f2fdfffd1c0
-			defaultHierarchy: LocalDateTable_40866fdd-c6e9-44c6-84ae-5e4c754d037d.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 
@@ -79,11 +69,6 @@ table drivers
 		lineageTag: 1cfda736-e850-48cd-81dd-7397af5cc9eb
 		summarizeBy: none
 		sourceColumn: date_of_birth
-
-		variation Variation
-			isDefault
-			relationship: 5f5f1cb1-0107-4395-ace1-cc8bc48e8183
-			defaultHierarchy: LocalDateTable_d4c9e566-d31e-47e5-b87e-614ae8a467db.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 

@@ -16,11 +16,6 @@ table truck_utilization_metrics
 		summarizeBy: none
 		sourceColumn: month
 
-		variation Variation
-			isDefault
-			relationship: 2d4b45b8-2265-4b57-a085-fa6d7971096a
-			defaultHierarchy: LocalDateTable_a3ea1056-438b-40d0-a0d0-d533e667ac2e.'Date Hierarchy'
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date

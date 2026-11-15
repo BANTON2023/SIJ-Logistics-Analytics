@@ -189,6 +189,32 @@
             "width": 234
           },
           "zIndex": 12
+        },
+        {
+          "location": {
+            "x": 2441.9007692230953,
+            "y": 624.24263223551361
+          },
+          "nodeIndex": "_Measures",
+          "nodeLineageTag": "e103bba9-cd3b-4a22-bb6d-b168cb43a723",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2725.9007692230953,
+            "y": 588.24263223551361
+          },
+          "nodeIndex": "Calendar",
+          "nodeLineageTag": "4977b0b3-c018-4748-8fcd-134ff80db4bc",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "All tables",
