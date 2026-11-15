@@ -92,14 +92,18 @@ RETURN
     IF (
         ISBLANK ( _change ),
         "No prior year to compare",
-        _prefix & IF ( _change >= 0, "$UP ", "$DOWN " ) & $text & " vs " & ( _year - 1 )
+        IF (
+            ROUND ( _change, 4 ) = 0,
+            _prefix & "No change vs " & ( _year - 1 ),
+            _prefix & IF ( _change > 0, "$UP ", "$DOWN " ) & $text & " vs " & ( _year - 1 )
+        )
     )
 "@ $null 'KPI Comparison'
 
   AddMeasure "$m vs LY Color" @"
 VAR _change = [$m YoY Change]
 RETURN
-    IF ( ISBLANK ( _change ) || _change = 0, "$NEUTRAL", IF ( $goodWhen, "$GOOD", "$BAD" ) )
+    IF ( ISBLANK ( _change ) || ROUND ( _change, 4 ) = 0, "$NEUTRAL", IF ( $goodWhen, "$GOOD", "$BAD" ) )
 "@ $null 'KPI Comparison'
 
   if ($null -ne $k.target) {

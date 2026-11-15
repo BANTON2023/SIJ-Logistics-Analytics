@@ -305,7 +305,11 @@ table _Measures
 			    IF (
 			        ISBLANK ( _change ),
 			        "No prior year to compare",
-			        _prefix & IF ( _change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        IF (
+			            ROUND ( _change, 4 ) = 0,
+			            _prefix & "No change vs " & ( _year - 1 ),
+			            _prefix & IF ( _change > 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        )
 			    )
 		displayFolder: KPI Comparison
 		lineageTag: 8a958dbd-d4ba-9faa-601b-ecf17efe4507
@@ -313,7 +317,7 @@ table _Measures
 	measure 'Total Revenue vs LY Color' =
 			VAR _change = [Total Revenue YoY Change]
 			RETURN
-			    IF ( ISBLANK ( _change ) || _change = 0, "#64748B", IF ( _change > 0, "#059669", "#DC2626" ) )
+			    IF ( ISBLANK ( _change ) || ROUND ( _change, 4 ) = 0, "#64748B", IF ( _change > 0, "#059669", "#DC2626" ) )
 		displayFolder: KPI Comparison
 		lineageTag: ce8c6a1c-f179-0826-9a4d-70b4aca7dedd
 
@@ -338,7 +342,11 @@ table _Measures
 			    IF (
 			        ISBLANK ( _change ),
 			        "No prior year to compare",
-			        _prefix & IF ( _change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        IF (
+			            ROUND ( _change, 4 ) = 0,
+			            _prefix & "No change vs " & ( _year - 1 ),
+			            _prefix & IF ( _change > 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        )
 			    )
 		displayFolder: KPI Comparison
 		lineageTag: 091c56ea-46af-7c8f-023b-59bbe031bfff
@@ -346,7 +354,7 @@ table _Measures
 	measure 'Total Loads vs LY Color' =
 			VAR _change = [Total Loads YoY Change]
 			RETURN
-			    IF ( ISBLANK ( _change ) || _change = 0, "#64748B", IF ( _change > 0, "#059669", "#DC2626" ) )
+			    IF ( ISBLANK ( _change ) || ROUND ( _change, 4 ) = 0, "#64748B", IF ( _change > 0, "#059669", "#DC2626" ) )
 		displayFolder: KPI Comparison
 		lineageTag: 14188665-a8bf-c0d7-1943-47c5f8d59044
 
@@ -371,7 +379,11 @@ table _Measures
 			    IF (
 			        ISBLANK ( _change ),
 			        "No prior year to compare",
-			        _prefix & IF ( _change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        IF (
+			            ROUND ( _change, 4 ) = 0,
+			            _prefix & "No change vs " & ( _year - 1 ),
+			            _prefix & IF ( _change > 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        )
 			    )
 		displayFolder: KPI Comparison
 		lineageTag: 603e63e0-c107-e859-5d99-b70d2c4ee752
@@ -379,7 +391,7 @@ table _Measures
 	measure 'Total Billed Revenue vs LY Color' =
 			VAR _change = [Total Billed Revenue YoY Change]
 			RETURN
-			    IF ( ISBLANK ( _change ) || _change = 0, "#64748B", IF ( _change > 0, "#059669", "#DC2626" ) )
+			    IF ( ISBLANK ( _change ) || ROUND ( _change, 4 ) = 0, "#64748B", IF ( _change > 0, "#059669", "#DC2626" ) )
 		displayFolder: KPI Comparison
 		lineageTag: 60d05abb-5c8a-731c-0ad4-88e7f5656efd
 
@@ -404,7 +416,11 @@ table _Measures
 			    IF (
 			        ISBLANK ( _change ),
 			        "No prior year to compare",
-			        _prefix & IF ( _change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        IF (
+			            ROUND ( _change, 4 ) = 0,
+			            _prefix & "No change vs " & ( _year - 1 ),
+			            _prefix & IF ( _change > 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        )
 			    )
 		displayFolder: KPI Comparison
 		lineageTag: 47bf586b-5c1e-4d99-f031-7a78a786fa40
@@ -412,7 +428,7 @@ table _Measures
 	measure 'Avg Revenue per Load vs LY Color' =
 			VAR _change = [Avg Revenue per Load YoY Change]
 			RETURN
-			    IF ( ISBLANK ( _change ) || _change = 0, "#64748B", IF ( _change > 0, "#059669", "#DC2626" ) )
+			    IF ( ISBLANK ( _change ) || ROUND ( _change, 4 ) = 0, "#64748B", IF ( _change > 0, "#059669", "#DC2626" ) )
 		displayFolder: KPI Comparison
 		lineageTag: 02f9241c-44aa-1f4d-f2c9-de9c1b4161e7
 
@@ -437,7 +453,11 @@ table _Measures
 			    IF (
 			        ISBLANK ( _change ),
 			        "No prior year to compare",
-			        _prefix & IF ( _change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        IF (
+			            ROUND ( _change, 4 ) = 0,
+			            _prefix & "No change vs " & ( _year - 1 ),
+			            _prefix & IF ( _change > 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        )
 			    )
 		displayFolder: KPI Comparison
 		lineageTag: 74a12d46-a500-79f9-388e-ac34e249d273
@@ -445,7 +465,7 @@ table _Measures
 	measure 'Active Customers vs LY Color' =
 			VAR _change = [Active Customers YoY Change]
 			RETURN
-			    IF ( ISBLANK ( _change ) || _change = 0, "#64748B", IF ( _change > 0, "#059669", "#DC2626" ) )
+			    IF ( ISBLANK ( _change ) || ROUND ( _change, 4 ) = 0, "#64748B", IF ( _change > 0, "#059669", "#DC2626" ) )
 		displayFolder: KPI Comparison
 		lineageTag: 10cb48e2-91d9-fa28-024c-2ff5a4a01971
 
@@ -470,7 +490,11 @@ table _Measures
 			    IF (
 			        ISBLANK ( _change ),
 			        "No prior year to compare",
-			        _prefix & IF ( _change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ) * 100, "0.0" ) & " pts" & " vs " & ( _year - 1 )
+			        IF (
+			            ROUND ( _change, 4 ) = 0,
+			            _prefix & "No change vs " & ( _year - 1 ),
+			            _prefix & IF ( _change > 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ) * 100, "0.0" ) & " pts" & " vs " & ( _year - 1 )
+			        )
 			    )
 		displayFolder: KPI Comparison
 		lineageTag: 2b71f595-caac-7b7e-980c-d35bec1199c9
@@ -478,7 +502,7 @@ table _Measures
 	measure 'Revenue vs Potential % vs LY Color' =
 			VAR _change = [Revenue vs Potential % YoY Change]
 			RETURN
-			    IF ( ISBLANK ( _change ) || _change = 0, "#64748B", IF ( _change > 0, "#059669", "#DC2626" ) )
+			    IF ( ISBLANK ( _change ) || ROUND ( _change, 4 ) = 0, "#64748B", IF ( _change > 0, "#059669", "#DC2626" ) )
 		displayFolder: KPI Comparison
 		lineageTag: d9f77d0d-480b-aa30-6968-84f184bd130f
 
@@ -516,7 +540,11 @@ table _Measures
 			    IF (
 			        ISBLANK ( _change ),
 			        "No prior year to compare",
-			        _prefix & IF ( _change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ) * 100, "0.0" ) & " pts" & " vs " & ( _year - 1 )
+			        IF (
+			            ROUND ( _change, 4 ) = 0,
+			            _prefix & "No change vs " & ( _year - 1 ),
+			            _prefix & IF ( _change > 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ) * 100, "0.0" ) & " pts" & " vs " & ( _year - 1 )
+			        )
 			    )
 		displayFolder: KPI Comparison
 		lineageTag: 591a925e-0f30-c435-1ec3-0509f2380ec7
@@ -524,7 +552,7 @@ table _Measures
 	measure 'Margin after Fuel % vs LY Color' =
 			VAR _change = [Margin after Fuel % YoY Change]
 			RETURN
-			    IF ( ISBLANK ( _change ) || _change = 0, "#64748B", IF ( _change > 0, "#059669", "#DC2626" ) )
+			    IF ( ISBLANK ( _change ) || ROUND ( _change, 4 ) = 0, "#64748B", IF ( _change > 0, "#059669", "#DC2626" ) )
 		displayFolder: KPI Comparison
 		lineageTag: 47a1f435-6ed0-11cc-9848-a935cc7d03fd
 
@@ -562,7 +590,11 @@ table _Measures
 			    IF (
 			        ISBLANK ( _change ),
 			        "No prior year to compare",
-			        _prefix & IF ( _change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        IF (
+			            ROUND ( _change, 4 ) = 0,
+			            _prefix & "No change vs " & ( _year - 1 ),
+			            _prefix & IF ( _change > 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        )
 			    )
 		displayFolder: KPI Comparison
 		lineageTag: 63288f41-b2dc-29a1-538e-022f1057108f
@@ -570,7 +602,7 @@ table _Measures
 	measure 'Margin after Fuel vs LY Color' =
 			VAR _change = [Margin after Fuel YoY Change]
 			RETURN
-			    IF ( ISBLANK ( _change ) || _change = 0, "#64748B", IF ( _change > 0, "#059669", "#DC2626" ) )
+			    IF ( ISBLANK ( _change ) || ROUND ( _change, 4 ) = 0, "#64748B", IF ( _change > 0, "#059669", "#DC2626" ) )
 		displayFolder: KPI Comparison
 		lineageTag: 2195f739-8e87-bd97-2c3e-a592887fdf6b
 
@@ -595,7 +627,11 @@ table _Measures
 			    IF (
 			        ISBLANK ( _change ),
 			        "No prior year to compare",
-			        _prefix & IF ( _change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ) * 100, "0.0" ) & " pts" & " vs " & ( _year - 1 )
+			        IF (
+			            ROUND ( _change, 4 ) = 0,
+			            _prefix & "No change vs " & ( _year - 1 ),
+			            _prefix & IF ( _change > 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ) * 100, "0.0" ) & " pts" & " vs " & ( _year - 1 )
+			        )
 			    )
 		displayFolder: KPI Comparison
 		lineageTag: 2e058407-7ea8-74a7-8c13-9b171ce6199b
@@ -603,7 +639,7 @@ table _Measures
 	measure 'On-Time Delivery % vs LY Color' =
 			VAR _change = [On-Time Delivery % YoY Change]
 			RETURN
-			    IF ( ISBLANK ( _change ) || _change = 0, "#64748B", IF ( _change > 0, "#059669", "#DC2626" ) )
+			    IF ( ISBLANK ( _change ) || ROUND ( _change, 4 ) = 0, "#64748B", IF ( _change > 0, "#059669", "#DC2626" ) )
 		displayFolder: KPI Comparison
 		lineageTag: 44ca1749-83a1-ac7b-023b-381ccc272860
 
@@ -641,7 +677,11 @@ table _Measures
 			    IF (
 			        ISBLANK ( _change ),
 			        "No prior year to compare",
-			        _prefix & IF ( _change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ) * 100, "0.0" ) & " pts" & " vs " & ( _year - 1 )
+			        IF (
+			            ROUND ( _change, 4 ) = 0,
+			            _prefix & "No change vs " & ( _year - 1 ),
+			            _prefix & IF ( _change > 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ) * 100, "0.0" ) & " pts" & " vs " & ( _year - 1 )
+			        )
 			    )
 		displayFolder: KPI Comparison
 		lineageTag: 155c4e94-0ae5-8f95-6827-a637b9f4e99e
@@ -649,7 +689,7 @@ table _Measures
 	measure 'On-Time Pickup % vs LY Color' =
 			VAR _change = [On-Time Pickup % YoY Change]
 			RETURN
-			    IF ( ISBLANK ( _change ) || _change = 0, "#64748B", IF ( _change > 0, "#059669", "#DC2626" ) )
+			    IF ( ISBLANK ( _change ) || ROUND ( _change, 4 ) = 0, "#64748B", IF ( _change > 0, "#059669", "#DC2626" ) )
 		displayFolder: KPI Comparison
 		lineageTag: d5eef552-210b-6f5e-727f-599ae425eb5b
 
@@ -687,7 +727,11 @@ table _Measures
 			    IF (
 			        ISBLANK ( _change ),
 			        "No prior year to compare",
-			        _prefix & IF ( _change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ) * 100, "0.0" ) & " pts" & " vs " & ( _year - 1 )
+			        IF (
+			            ROUND ( _change, 4 ) = 0,
+			            _prefix & "No change vs " & ( _year - 1 ),
+			            _prefix & IF ( _change > 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ) * 100, "0.0" ) & " pts" & " vs " & ( _year - 1 )
+			        )
 			    )
 		displayFolder: KPI Comparison
 		lineageTag: b30dd278-c4af-1baf-4f82-047c75a7c4d9
@@ -695,7 +739,7 @@ table _Measures
 	measure 'Late Stops % vs LY Color' =
 			VAR _change = [Late Stops % YoY Change]
 			RETURN
-			    IF ( ISBLANK ( _change ) || _change = 0, "#64748B", IF ( _change < 0, "#059669", "#DC2626" ) )
+			    IF ( ISBLANK ( _change ) || ROUND ( _change, 4 ) = 0, "#64748B", IF ( _change < 0, "#059669", "#DC2626" ) )
 		displayFolder: KPI Comparison
 		lineageTag: 80c13f0a-73cb-3760-2e8b-7d7e6a89650e
 
@@ -733,7 +777,11 @@ table _Measures
 			    IF (
 			        ISBLANK ( _change ),
 			        "No prior year to compare",
-			        _prefix & IF ( _change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ) * 100, "0.0" ) & " pts" & " vs " & ( _year - 1 )
+			        IF (
+			            ROUND ( _change, 4 ) = 0,
+			            _prefix & "No change vs " & ( _year - 1 ),
+			            _prefix & IF ( _change > 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ) * 100, "0.0" ) & " pts" & " vs " & ( _year - 1 )
+			        )
 			    )
 		displayFolder: KPI Comparison
 		lineageTag: 9b37d34f-50d0-d210-f377-42e63ffea925
@@ -741,7 +789,7 @@ table _Measures
 	measure 'Early Stops % vs LY Color' =
 			VAR _change = [Early Stops % YoY Change]
 			RETURN
-			    IF ( ISBLANK ( _change ) || _change = 0, "#64748B", IF ( _change < 0, "#059669", "#DC2626" ) )
+			    IF ( ISBLANK ( _change ) || ROUND ( _change, 4 ) = 0, "#64748B", IF ( _change < 0, "#059669", "#DC2626" ) )
 		displayFolder: KPI Comparison
 		lineageTag: d4e3c6d8-98b1-adcc-f63c-bd2215640fdc
 
@@ -766,7 +814,11 @@ table _Measures
 			    IF (
 			        ISBLANK ( _change ),
 			        "No prior year to compare",
-			        _prefix & IF ( _change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        IF (
+			            ROUND ( _change, 4 ) = 0,
+			            _prefix & "No change vs " & ( _year - 1 ),
+			            _prefix & IF ( _change > 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        )
 			    )
 		displayFolder: KPI Comparison
 		lineageTag: 1b25920e-8a4d-331c-d980-5a91c6fb2c13
@@ -774,7 +826,7 @@ table _Measures
 	measure 'Avg Detention (min) vs LY Color' =
 			VAR _change = [Avg Detention (min) YoY Change]
 			RETURN
-			    IF ( ISBLANK ( _change ) || _change = 0, "#64748B", IF ( _change < 0, "#059669", "#DC2626" ) )
+			    IF ( ISBLANK ( _change ) || ROUND ( _change, 4 ) = 0, "#64748B", IF ( _change < 0, "#059669", "#DC2626" ) )
 		displayFolder: KPI Comparison
 		lineageTag: f534a345-e345-a3a2-b71c-2e65512340d1
 
@@ -812,7 +864,11 @@ table _Measures
 			    IF (
 			        ISBLANK ( _change ),
 			        "No prior year to compare",
-			        _prefix & IF ( _change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ) * 100, "0.0" ) & " pts" & " vs " & ( _year - 1 )
+			        IF (
+			            ROUND ( _change, 4 ) = 0,
+			            _prefix & "No change vs " & ( _year - 1 ),
+			            _prefix & IF ( _change > 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ) * 100, "0.0" ) & " pts" & " vs " & ( _year - 1 )
+			        )
 			    )
 		displayFolder: KPI Comparison
 		lineageTag: e5d25783-c922-1b93-4792-5f0e34fc3900
@@ -820,7 +876,7 @@ table _Measures
 	measure 'Preventable Incident % vs LY Color' =
 			VAR _change = [Preventable Incident % YoY Change]
 			RETURN
-			    IF ( ISBLANK ( _change ) || _change = 0, "#64748B", IF ( _change < 0, "#059669", "#DC2626" ) )
+			    IF ( ISBLANK ( _change ) || ROUND ( _change, 4 ) = 0, "#64748B", IF ( _change < 0, "#059669", "#DC2626" ) )
 		displayFolder: KPI Comparison
 		lineageTag: 7e310aae-657c-872e-600e-2df3f4344b4f
 
@@ -858,7 +914,11 @@ table _Measures
 			    IF (
 			        ISBLANK ( _change ),
 			        "No prior year to compare",
-			        _prefix & IF ( _change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        IF (
+			            ROUND ( _change, 4 ) = 0,
+			            _prefix & "No change vs " & ( _year - 1 ),
+			            _prefix & IF ( _change > 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        )
 			    )
 		displayFolder: KPI Comparison
 		lineageTag: 61308904-3ee7-ae77-8041-6a59004a98ed
@@ -866,7 +926,7 @@ table _Measures
 	measure 'Incidents per 100 Trips vs LY Color' =
 			VAR _change = [Incidents per 100 Trips YoY Change]
 			RETURN
-			    IF ( ISBLANK ( _change ) || _change = 0, "#64748B", IF ( _change < 0, "#059669", "#DC2626" ) )
+			    IF ( ISBLANK ( _change ) || ROUND ( _change, 4 ) = 0, "#64748B", IF ( _change < 0, "#059669", "#DC2626" ) )
 		displayFolder: KPI Comparison
 		lineageTag: 09324dc8-30cd-badc-6905-e173bd3560a8
 
@@ -904,7 +964,11 @@ table _Measures
 			    IF (
 			        ISBLANK ( _change ),
 			        "No prior year to compare",
-			        _prefix & IF ( _change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        IF (
+			            ROUND ( _change, 4 ) = 0,
+			            _prefix & "No change vs " & ( _year - 1 ),
+			            _prefix & IF ( _change > 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        )
 			    )
 		displayFolder: KPI Comparison
 		lineageTag: 7f10d5f4-8980-337f-90be-8184b4bc020e
@@ -912,7 +976,7 @@ table _Measures
 	measure 'Active Trucks vs LY Color' =
 			VAR _change = [Active Trucks YoY Change]
 			RETURN
-			    IF ( ISBLANK ( _change ) || _change = 0, "#64748B", IF ( _change > 0, "#059669", "#DC2626" ) )
+			    IF ( ISBLANK ( _change ) || ROUND ( _change, 4 ) = 0, "#64748B", IF ( _change > 0, "#059669", "#DC2626" ) )
 		displayFolder: KPI Comparison
 		lineageTag: 69820c24-b7f9-234b-5e6b-45a8aae51899
 
@@ -937,7 +1001,11 @@ table _Measures
 			    IF (
 			        ISBLANK ( _change ),
 			        "No prior year to compare",
-			        _prefix & IF ( _change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        IF (
+			            ROUND ( _change, 4 ) = 0,
+			            _prefix & "No change vs " & ( _year - 1 ),
+			            _prefix & IF ( _change > 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        )
 			    )
 		displayFolder: KPI Comparison
 		lineageTag: 9dc4d70d-5193-a4f7-c60d-03cab4ce28ab
@@ -945,7 +1013,7 @@ table _Measures
 	measure 'Active Drivers vs LY Color' =
 			VAR _change = [Active Drivers YoY Change]
 			RETURN
-			    IF ( ISBLANK ( _change ) || _change = 0, "#64748B", IF ( _change > 0, "#059669", "#DC2626" ) )
+			    IF ( ISBLANK ( _change ) || ROUND ( _change, 4 ) = 0, "#64748B", IF ( _change > 0, "#059669", "#DC2626" ) )
 		displayFolder: KPI Comparison
 		lineageTag: 7855befc-d757-8410-c914-e40bd13b34e1
 
@@ -970,7 +1038,11 @@ table _Measures
 			    IF (
 			        ISBLANK ( _change ),
 			        "No prior year to compare",
-			        _prefix & IF ( _change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ) * 100, "0.0" ) & " pts" & " vs " & ( _year - 1 )
+			        IF (
+			            ROUND ( _change, 4 ) = 0,
+			            _prefix & "No change vs " & ( _year - 1 ),
+			            _prefix & IF ( _change > 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ) * 100, "0.0" ) & " pts" & " vs " & ( _year - 1 )
+			        )
 			    )
 		displayFolder: KPI Comparison
 		lineageTag: da3f4eb9-8799-3150-2220-9d9f8b2806a0
@@ -978,7 +1050,7 @@ table _Measures
 	measure 'Avg Utilization Rate vs LY Color' =
 			VAR _change = [Avg Utilization Rate YoY Change]
 			RETURN
-			    IF ( ISBLANK ( _change ) || _change = 0, "#64748B", IF ( _change > 0, "#059669", "#DC2626" ) )
+			    IF ( ISBLANK ( _change ) || ROUND ( _change, 4 ) = 0, "#64748B", IF ( _change > 0, "#059669", "#DC2626" ) )
 		displayFolder: KPI Comparison
 		lineageTag: 541d8e81-8d22-ccad-dbd3-24012a4874f3
 
@@ -1016,7 +1088,11 @@ table _Measures
 			    IF (
 			        ISBLANK ( _change ),
 			        "No prior year to compare",
-			        _prefix & IF ( _change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        IF (
+			            ROUND ( _change, 4 ) = 0,
+			            _prefix & "No change vs " & ( _year - 1 ),
+			            _prefix & IF ( _change > 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        )
 			    )
 		displayFolder: KPI Comparison
 		lineageTag: 9696271c-834d-0987-ca84-9cdb7fab75f7
@@ -1024,7 +1100,7 @@ table _Measures
 	measure 'Avg MPG vs LY Color' =
 			VAR _change = [Avg MPG YoY Change]
 			RETURN
-			    IF ( ISBLANK ( _change ) || _change = 0, "#64748B", IF ( _change > 0, "#059669", "#DC2626" ) )
+			    IF ( ISBLANK ( _change ) || ROUND ( _change, 4 ) = 0, "#64748B", IF ( _change > 0, "#059669", "#DC2626" ) )
 		displayFolder: KPI Comparison
 		lineageTag: 5bdb28c1-8c44-cd77-b2ea-865cf72fbddc
 
@@ -1062,7 +1138,11 @@ table _Measures
 			    IF (
 			        ISBLANK ( _change ),
 			        "No prior year to compare",
-			        _prefix & IF ( _change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ) * 100, "0.0" ) & " pts" & " vs " & ( _year - 1 )
+			        IF (
+			            ROUND ( _change, 4 ) = 0,
+			            _prefix & "No change vs " & ( _year - 1 ),
+			            _prefix & IF ( _change > 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ) * 100, "0.0" ) & " pts" & " vs " & ( _year - 1 )
+			        )
 			    )
 		displayFolder: KPI Comparison
 		lineageTag: ad3562fd-5b2a-1858-0a3e-ed279e2f4dda
@@ -1070,7 +1150,7 @@ table _Measures
 	measure 'Idle % vs LY Color' =
 			VAR _change = [Idle % YoY Change]
 			RETURN
-			    IF ( ISBLANK ( _change ) || _change = 0, "#64748B", IF ( _change < 0, "#059669", "#DC2626" ) )
+			    IF ( ISBLANK ( _change ) || ROUND ( _change, 4 ) = 0, "#64748B", IF ( _change < 0, "#059669", "#DC2626" ) )
 		displayFolder: KPI Comparison
 		lineageTag: 57de931a-5dd7-e0df-8d66-4fc17d2db132
 
@@ -1108,7 +1188,11 @@ table _Measures
 			    IF (
 			        ISBLANK ( _change ),
 			        "No prior year to compare",
-			        _prefix & IF ( _change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        IF (
+			            ROUND ( _change, 4 ) = 0,
+			            _prefix & "No change vs " & ( _year - 1 ),
+			            _prefix & IF ( _change > 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        )
 			    )
 		displayFolder: KPI Comparison
 		lineageTag: 711b7653-1e81-509b-35c2-1d87cf967cde
@@ -1116,7 +1200,7 @@ table _Measures
 	measure 'Downtime Hours vs LY Color' =
 			VAR _change = [Downtime Hours YoY Change]
 			RETURN
-			    IF ( ISBLANK ( _change ) || _change = 0, "#64748B", IF ( _change < 0, "#059669", "#DC2626" ) )
+			    IF ( ISBLANK ( _change ) || ROUND ( _change, 4 ) = 0, "#64748B", IF ( _change < 0, "#059669", "#DC2626" ) )
 		displayFolder: KPI Comparison
 		lineageTag: de65a6ba-2023-6975-e36f-91d462a1240b
 
@@ -1141,7 +1225,11 @@ table _Measures
 			    IF (
 			        ISBLANK ( _change ),
 			        "No prior year to compare",
-			        _prefix & IF ( _change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        IF (
+			            ROUND ( _change, 4 ) = 0,
+			            _prefix & "No change vs " & ( _year - 1 ),
+			            _prefix & IF ( _change > 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        )
 			    )
 		displayFolder: KPI Comparison
 		lineageTag: f3b8de5b-6a2f-527e-3abe-baf349b11c36
@@ -1149,7 +1237,7 @@ table _Measures
 	measure 'Total Operating Cost vs LY Color' =
 			VAR _change = [Total Operating Cost YoY Change]
 			RETURN
-			    IF ( ISBLANK ( _change ) || _change = 0, "#64748B", IF ( _change < 0, "#059669", "#DC2626" ) )
+			    IF ( ISBLANK ( _change ) || ROUND ( _change, 4 ) = 0, "#64748B", IF ( _change < 0, "#059669", "#DC2626" ) )
 		displayFolder: KPI Comparison
 		lineageTag: 91b498fa-539d-7a1c-7015-64a6db46ebdd
 
@@ -1174,7 +1262,11 @@ table _Measures
 			    IF (
 			        ISBLANK ( _change ),
 			        "No prior year to compare",
-			        _prefix & IF ( _change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        IF (
+			            ROUND ( _change, 4 ) = 0,
+			            _prefix & "No change vs " & ( _year - 1 ),
+			            _prefix & IF ( _change > 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        )
 			    )
 		displayFolder: KPI Comparison
 		lineageTag: c0b41341-7b0a-0173-f4db-7aaaea354faf
@@ -1182,7 +1274,7 @@ table _Measures
 	measure 'Cost per Mile vs LY Color' =
 			VAR _change = [Cost per Mile YoY Change]
 			RETURN
-			    IF ( ISBLANK ( _change ) || _change = 0, "#64748B", IF ( _change < 0, "#059669", "#DC2626" ) )
+			    IF ( ISBLANK ( _change ) || ROUND ( _change, 4 ) = 0, "#64748B", IF ( _change < 0, "#059669", "#DC2626" ) )
 		displayFolder: KPI Comparison
 		lineageTag: 38a16885-f2b1-8d7f-f0d4-c5a5523ba1a6
 
@@ -1220,7 +1312,11 @@ table _Measures
 			    IF (
 			        ISBLANK ( _change ),
 			        "No prior year to compare",
-			        _prefix & IF ( _change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        IF (
+			            ROUND ( _change, 4 ) = 0,
+			            _prefix & "No change vs " & ( _year - 1 ),
+			            _prefix & IF ( _change > 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        )
 			    )
 		displayFolder: KPI Comparison
 		lineageTag: 6d878edc-ef01-c59a-8933-3420c23c4245
@@ -1228,7 +1324,7 @@ table _Measures
 	measure 'Fuel Cost per Mile vs LY Color' =
 			VAR _change = [Fuel Cost per Mile YoY Change]
 			RETURN
-			    IF ( ISBLANK ( _change ) || _change = 0, "#64748B", IF ( _change < 0, "#059669", "#DC2626" ) )
+			    IF ( ISBLANK ( _change ) || ROUND ( _change, 4 ) = 0, "#64748B", IF ( _change < 0, "#059669", "#DC2626" ) )
 		displayFolder: KPI Comparison
 		lineageTag: c59e6aa9-1b85-7c42-c889-4be1a2646653
 
@@ -1266,7 +1362,11 @@ table _Measures
 			    IF (
 			        ISBLANK ( _change ),
 			        "No prior year to compare",
-			        _prefix & IF ( _change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        IF (
+			            ROUND ( _change, 4 ) = 0,
+			            _prefix & "No change vs " & ( _year - 1 ),
+			            _prefix & IF ( _change > 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        )
 			    )
 		displayFolder: KPI Comparison
 		lineageTag: 4356a895-af1b-1f7e-3b43-b4362f41fdad
@@ -1274,7 +1374,7 @@ table _Measures
 	measure 'Avg Fuel Price per Gallon vs LY Color' =
 			VAR _change = [Avg Fuel Price per Gallon YoY Change]
 			RETURN
-			    IF ( ISBLANK ( _change ) || _change = 0, "#64748B", IF ( _change < 0, "#059669", "#DC2626" ) )
+			    IF ( ISBLANK ( _change ) || ROUND ( _change, 4 ) = 0, "#64748B", IF ( _change < 0, "#059669", "#DC2626" ) )
 		displayFolder: KPI Comparison
 		lineageTag: 59d54ccd-9d15-bf38-066c-f3ebfa7731e6
 
@@ -1299,7 +1399,11 @@ table _Measures
 			    IF (
 			        ISBLANK ( _change ),
 			        "No prior year to compare",
-			        _prefix & IF ( _change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        IF (
+			            ROUND ( _change, 4 ) = 0,
+			            _prefix & "No change vs " & ( _year - 1 ),
+			            _prefix & IF ( _change > 0, "▲ ", "▼ " ) & FORMAT ( ABS ( _change ), "0.0%" ) & " vs " & ( _year - 1 )
+			        )
 			    )
 		displayFolder: KPI Comparison
 		lineageTag: 26e70772-427c-7852-9865-3c547d2b9f78
@@ -1307,7 +1411,7 @@ table _Measures
 	measure 'Total Claim Amount vs LY Color' =
 			VAR _change = [Total Claim Amount YoY Change]
 			RETURN
-			    IF ( ISBLANK ( _change ) || _change = 0, "#64748B", IF ( _change < 0, "#059669", "#DC2626" ) )
+			    IF ( ISBLANK ( _change ) || ROUND ( _change, 4 ) = 0, "#64748B", IF ( _change < 0, "#059669", "#DC2626" ) )
 		displayFolder: KPI Comparison
 		lineageTag: 47006748-469d-40f7-11da-9c6f018be945
 
