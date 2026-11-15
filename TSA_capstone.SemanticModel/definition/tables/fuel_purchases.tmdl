@@ -2,9 +2,8 @@ table fuel_purchases
 	lineageTag: 525b552a-d764-470a-9762-76b9ccb7bbe5
 
 	measure total_fuel_cost = SUM(fuel_purchases[total_cost])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
 		lineageTag: 799cb2be-5c4e-427c-a7fe-cb1e3e2fd93e
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column fuel_purchase_id
 		dataType: string

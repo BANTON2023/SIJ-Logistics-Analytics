@@ -5,15 +5,13 @@ table trips
 		formatString: 0
 		lineageTag: 23ff09f1-236f-42a9-b168-cf363ae7f766
 
-	measure trips_per_load = [Total Trips] / [Total Loads]
+	measure trips_per_load = DIVIDE([Total Trips], [Total Loads])
+		formatString: 0.00
 		lineageTag: e3a3bc3f-7449-4aea-8bf9-222688cfb914
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
 	measure average_trip_duration = AVERAGE(trips[actual_duration_hours])
+		formatString: 0.00
 		lineageTag: a754b99c-8fba-40e5-a62f-bae49fecf7a8
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column trip_id
 		dataType: string

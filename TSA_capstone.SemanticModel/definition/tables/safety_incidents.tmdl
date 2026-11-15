@@ -5,10 +5,9 @@ table safety_incidents
 		formatString: 0
 		lineageTag: 0847c78d-38fd-44c3-aa93-6a08d9485cd2
 
-	measure incidents_per_100_trips = ([total_safety_incidents] / [Total Trips]) * 100
+	measure incidents_per_100_trips = DIVIDE([total_safety_incidents], [Total Trips]) * 100
+		formatString: 0.00
 		lineageTag: fcc66726-a41b-4c31-ada8-25fb8b0a2807
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column incident_id
 		dataType: string
