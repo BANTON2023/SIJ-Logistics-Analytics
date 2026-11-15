@@ -4,10 +4,10 @@
   "position": {
     "x": 564,
     "y": 189,
-    "z": 18000,
+    "z": 26000,
     "width": 166,
     "height": 111,
-    "tabOrder": 18000
+    "tabOrder": 26000
   },
   "visual": {
     "visualType": "card",
@@ -23,17 +23,44 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Profit"
+                  "Property": "Margin after Fuel"
                 }
               },
-              "queryRef": "_Measures.Profit",
-              "nativeQueryRef": "Profit"
+              "queryRef": "_Measures.Margin after Fuel",
+              "nativeQueryRef": "Margin after Fuel"
             }
           ]
         }
       }
     },
-    "drillFilterOtherVisuals": true,
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "20D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryLabels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
     "visualContainerObjects": {
       "title": [
         {
@@ -48,13 +75,48 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Profit*'"
+                  "Value": "'Margin after Fuel'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "6D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "bottom": {
+              "expr": {
+                "Literal": {
+                  "Value": "38D"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
                 }
               }
             }
           }
         }
       ]
-    }
+    },
+    "drillFilterOtherVisuals": true
   }
 }

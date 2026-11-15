@@ -4,10 +4,10 @@
   "position": {
     "x": 920,
     "y": 310,
-    "z": 28000,
+    "z": 39000,
     "width": 348,
     "height": 398,
-    "tabOrder": 28000
+    "tabOrder": 39000
   },
   "visual": {
     "visualType": "lineChart",
@@ -41,11 +41,25 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "On-Time %"
+                  "Property": "On-Time Delivery %"
                 }
               },
-              "queryRef": "_Measures.On-Time %",
-              "nativeQueryRef": "On-Time %"
+              "queryRef": "_Measures.On-Time Delivery %",
+              "nativeQueryRef": "On-Time Delivery %"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "On-Time Pickup %"
+                }
+              },
+              "queryRef": "_Measures.On-Time Pickup %",
+              "nativeQueryRef": "On-Time Pickup %"
             }
           ]
         }
@@ -66,7 +80,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'On-Time Delivery % by Month'"
+                  "Value": "'On-Time Delivery and Pickup % by Month'"
                 }
               }
             }

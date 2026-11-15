@@ -3,11 +3,11 @@
   "name": "fleet01_nav5",
   "position": {
     "x": 12,
-    "y": 262,
-    "z": 10000,
+    "y": 266,
+    "z": 11000,
     "width": 176,
     "height": 36,
-    "tabOrder": 10000
+    "tabOrder": 11000
   },
   "visual": {
     "visualType": "actionButton",

@@ -114,7 +114,9 @@ function Run($r) {
 function TextBox($page, $id, $x, $y, $w, $h, $paragraphs, $vco) {
   $paras = @($paragraphs | ForEach-Object {
     if ($_.runs) { $rs = @($_.runs | ForEach-Object { Run $_ }) } else { $rs = @((Run $_)) }
-    @{ textRuns = $rs }
+    $para = [ordered]@{ textRuns = $rs }
+    if ($_.align) { $para.horizontalTextAlignment = $_.align }
+    $para
   })
   if (-not $vco) { $vco = Bare }
   $v = [ordered]@{
@@ -187,7 +189,7 @@ $R1_Y = 68;  $R1_H = 232     # KPI tiles (3 x 2) + lead chart
 $R2_Y = 310; $R2_H = 398     # detail visuals (ends at 708)
 $KPI_W = 166; $KPI_H = 111   # 3 tiles + 2 gaps = 518
 $LEAD_X = $MX + 3 * $KPI_W + 3 * $GAP; $LEAD_W = $MX + $MW - $LEAD_X
-$NAV_Y = 62; $NAV_H = 36; $NAV_STEP = 40   # buttons below ~36 px clip their label
+$NAV_Y = 66; $NAV_H = 36; $NAV_STEP = 40   # buttons below ~36 px clip their label
 $FILTER_Y = 306              # grey filter panel top
 $SLICER_Y = 334; $SLICER_H = 64; $SLICER_STEP = 66   # dropdown slicers need 64 px with no padding
 $CLEAR_Y = 672; $CLEAR_H = 36
@@ -205,9 +207,11 @@ function Sidebar($page) {
   Panel $page "${page}_panel" 0 0 $SIDE_W 720 $WHITE
   Panel $page "${page}_filterPanel" 0 $FILTER_Y $SIDE_W (720 - $FILTER_Y) $PANEL_GREY
   Panel $page "${page}_divider" ($SIDE_W - 1) 0 1 $FILTER_Y $PANEL_GREY
-  TextBox $page "${page}_brand" 12 8 176 48 @(
-    @{ t = 'SIJ Logistics'; font = 'Segoe UI'; size = '15pt'; color = $BRAND_BLUE; bold = $true },
-    @{ t = '& Analytics'; font = 'Segoe UI'; size = '10pt'; color = $TEAL; bold = $true }
+  # Brand banner: white name on theme blue, aligned with the title bar height
+  Panel $page "${page}_brandPanel" 0 0 $SIDE_W $HEAD_H $BRAND_BLUE
+  TextBox $page "${page}_brand" 12 6 176 48 @(
+    @{ t = 'SIJ Logistics'; font = 'Segoe UI'; size = '15pt'; color = $WHITE; bold = $true },
+    @{ t = '& Analytics'; font = 'Segoe UI'; size = '10pt'; color = $TEAL_PALE; bold = $true }
   )
   # Navigation: one button per page, labelled with the page title; the current
   # page is solid teal, the others light grey and turn pale teal on hover
@@ -263,11 +267,47 @@ function Header($page, $title, $subtitle) {
     @{ t = $subtitle; font = 'Segoe UI'; size = '9pt'; color = $SUBTLE }
   ) $vco
 }
-# Six KPI tiles in a 3 x 2 block next to the page's lead chart
-function Kpis($page, $measures, $titles) {
+# Colour taken from a measure that returns a hex code (conditional formatting by field value)
+function MCol($measure) { @{ solid = @{ color = @{ expr = @{ Measure = [ordered]@{ Expression = @{ SourceRef = @{ Entity = '_Measures' } }; Property = $measure } } } } } }
+# A card showing one measure, with optional colour measure and container settings
+function Card($page, $id, $x, $y, $w, $h, $measure, $colorMeasure, $size, $vco) {
+  $labels = [ordered]@{ fontSize = (Lit "${size}D") }
+  if ($colorMeasure) { $labels.color = (MCol $colorMeasure) }
+  $v = [ordered]@{
+    visualType = 'card'
+    query = [ordered]@{ queryState = [ordered]@{ Values = @{ projections = @((Proj (M $measure))) } } }
+    objects = [ordered]@{ labels = @(@{ properties = $labels }); categoryLabels = (Off) }
+    visualContainerObjects = $vco
+    drillFilterOtherVisuals = $true
+  }
+  $fields = @((M $measure)); if ($colorMeasure) { $fields += (M $colorMeasure) }
+  Emit $page $id $x $y $w $h $v $fields
+}
+# KPI definitions (titles, targets, which direction is good) come from tools/kpi_catalog.json,
+# the same file that tools/build_kpi_measures.ps1 uses to create the comparison measures.
+$KPI = @{}
+foreach ($k in (Get-Content 'tools\kpi_catalog.json' -Raw -Encoding UTF8 | ConvertFrom-Json).kpis) { $KPI[$k.measure] = $k }
+# Six KPI tiles in a 3 x 2 block next to the page's lead chart. Each tile:
+#   - the value, green or red against its target (if it has one), with the title
+#   - "2024: ▲ 1.2% vs 2023" - latest selected year against the year before,
+#     green when the change is good and red when it is bad
+#   - the target, if the KPI has one
+function Kpis($page, $measures) {
   for ($i = 0; $i -lt $measures.Count; $i++) {
+    $m = $measures[$i]; $k = $KPI[$m]
+    if (-not $k) { throw "KPI '$m' is not in tools/kpi_catalog.json" }
     $col = $i % 3; $row = [math]::Floor($i / 3)
-    Visual $page "${page}_kpi$i" 'card' ($MX + $col * ($KPI_W + $GAP)) ($R1_Y + $row * ($KPI_H + $GAP)) $KPI_W $KPI_H @{ Values = @((M $measures[$i])) } $titles[$i] $null
+    $x = $MX + $col * ($KPI_W + $GAP); $y = $R1_Y + $row * ($KPI_H + $GAP)
+    $hasTarget = $null -ne $k.target
+    # The value sits in the upper part of the tile; the bottom padding leaves room for the text lines
+    $vco = [ordered]@{ title = (Title $k.title $null); padding = (Pad 6 10 38 10) }
+    $valueColor = if ($hasTarget) { "$m Target Color" } else { $null }
+    Card $page "${page}_kpi$i" $x $y $KPI_W $KPI_H $m $valueColor 20 $vco
+    $lyY = if ($hasTarget) { $y + 70 } else { $y + 80 }
+    Card $page "${page}_kpi${i}_ly" ($x + 4) $lyY ($KPI_W - 8) 18 "$m vs LY" "$m vs LY Color" 8 (Bare)
+    if ($hasTarget) {
+      TextBox $page "${page}_kpi${i}_tgt" ($x + 4) ($y + 90) ($KPI_W - 8) 16 @(@{ t = $k.targetLabel; font = 'Segoe UI'; size = '8pt'; color = $SUBTLE; align = 'center' }) (Bare)
+    }
   }
 }
 function Page($name, $display, $subtitle) {
@@ -300,26 +340,26 @@ Get-ChildItem $PAGES -Directory | ForEach-Object { RemoveDir "$($_.FullName)\vis
 
 # ---------------- Executive Overview (reuses the original blank page) ----------------
 $p = 'b388af99db000d0b50c6'; Page $p 'Executive Overview' 'Revenue, cost, service and safety at a glance - 2022 to 2024'
-Kpis $p @('Total Revenue','Total Loads','Profit Margin %','On-Time %','Incidents per 100 Trips','Cost per Mile') @('Total Revenue','Total Loads','Profit Margin*','On-Time Delivery','Incidents / 100 Trips','Cost per Mile*')
+Kpis $p @('Total Revenue','Total Loads','On-Time Delivery %','Cost per Mile','Incidents per 100 Trips','Margin after Fuel %')
 Slicers $p @(@{ f = (C 'customers' 'customer_type'); t = 'Customer Type' }, @{ f = (C 'routes' 'origin_state'); t = 'Origin State' })
 Visual $p 'execTrend' 'lineChart' $LEAD_X $R1_Y $LEAD_W $R1_H ([ordered]@{ Category = @((C 'Calendar' 'Year Month')); Y = @((M 'Total Revenue'), (M 'Total Operating Cost')) }) 'Revenue vs Operating Cost by Month' $null
 $c = Cols @(344, 344, 344)
 Visual $p 'execType' 'clusteredBarChart' $c[0][0] $R2_Y $c[0][1] $R2_H ([ordered]@{ Category = @((C 'customers' 'customer_type')); Y = @((M 'Total Revenue')) }) 'Revenue by Customer Type' (M 'Total Revenue')
 Visual $p 'execCost' 'clusteredColumnChart' $c[1][0] $R2_Y $c[1][1] $R2_H ([ordered]@{ Category = @((C 'Calendar' 'Year')); Y = @((M 'Total Fuel Cost'), (M 'Total Maintenance Cost'), (M 'Total Claim Amount')) }) 'Cost Mix by Year' $null
-Visual $p 'execOnTime' 'lineChart' $c[2][0] $R2_Y $c[2][1] $R2_H ([ordered]@{ Category = @((C 'Calendar' 'Year Month')); Y = @((M 'On-Time %')) }) 'On-Time Delivery % by Month' $null
+Visual $p 'execOnTime' 'lineChart' $c[2][0] $R2_Y $c[2][1] $R2_H ([ordered]@{ Category = @((C 'Calendar' 'Year Month')); Y = @((M 'On-Time Delivery %'), (M 'On-Time Pickup %')) }) 'On-Time Delivery and Pickup % by Month' $null
 
 # ---------------- Customers ----------------
 $p = 'customers01'; Page $p 'Customers' 'Who drives revenue, how much potential is captured, and how well we serve them'
-Kpis $p @('Active Customers','Total Revenue','Total Billed Revenue','Avg Revenue per Load','Revenue vs Potential %','Margin after Fuel %') @('Active Customers','Total Revenue','Billed Revenue','Avg Revenue per Load','Revenue vs Potential','Margin after Fuel')
+Kpis $p @('Active Customers','Total Revenue','Total Billed Revenue','Avg Revenue per Load','Revenue vs Potential %','Margin after Fuel %')
 Slicers $p @(@{ f = (C 'customers' 'customer_type'); t = 'Customer Type' }, @{ f = (C 'customers' 'account_status'); t = 'Account Status' })
 Visual $p 'custFreight' 'clusteredColumnChart' $LEAD_X $R1_Y $LEAD_W $R1_H ([ordered]@{ Category = @((C 'customers' 'primary_freight_type')); Y = @((M 'Avg Revenue per Load')) }) 'Avg Revenue per Load by Freight Type' (M 'Avg Revenue per Load')
 $c = Cols @(380, 662)
 Visual $p 'custTop' 'clusteredBarChart' $c[0][0] $R2_Y $c[0][1] $R2_H ([ordered]@{ Category = @((C 'customers' 'customer_name')); Y = @((M 'Total Revenue')) }) 'Revenue by Name (merges same-name accounts)' (M 'Total Revenue')
-Visual $p 'custTable' 'tableEx' $c[1][0] $R2_Y $c[1][1] $R2_H ([ordered]@{ Values = @((C 'customers' 'customer_id'), (C 'customers' 'customer_name'), (C 'customers' 'customer_type'), (M 'Total Revenue'), (M 'Customer Revenue Share %'), (M 'Revenue vs Potential %'), (M 'On-Time %'), (M 'Margin after Fuel %')) }) 'Customer Scorecard (one row per account)' (M 'Total Revenue')
+Visual $p 'custTable' 'tableEx' $c[1][0] $R2_Y $c[1][1] $R2_H ([ordered]@{ Values = @((C 'customers' 'customer_id'), (C 'customers' 'customer_name'), (C 'customers' 'customer_type'), (M 'Total Revenue'), (M 'Customer Revenue Share %'), (M 'Revenue vs Potential %'), (M 'On-Time Delivery %'), (M 'Margin after Fuel %')) }) 'Customer Scorecard (one row per account)' (M 'Total Revenue')
 
 # ---------------- Fleet ----------------
 $p = 'fleet01'; Page $p 'Fleet' 'Utilization, fuel efficiency and maintenance across trucks and drivers'
-Kpis $p @('Active Trucks','Active Drivers','Avg Utilization Rate','Avg MPG','Idle %','Downtime Hours') @('Active Trucks','Active Drivers','Avg Utilization','Avg MPG','Idle Time','Downtime Hours')
+Kpis $p @('Active Trucks','Active Drivers','Avg Utilization Rate','Avg MPG','Idle %','Downtime Hours')
 Slicers $p @(@{ f = (C 'trucks' 'make'); t = 'Truck Make' }, @{ f = (C 'drivers' 'home_terminal'); t = 'Home Terminal' })
 Visual $p 'fleetYearModel' 'clusteredColumnChart' $LEAD_X $R1_Y $LEAD_W $R1_H ([ordered]@{ Category = @((C 'trucks' 'model_year')); Y = @((M 'Maintenance Cost per Mile')) }) 'Maintenance Cost per Mile by Model Year' $null
 $c = Cols @(260, 260, 512)
@@ -328,18 +368,18 @@ Visual $p 'fleetDrivers' 'clusteredBarChart' $c[1][0] $R2_Y $c[1][1] $R2_H ([ord
 Visual $p 'fleetTable' 'tableEx' $c[2][0] $R2_Y $c[2][1] $R2_H ([ordered]@{ Values = @((C 'trucks' 'unit_number'), (C 'trucks' 'make'), (M 'Total Miles'), (M 'Avg MPG'), (M 'Maintenance Cost per Mile'), (M 'Downtime Hours'), (M 'Avg Utilization Rate')) }) 'Truck Scorecard' (M 'Total Miles')
 
 # ---------------- Service ----------------
-$p = 'service01'; Page $p 'Service' 'On-time delivery, detention, transit times and safety'
-Kpis $p @('On-Time %','Avg Detention (min)','Avg Actual Transit Days','Avg Planned Transit Days','Incidents per Million Miles','Preventable Incident %') @('On-Time Delivery','Avg Detention (min)','Actual Transit Days','Planned Transit Days','Incidents / M Miles','Preventable Incidents')
+$p = 'service01'; Page $p 'Service' 'On-time pickup and delivery (late and early split), detention, transit times and safety'
+Kpis $p @('On-Time Delivery %','On-Time Pickup %','Late Stops %','Early Stops %','Avg Detention (min)','Preventable Incident %')
 Slicers $p @(@{ f = (C 'facilities' 'facility_type'); t = 'Facility Type' }, @{ f = (C 'routes' 'origin_state'); t = 'Origin State' })
-Visual $p 'svcTrend' 'lineChart' $LEAD_X $R1_Y $LEAD_W $R1_H ([ordered]@{ Category = @((C 'Calendar' 'Year Month')); Y = @((M 'On-Time %')) }) 'On-Time Delivery % by Month' $null
+Visual $p 'svcTrend' 'lineChart' $LEAD_X $R1_Y $LEAD_W $R1_H ([ordered]@{ Category = @((C 'Calendar' 'Year Month')); Y = @((M 'On-Time Delivery %'), (M 'Late Stops %'), (M 'Early Stops %')) }) 'Delivery: On Time, Late and Early by Month' $null
 $c = Cols @(300, 260, 472)
 Visual $p 'svcFacility' 'clusteredBarChart' $c[0][0] $R2_Y $c[0][1] $R2_H ([ordered]@{ Category = @((C 'facilities' 'facility_name')); Y = @((M 'Avg Detention (min)')) }) 'Avg Detention by Facility (min)' (M 'Avg Detention (min)')
 Visual $p 'svcIncidents' 'clusteredBarChart' $c[1][0] $R2_Y $c[1][1] $R2_H ([ordered]@{ Category = @((C 'safety_incidents' 'incident_type')); Y = @((M 'Total Safety Incidents')) }) 'Safety Incidents by Type' (M 'Total Safety Incidents')
-Visual $p 'svcRoutes' 'tableEx' $c[2][0] $R2_Y $c[2][1] $R2_H ([ordered]@{ Values = @((C 'routes' 'origin_city'), (C 'routes' 'destination_city'), (M 'Total Loads'), (M 'On-Time %'), (M 'Avg Actual Transit Days'), (M 'Avg Planned Transit Days')) }) 'Route Service Levels' (M 'Total Loads')
+Visual $p 'svcRoutes' 'tableEx' $c[2][0] $R2_Y $c[2][1] $R2_H ([ordered]@{ Values = @((C 'routes' 'origin_city'), (C 'routes' 'destination_city'), (M 'Total Loads'), (M 'On-Time Delivery %'), (M 'Avg Actual Transit Days'), (M 'Avg Planned Transit Days')) }) 'Route Service Levels' (M 'Total Loads')
 
 # ---------------- Cost ----------------
 $p = 'cost01'; Page $p 'Cost' 'Operating cost, fuel and margin by route - cost covers fuel and maintenance only'
-Kpis $p @('Total Operating Cost','Cost per Mile','Fuel Cost per Mile','Avg Fuel Price per Gallon','Total Claim Amount','Profit') @('Operating Cost*','Cost per Mile*','Fuel Cost per Mile','Fuel Price / Gallon','Incident Claims','Profit*')
+Kpis $p @('Total Operating Cost','Cost per Mile','Fuel Cost per Mile','Avg Fuel Price per Gallon','Total Claim Amount','Margin after Fuel')
 Slicers $p @(@{ f = (C 'fuel_purchases' 'location_state'); t = 'Fuel State' }, @{ f = (C 'routes' 'origin_state'); t = 'Origin State' })
 Visual $p 'costTrend' 'lineChart' $LEAD_X $R1_Y $LEAD_W $R1_H ([ordered]@{ Category = @((C 'Calendar' 'Year Month')); Y = @((M 'Cost per Mile'), (M 'Fuel Cost per Mile')) }) 'Cost per Mile by Month' $null
 $c = Cols @(400, 642)

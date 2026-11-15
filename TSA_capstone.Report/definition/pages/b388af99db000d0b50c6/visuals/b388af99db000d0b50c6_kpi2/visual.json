@@ -4,10 +4,10 @@
   "position": {
     "x": 564,
     "y": 68,
-    "z": 15000,
+    "z": 18000,
     "width": 166,
     "height": 111,
-    "tabOrder": 15000
+    "tabOrder": 18000
   },
   "visual": {
     "visualType": "card",
@@ -23,17 +23,60 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Profit Margin %"
+                  "Property": "On-Time Delivery %"
                 }
               },
-              "queryRef": "_Measures.Profit Margin %",
-              "nativeQueryRef": "Profit Margin %"
+              "queryRef": "_Measures.On-Time Delivery %",
+              "nativeQueryRef": "On-Time Delivery %"
             }
           ]
         }
       }
     },
-    "drillFilterOtherVisuals": true,
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "20D"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "On-Time Delivery % Target Color"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryLabels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
     "visualContainerObjects": {
       "title": [
         {
@@ -48,13 +91,48 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Profit Margin*'"
+                  "Value": "'On-Time Delivery'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "6D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "bottom": {
+              "expr": {
+                "Literal": {
+                  "Value": "38D"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
                 }
               }
             }
           }
         }
       ]
-    }
+    },
+    "drillFilterOtherVisuals": true
   }
 }

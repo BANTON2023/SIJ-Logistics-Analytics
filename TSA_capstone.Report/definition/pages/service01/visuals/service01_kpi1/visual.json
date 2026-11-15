@@ -4,10 +4,10 @@
   "position": {
     "x": 388,
     "y": 68,
-    "z": 14000,
+    "z": 17000,
     "width": 166,
     "height": 111,
-    "tabOrder": 14000
+    "tabOrder": 17000
   },
   "visual": {
     "visualType": "card",
@@ -23,17 +23,60 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Avg Detention (min)"
+                  "Property": "On-Time Pickup %"
                 }
               },
-              "queryRef": "_Measures.Avg Detention (min)",
-              "nativeQueryRef": "Avg Detention (min)"
+              "queryRef": "_Measures.On-Time Pickup %",
+              "nativeQueryRef": "On-Time Pickup %"
             }
           ]
         }
       }
     },
-    "drillFilterOtherVisuals": true,
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "20D"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "On-Time Pickup % Target Color"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryLabels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
     "visualContainerObjects": {
       "title": [
         {
@@ -48,13 +91,48 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Avg Detention (min)'"
+                  "Value": "'On-Time Pickup'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "6D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "bottom": {
+              "expr": {
+                "Literal": {
+                  "Value": "38D"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
                 }
               }
             }
           }
         }
       ]
-    }
+    },
+    "drillFilterOtherVisuals": true
   }
 }
