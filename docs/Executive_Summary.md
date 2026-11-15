@@ -1,15 +1,15 @@
-# SIJ_Logistics — Executive Summary and Recommendations
+# SIJ Logistics & Analytics — Executive Summary and Recommendations
 
 **Period covered:** January 2022 to December 2024 (three years)
 **Prepared by:** Mbaji Austin
-**Source:** SIJ_Logistics Power BI report (`TSA_capstone.pbip`) and the underlying
+**Source:** SIJ Logistics & Analytics Power BI report (`TSA_capstone.pbip`) and the underlying
 operating data: loads, trips, deliveries, fuel, maintenance and safety records.
 
 ---
 
 ## The short version
 
-SIJ_Logistics is a busy, steady business that is **not keeping its delivery promises**.
+SIJ Logistics is a busy, steady business that is **not keeping its delivery promises**.
 
 - It earned **$262.5 million** from **85,410 loads** for **200 customers**, and revenue
   was flat at about $87–88 million a year.

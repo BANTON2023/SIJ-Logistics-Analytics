@@ -1,4 +1,4 @@
-# SIJ_Logistics — Transport & Logistics Analytics (Power BI)
+# SIJ Logistics & Analytics — Transport and Freight Reporting (Power BI)
 
 Capstone analytics project for a trucking and freight operation. A Power BI
 semantic model and report answer business questions about **customers**,
@@ -16,8 +16,10 @@ Author: Mbaji Austin
 | `TSA_capstone_new_measures.dax` | Readable list of the business-question measures |
 | `tools/build_report_pages.ps1` | Regenerates the report pages (close Power BI Desktop first) |
 | `docs/Executive_Summary.md` | Plain-language findings and recommendations for management |
+| `docs/Business_Questions.md` | Each business question, where the report answers it, and the answer |
 
-Binary `.pbix` files are not tracked; the PBIP folders are the source of truth.
+There is no `.pbix` in this project: `TSA_capstone.pbip` and its folders are the only
+working copy. (`.pbix` files are also ignored by Git.)
 
 ## Data model
 
@@ -66,22 +68,22 @@ All measures live in the `_Measures` table, in display folders:
 ## Report
 
 Six pages: **Executive Overview**, **Customers**, **Fleet**, **Service**, **Cost** and
-**Summary & Actions**, styled with the custom `SIJ_Logistics` theme
+**Summary & Actions**, styled with the custom `SIJ Logistics & Analytics` theme
 (`TSA_capstone.Report/StaticResources/RegisteredResources/SIJ_Logistics_Theme.json`):
-navy and teal palette, white rounded cards with a soft shadow, light grey canvas.
+teal and navy palette, white rounded cards with a soft shadow, light grey canvas.
 
 Every page shares one layout:
 
 - **Title bar (top):** full-width white bar with the page title in bold and a
   one-line description.
 - **Sidebar (left)**
-  - Navy panel with the brand and **navigation buttons** for all six pages; the current
-    page is highlighted in teal. Click to switch pages (Ctrl+click while editing in
-    Power BI Desktop).
+  - White panel with the brand and **navigation buttons** labelled with each page's
+    title; the current page is solid teal, the others light grey (pale teal on hover).
+    Click to switch pages (Ctrl+click while editing in Power BI Desktop).
   - Grey **filter panel** down to the bottom edge: Year, Quarter and Month dropdowns,
     synced across all pages so a date selection carries over, plus two slicers for the
     page's own categories (for example Customer Type and Account Status on Customers),
-    and a **Clear all filters** button.
+    and a **Clear all filters** button. Each slicer shows its name once.
 - **Main area:** 12 px margins on every side.
   - **Six KPI cards** in a 3 × 2 block beside the page's lead chart.
   - Detail charts and scorecard tables below.
@@ -104,7 +106,7 @@ powershell -ExecutionPolicy Bypass -File tools\build_report_pages.ps1 -Repo .
 
 | To change | Edit |
 | --- | --- |
-| Colours for the whole report | `dataColors` and `visualStyles` in `SIJ_Logistics_Theme.json`, and the palette variables (`$NAVY`, `$TEAL`, …) at the top of the script |
+| Colours for the whole report | `dataColors` and `visualStyles` in `SIJ_Logistics_Theme.json`, and the palette variables (`$TEAL`, `$INK`, `$BTN_GREY`, …) at the top of the script |
 | A page title or description | The `Page` line for that page |
 | Which KPIs a page shows | The `Kpis` line: list of measure names, then the card titles |
 | A page's category slicers | The `Slicers` line: table, column and label |
@@ -117,6 +119,9 @@ Power BI Desktop to those visuals are overwritten, so either make design changes
 the script, or stop using the script and edit in Desktop from then on.
 
 ## Business questions
+
+Answered question by question, with the report page, visual and measures for each, in
+[`docs/Business_Questions.md`](docs/Business_Questions.md).
 
 **Customers** — revenue concentration; revenue per load by customer and freight
 type; revenue against annual potential; trends for active and inactive accounts.
