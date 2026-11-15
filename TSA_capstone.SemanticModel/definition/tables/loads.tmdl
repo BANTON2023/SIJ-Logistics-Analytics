@@ -1,18 +1,6 @@
 table loads
 	lineageTag: a7a9294d-d918-49a6-9498-1b7c930480e1
 
-	measure 'Total Loads' = DISTINCTCOUNT(loads[load_id])
-		formatString: 0
-		lineageTag: 369ee193-74d1-474a-a2af-3d896b9dba1a
-
-	measure 'Total Revenue' = SUM(loads[revenue])
-		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
-		lineageTag: 95b32f4b-47b6-4861-8284-37d1ff335967
-
-	measure AVG_Rev/Load = DIVIDE([Total Revenue], [Total Loads])
-		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
-		lineageTag: 57c8ee94-7053-45da-b14e-37c697f04df9
-
 	column load_id
 		dataType: string
 		lineageTag: e3f5ad52-2aa7-4ed2-8b48-f72b72eb5ed5

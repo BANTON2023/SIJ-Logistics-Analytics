@@ -1,14 +1,6 @@
 table safety_incidents
 	lineageTag: 4e7d79ca-7686-46b3-a9f1-f19b45bf9bd8
 
-	measure total_safety_incidents = DISTINCTCOUNT(safety_incidents[incident_id])
-		formatString: 0
-		lineageTag: 0847c78d-38fd-44c3-aa93-6a08d9485cd2
-
-	measure incidents_per_100_trips = DIVIDE([total_safety_incidents], [Total Trips]) * 100
-		formatString: 0.00
-		lineageTag: fcc66726-a41b-4c31-ada8-25fb8b0a2807
-
 	column incident_id
 		dataType: string
 		lineageTag: 41dfbe62-f2e2-41af-835c-7fba7abbf566

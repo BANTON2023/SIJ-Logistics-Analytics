@@ -1,0 +1,78 @@
+/// Home table for all report measures.
+table _Measures
+	lineageTag: e103bba9-cd3b-4a22-bb6d-b168cb43a723
+
+	measure 'Total Delivery Events' = DISTINCTCOUNT(delivery_events[event_id])
+		formatString: 0
+		displayFolder: Operations
+		lineageTag: 104ace0e-dfc6-4d9e-914f-3eb27838c175
+
+	measure 'Total Fuel Cost' = SUM(fuel_purchases[total_cost])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Costs
+		lineageTag: 799cb2be-5c4e-427c-a7fe-cb1e3e2fd93e
+
+	measure 'Total Loads' = DISTINCTCOUNT(loads[load_id])
+		formatString: 0
+		displayFolder: Revenue & Volume
+		lineageTag: 369ee193-74d1-474a-a2af-3d896b9dba1a
+
+	measure 'Total Revenue' = SUM(loads[revenue])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Revenue & Volume
+		lineageTag: 95b32f4b-47b6-4861-8284-37d1ff335967
+
+	measure 'Avg Revenue per Load' = DIVIDE([Total Revenue], [Total Loads])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Revenue & Volume
+		lineageTag: 57c8ee94-7053-45da-b14e-37c697f04df9
+
+	measure 'Total Maintenance Cost' = SUM(maintenance_records[total_cost])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Costs
+		lineageTag: 4af29d2f-b789-4218-a3ff-a2d7b11fa3f3
+
+	measure 'Total Operating Cost' = [Total Fuel Cost] + [Total Maintenance Cost]
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Costs
+		lineageTag: e1d16d7c-cdd6-4976-9266-b0512f19ed4b
+
+	measure 'Operating Cost per Load' = DIVIDE([Total Operating Cost], [Total Loads])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Costs
+		lineageTag: 3e57ce7a-2796-4574-8989-7ff54af49f17
+
+	measure 'Total Safety Incidents' = DISTINCTCOUNT(safety_incidents[incident_id])
+		formatString: 0
+		displayFolder: Safety
+		lineageTag: 0847c78d-38fd-44c3-aa93-6a08d9485cd2
+
+	measure 'Incidents per 100 Trips' = DIVIDE([Total Safety Incidents], [Total Trips]) * 100
+		formatString: 0.00
+		displayFolder: Safety
+		lineageTag: fcc66726-a41b-4c31-ada8-25fb8b0a2807
+
+	measure 'Total Trips' = DISTINCTCOUNT(trips[trip_id])
+		formatString: 0
+		displayFolder: Operations
+		lineageTag: 23ff09f1-236f-42a9-b168-cf363ae7f766
+
+	measure 'Trips per Load' = DIVIDE([Total Trips], [Total Loads])
+		formatString: 0.00
+		displayFolder: Operations
+		lineageTag: e3a3bc3f-7449-4aea-8bf9-222688cfb914
+
+	measure 'Avg Trip Duration (hrs)' = AVERAGE(trips[actual_duration_hours])
+		formatString: 0.00
+		displayFolder: Operations
+		lineageTag: a754b99c-8fba-40e5-a62f-bae49fecf7a8
+
+	column _placeholder
+		isHidden
+		isNameInferred
+		sourceColumn: [_placeholder]
+
+	partition _Measures = calculated
+		mode: import
+		source = ROW("_placeholder", BLANK())
+

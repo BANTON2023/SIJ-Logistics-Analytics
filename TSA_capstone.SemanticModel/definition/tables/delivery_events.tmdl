@@ -1,10 +1,6 @@
 table delivery_events
 	lineageTag: 4bd37dce-9078-40a7-a6ff-73ab72a19991
 
-	measure total_delievery_events = DISTINCTCOUNT(delivery_events[event_id])
-		formatString: 0
-		lineageTag: 104ace0e-dfc6-4d9e-914f-3eb27838c175
-
 	column event_id
 		dataType: string
 		lineageTag: 8bb2953f-e02f-40d4-b72e-386e3783fa9c

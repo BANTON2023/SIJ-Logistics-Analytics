@@ -1,18 +1,6 @@
 table maintenance_records
 	lineageTag: 0e34b7b5-7204-4515-850e-07f8d5cc13b7
 
-	measure total_maintenance_cost = SUM(maintenance_records[total_cost])
-		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
-		lineageTag: 4af29d2f-b789-4218-a3ff-a2d7b11fa3f3
-
-	measure total_operating_cost = [total_fuel_cost] + [total_maintenance_cost]
-		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
-		lineageTag: e1d16d7c-cdd6-4976-9266-b0512f19ed4b
-
-	measure operating_cost_per_load = DIVIDE([total_operating_cost], [Total Loads])
-		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
-		lineageTag: 3e57ce7a-2796-4574-8989-7ff54af49f17
-
 	column maintenance_id
 		dataType: string
 		lineageTag: cb7bb396-a422-48f1-9ef0-3c2286681e4a
