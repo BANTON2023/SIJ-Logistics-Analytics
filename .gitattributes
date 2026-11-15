@@ -8,6 +8,9 @@
 *.pbip    text eol=crlf
 *.dax     text eol=crlf
 *.md      text eol=crlf
+*.sql     text eol=crlf
+*.py      text eol=crlf
+*.ps1     text eol=crlf
 
 # Binary Power BI artefacts
 *.pbix    binary
