@@ -1,0 +1,99 @@
+// TSA_capstone - measures for the draft business questions
+// All go in the _Measures table. Folder shown after each name.
+// Q# = which draft question the measure answers.
+
+// ---------- Revenue & Volume ----------
+// Total Billed Revenue  [Revenue & Volume]  Q1-Q4, Q15
+Total Billed Revenue = SUM(loads[revenue]) + SUM(loads[fuel_surcharge]) + SUM(loads[accessorial_charges])
+
+// Revenue per Mile  [Revenue & Volume]  Q2, Q15
+Revenue per Mile = DIVIDE([Total Revenue], [Total Miles])
+
+// Customer Revenue Share %  [Revenue & Volume]  Q1
+Customer Revenue Share % = DIVIDE([Total Revenue], CALCULATE([Total Revenue], ALL(customers)))
+
+// Active Customers  [Revenue & Volume]  Q4
+Active Customers = DISTINCTCOUNT(loads[customer_id])
+
+// Revenue vs Potential %  [Revenue & Volume]  Q3  (annualised revenue / annual potential)
+Revenue vs Potential % =
+VAR _years = COUNTROWS(VALUES('Calendar'[Year]))
+RETURN DIVIDE(DIVIDE([Total Revenue], _years), SUM(customers[annual_revenue_potential]))
+
+// ---------- Operations / Fleet ----------
+// Total Miles  [Operations]  Q5, Q13
+Total Miles = SUM(trips[actual_distance_miles])
+
+// Avg MPG  [Fleet]  Q7  (miles / gallons, not an average of averages)
+Avg MPG = DIVIDE([Total Miles], SUM(trips[fuel_gallons_used]))
+
+// Idle Hours  [Fleet]  Q7
+Idle Hours = SUM(trips[idle_time_hours])
+
+// Idle %  [Fleet]  Q7
+Idle % = DIVIDE([Idle Hours], SUM(trips[actual_duration_hours]))
+
+// Avg Utilization Rate  [Fleet]  Q5
+Avg Utilization Rate = AVERAGE(truck_utilization_metrics[utilization_rate])
+
+// Downtime Hours  [Fleet]  Q5
+Downtime Hours = SUM(maintenance_records[downtime_hours])
+
+// Active Trucks / Active Drivers  [Fleet]  Q5, Q8
+Active Trucks = DISTINCTCOUNT(trips[truck_id])
+Active Drivers = DISTINCTCOUNT(trips[driver_id])
+
+// Miles per Driver  [Fleet]  Q8
+Miles per Driver = DIVIDE([Total Miles], [Active Drivers])
+
+// ---------- Service ----------
+// On-Time %  [Service]  Q9
+On-Time % = DIVIDE(CALCULATE(COUNTROWS(delivery_events), delivery_events[on_time_flag] = TRUE()), COUNTROWS(delivery_events))
+
+// Avg Detention (min)  [Service]  Q10
+Avg Detention (min) = AVERAGE(delivery_events[detention_minutes])
+
+// Total Detention Hours  [Service]  Q10
+Total Detention Hours = DIVIDE(SUM(delivery_events[detention_minutes]), 60)
+
+// Avg Actual Transit Days / Avg Planned Transit Days  [Service]  Q11
+Avg Actual Transit Days = DIVIDE(AVERAGE(trips[actual_duration_hours]), 24)
+Avg Planned Transit Days = AVERAGEX(loads, RELATED(routes[typical_transit_days]))
+
+// ---------- Safety ----------
+// Preventable Incident %  [Safety]  Q12
+Preventable Incident % = DIVIDE(CALCULATE([Total Safety Incidents], safety_incidents[preventable_flag] = TRUE()), [Total Safety Incidents])
+
+// At-Fault Incident %  [Safety]  Q12
+At-Fault Incident % = DIVIDE(CALCULATE([Total Safety Incidents], safety_incidents[at_fault_flag] = TRUE()), [Total Safety Incidents])
+
+// Injury Incidents  [Safety]  Q12
+Injury Incidents = CALCULATE([Total Safety Incidents], safety_incidents[injury_flag] = TRUE())
+
+// Total Claim Amount / Total Damage Cost  [Safety]  Q12, Q14
+Total Claim Amount = SUM(safety_incidents[claim_amount])
+Total Damage Cost = SUM(safety_incidents[vehicle_damage_cost]) + SUM(safety_incidents[cargo_damage_cost])
+
+// Incidents per Million Miles  [Safety]  Q12
+Incidents per Million Miles = DIVIDE([Total Safety Incidents], [Total Miles]) * 1000000
+
+// ---------- Costs ----------
+// Cost per Mile / Fuel Cost per Mile / Maintenance Cost per Mile  [Costs]  Q6, Q13
+Cost per Mile = DIVIDE([Total Operating Cost], [Total Miles])
+Fuel Cost per Mile = DIVIDE([Total Fuel Cost], [Total Miles])
+Maintenance Cost per Mile = DIVIDE([Total Maintenance Cost], [Total Miles])
+
+// Avg Fuel Price per Gallon  [Costs]  Q16  (weighted by gallons)
+Avg Fuel Price per Gallon = DIVIDE(SUM(fuel_purchases[total_cost]), SUM(fuel_purchases[gallons]))
+
+// Fuel Share of Cost %  [Costs]  Q14
+Fuel Share of Cost % = DIVIDE([Total Fuel Cost], [Total Operating Cost] + [Total Claim Amount])
+
+// Profit / Profit Margin %  [Costs]  Q15 - company / time level only
+// (maintenance is not linked to customers or routes, so do not slice these by customer/route)
+Profit = [Total Revenue] - [Total Operating Cost]
+Profit Margin % = DIVIDE([Profit], [Total Revenue])
+
+// Margin after Fuel / Margin after Fuel %  [Costs]  Q15 - safe to slice by customer and route
+Margin after Fuel = [Total Revenue] - [Total Fuel Cost]
+Margin after Fuel % = DIVIDE([Margin after Fuel], [Total Revenue])

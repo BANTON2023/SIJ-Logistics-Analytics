@@ -67,6 +67,180 @@ table _Measures
 		displayFolder: Operations
 		lineageTag: a754b99c-8fba-40e5-a62f-bae49fecf7a8
 
+	measure 'Total Billed Revenue' = SUM(loads[revenue]) + SUM(loads[fuel_surcharge]) + SUM(loads[accessorial_charges])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Revenue & Volume
+		lineageTag: e57c5033-95e2-48c7-83e2-810f1ff7fd25
+
+	measure 'Revenue per Mile' = DIVIDE([Total Revenue], [Total Miles])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Revenue & Volume
+		lineageTag: 75a66196-d8f9-44d6-af95-e74211bcf824
+
+	measure 'Customer Revenue Share %' = DIVIDE([Total Revenue], CALCULATE([Total Revenue], ALL(customers)))
+		formatString: 0.0%
+		displayFolder: Revenue & Volume
+		lineageTag: fcc237e3-ad81-4ba6-b647-e17a7694c3e5
+
+	measure 'Active Customers' = DISTINCTCOUNT(loads[customer_id])
+		formatString: #,0
+		displayFolder: Revenue & Volume
+		lineageTag: 82d51018-b9cb-4583-b251-2000011da5b1
+
+	measure 'Revenue vs Potential %' =
+			VAR _years = COUNTROWS(VALUES('Calendar'[Year]))
+			RETURN DIVIDE(DIVIDE([Total Revenue], _years), SUM(customers[annual_revenue_potential]))
+		formatString: 0.0%
+		displayFolder: Revenue & Volume
+		lineageTag: d761ca11-6ffa-401b-8146-cfc2e05ca11c
+
+	measure 'Total Miles' = SUM(trips[actual_distance_miles])
+		formatString: #,0
+		displayFolder: Operations
+		lineageTag: 066618f1-611b-4684-ad21-d6e20cd7ef68
+
+	measure 'Avg MPG' = DIVIDE([Total Miles], SUM(trips[fuel_gallons_used]))
+		formatString: 0.00
+		displayFolder: Fleet
+		lineageTag: 5ad20120-4362-4005-84b4-2cae3114c3ca
+
+	measure 'Idle Hours' = SUM(trips[idle_time_hours])
+		formatString: #,0
+		displayFolder: Fleet
+		lineageTag: 63cfb03d-83c8-422b-b738-9163596681df
+
+	measure 'Idle %' = DIVIDE([Idle Hours], SUM(trips[actual_duration_hours]))
+		formatString: 0.0%
+		displayFolder: Fleet
+		lineageTag: 4345c9b2-bbe5-4aa0-8ce9-497af578d244
+
+	measure 'Avg Utilization Rate' = AVERAGE(truck_utilization_metrics[utilization_rate])
+		formatString: 0.0%
+		displayFolder: Fleet
+		lineageTag: 145c3f94-1f60-4040-a203-c0ce1ed5726a
+
+	measure 'Downtime Hours' = SUM(maintenance_records[downtime_hours])
+		formatString: #,0
+		displayFolder: Fleet
+		lineageTag: e4cf895e-560c-4869-81a3-f5c4913cec09
+
+	measure 'Active Trucks' = DISTINCTCOUNT(trips[truck_id])
+		formatString: #,0
+		displayFolder: Fleet
+		lineageTag: e8ce6f3c-40e7-4848-8d3d-4ebd7c6e8411
+
+	measure 'Active Drivers' = DISTINCTCOUNT(trips[driver_id])
+		formatString: #,0
+		displayFolder: Fleet
+		lineageTag: 1764cf0f-2222-4184-a3d6-33e95c54e40a
+
+	measure 'Miles per Driver' = DIVIDE([Total Miles], [Active Drivers])
+		formatString: #,0
+		displayFolder: Fleet
+		lineageTag: 05860943-f496-40e3-9bf7-939dc14b3795
+
+	measure 'On-Time %' = DIVIDE(CALCULATE(COUNTROWS(delivery_events), delivery_events[on_time_flag] = TRUE()), COUNTROWS(delivery_events))
+		formatString: 0.0%
+		displayFolder: Service
+		lineageTag: 3dc6134c-211c-4187-987b-a379d05ee102
+
+	measure 'Avg Detention (min)' = AVERAGE(delivery_events[detention_minutes])
+		formatString: 0.0
+		displayFolder: Service
+		lineageTag: df6dd7d2-a07d-4b85-858d-c5d9410e93a7
+
+	measure 'Total Detention Hours' = DIVIDE(SUM(delivery_events[detention_minutes]), 60)
+		formatString: #,0
+		displayFolder: Service
+		lineageTag: a9cb0fae-996c-4577-b14b-05fbc4011638
+
+	measure 'Avg Actual Transit Days' = DIVIDE(AVERAGE(trips[actual_duration_hours]), 24)
+		formatString: 0.00
+		displayFolder: Service
+		lineageTag: 95aebc2f-afc8-4b32-a84d-9c987dddc7a9
+
+	measure 'Avg Planned Transit Days' = AVERAGEX(loads, RELATED(routes[typical_transit_days]))
+		formatString: 0.00
+		displayFolder: Service
+		lineageTag: 897e7f1a-a212-490d-85e8-a44b4a02220f
+
+	measure 'Preventable Incident %' = DIVIDE(CALCULATE([Total Safety Incidents], safety_incidents[preventable_flag] = TRUE()), [Total Safety Incidents])
+		formatString: 0.0%
+		displayFolder: Safety
+		lineageTag: 9e819bd4-a29a-478a-9afc-28fb336d0946
+
+	measure 'At-Fault Incident %' = DIVIDE(CALCULATE([Total Safety Incidents], safety_incidents[at_fault_flag] = TRUE()), [Total Safety Incidents])
+		formatString: 0.0%
+		displayFolder: Safety
+		lineageTag: f191d4b8-34ec-433c-b39c-f1e3cf642d38
+
+	measure 'Injury Incidents' = CALCULATE([Total Safety Incidents], safety_incidents[injury_flag] = TRUE())
+		formatString: #,0
+		displayFolder: Safety
+		lineageTag: aba58cca-bf33-455b-ac32-8abe63da8a1a
+
+	measure 'Total Claim Amount' = SUM(safety_incidents[claim_amount])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Safety
+		lineageTag: 53392ae6-a3a2-4eb8-bfde-686021ec16d4
+
+	measure 'Total Damage Cost' = SUM(safety_incidents[vehicle_damage_cost]) + SUM(safety_incidents[cargo_damage_cost])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Safety
+		lineageTag: a36ffdc5-fe51-4f7f-aa1b-e8aaef36e3c9
+
+	measure 'Incidents per Million Miles' = DIVIDE([Total Safety Incidents], [Total Miles]) * 1000000
+		formatString: 0.00
+		displayFolder: Safety
+		lineageTag: 89fd95db-d140-4044-86d5-132ef2dc194b
+
+	measure 'Cost per Mile' = DIVIDE([Total Operating Cost], [Total Miles])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Costs
+		lineageTag: 7992808d-e94f-4c1b-a45a-342569311b86
+
+	measure 'Fuel Cost per Mile' = DIVIDE([Total Fuel Cost], [Total Miles])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Costs
+		lineageTag: a27533bf-2fb9-4a87-8f9f-36887e4619eb
+
+	measure 'Maintenance Cost per Mile' = DIVIDE([Total Maintenance Cost], [Total Miles])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Costs
+		lineageTag: ca6525ce-7ea8-4bc2-a1fb-cc26aaebb2c3
+
+	measure 'Avg Fuel Price per Gallon' = DIVIDE(SUM(fuel_purchases[total_cost]), SUM(fuel_purchases[gallons]))
+		formatString: \$#,0.000;(\$#,0.000);\$#,0.000
+		displayFolder: Costs
+		lineageTag: e78c7ed7-7bf5-4352-984a-6ba7e609e78b
+
+	measure 'Fuel Share of Cost %' = DIVIDE([Total Fuel Cost], [Total Operating Cost] + [Total Claim Amount])
+		formatString: 0.0%
+		displayFolder: Costs
+		lineageTag: 563b1b86-a62d-46f4-82c3-812ec062adab
+
+	/// Company / time level only. Maintenance is not linked to customers or routes; use Margin after Fuel for those.
+	measure Profit = [Total Revenue] - [Total Operating Cost]
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Costs
+		lineageTag: 3a8a9d3f-8b54-44d4-b6f6-85591826755d
+
+	/// Company / time level only. Use Margin after Fuel % by customer or route.
+	measure 'Profit Margin %' = DIVIDE([Profit], [Total Revenue])
+		formatString: 0.0%
+		displayFolder: Costs
+		lineageTag: 18cff52e-a180-4580-9ee0-51faf6eae4fc
+
+	measure 'Margin after Fuel' = [Total Revenue] - [Total Fuel Cost]
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Costs
+		lineageTag: bcf6b475-9f18-4650-a82d-3c9c4c878cab
+
+	measure 'Margin after Fuel %' = DIVIDE([Margin after Fuel], [Total Revenue])
+		formatString: 0.0%
+		displayFolder: Costs
+		lineageTag: 1bb4b1d5-7fca-4737-ae5e-06935d9f734b
+
 	column _placeholder
 		isHidden
 		isNameInferred
