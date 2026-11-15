@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "fleet01_kpi0",
   "position": {
-    "x": 216,
-    "y": 60,
-    "z": 10000,
+    "x": 212,
+    "y": 68,
+    "z": 11000,
     "width": 166,
-    "height": 114,
-    "tabOrder": 10000
+    "height": 111,
+    "tabOrder": 11000
   },
   "visual": {
     "visualType": "card",

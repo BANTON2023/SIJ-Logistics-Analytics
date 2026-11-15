@@ -3,11 +3,11 @@
   "name": "customers01_nav0",
   "position": {
     "x": 12,
-    "y": 80,
-    "z": 3000,
+    "y": 74,
+    "z": 4000,
     "width": 176,
-    "height": 34,
-    "tabOrder": 3000
+    "height": 32,
+    "tabOrder": 4000
   },
   "visual": {
     "visualType": "actionButton",
@@ -223,6 +223,40 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "bottom": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
                 }
               }
             }

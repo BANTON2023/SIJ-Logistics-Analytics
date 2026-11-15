@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "fleetDrivers",
   "position": {
-    "x": 486,
-    "y": 308,
-    "z": 24000,
+    "x": 482,
+    "y": 310,
+    "z": 25000,
     "width": 260,
-    "height": 402,
-    "tabOrder": 24000
+    "height": 398,
+    "tabOrder": 25000
   },
   "visual": {
     "visualType": "clusteredBarChart",

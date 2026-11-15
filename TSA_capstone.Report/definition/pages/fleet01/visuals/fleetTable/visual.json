@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "fleetTable",
   "position": {
-    "x": 756,
-    "y": 308,
-    "z": 25000,
-    "width": 512,
-    "height": 402,
-    "tabOrder": 25000
+    "x": 752,
+    "y": 310,
+    "z": 26000,
+    "width": 516,
+    "height": 398,
+    "tabOrder": 26000
   },
   "visual": {
     "visualType": "tableEx",

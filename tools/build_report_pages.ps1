@@ -67,12 +67,17 @@ function Title($text, $color) {
   if ($color) { $props.fontColor = (Col $color) }
   , @(@{ properties = $props })
 }
-# Container with no card styling (used on the sidebar)
-function Bare() { [ordered]@{ background = (Off); border = (Off); dropShadow = (Off) } }
+function Pad($t, $r, $b, $l) { , @(@{ properties = [ordered]@{ top = (Lit "${t}D"); right = (Lit "${r}D"); bottom = (Lit "${b}D"); left = (Lit "${l}D") } }) }
+function Fill($hex) { , @(@{ properties = [ordered]@{ show = (Lit 'true'); color = (Col $hex); transparency = (Lit '0D') } }) }
+# Container with no card styling or padding (sidebar items, text, buttons).
+# The theme adds 8/12 px padding to every visual; removing it here stops text
+# boxes from clipping and showing a scroll bar.
+function Bare() { [ordered]@{ background = (Off); border = (Off); dropShadow = (Off); padding = (Pad 0 0 0 0) } }
 
 # Palette (matches StaticResources/RegisteredResources/SIJ_Logistics_Theme.json)
 $NAVY = '#0F2A44'; $NAVY_HOVER = '#1E3A5F'; $TEAL = '#14A3A3'; $AMBER = '#F59E0B'
 $WHITE = '#FFFFFF'; $MUTED = '#CBD5E1'; $INK = '#0F2A44'; $SUBTLE = '#64748B'
+$PANEL_GREY = '#E2E8F0'; $LABEL = '#334155'
 
 # ---------- Visual builders ----------
 $script:vis = @()
@@ -95,13 +100,37 @@ function Visual($page, $id, $type, $x, $y, $w, $h, $roles, $title, $sortBy) {
   if ($title) { $v.visualContainerObjects = @{ title = (Title $title $null) } }
   Emit $page $id $x $y $w $h $v @($roles.Values | ForEach-Object { $_ })
 }
-function TextBox($page, $id, $x, $y, $w, $h, $runs) {
-  $paras = @($runs | ForEach-Object { @{ textRuns = @(@{ value = $_.t; textStyle = [ordered]@{ fontFamily = $_.font; fontSize = $_.size; color = $_.color } }) } })
+# Text box. Each paragraph is either one run @{ t; font; size; color; bold }
+# or @{ runs = @(run, run, ...) } to mix bold and regular text on one line.
+function Run($r) {
+  $style = [ordered]@{ fontFamily = $r.font; fontSize = $r.size; color = $r.color }
+  if ($r.bold) { $style.fontWeight = 'bold' }
+  [ordered]@{ value = $r.t; textStyle = $style }
+}
+function TextBox($page, $id, $x, $y, $w, $h, $paragraphs, $vco) {
+  $paras = @($paragraphs | ForEach-Object {
+    if ($_.runs) { $rs = @($_.runs | ForEach-Object { Run $_ }) } else { $rs = @((Run $_)) }
+    @{ textRuns = $rs }
+  })
+  if (-not $vco) { $vco = Bare }
   $v = [ordered]@{
     visualType = 'textbox'
     objects = @{ general = @(@{ properties = @{ paragraphs = $paras } }) }
-    visualContainerObjects = (Bare)
+    visualContainerObjects = $vco
     drillFilterOtherVisuals = $true
+  }
+  Emit $page $id $x $y $w $h $v @()
+}
+# Plain rectangle used for the sidebar and filter panels
+function Panel($page, $id, $x, $y, $w, $h, $hex) {
+  $v = [ordered]@{
+    visualType = 'shape'
+    objects = [ordered]@{
+      shape = @(@{ properties = @{ tileShape = (Lit "'rectangle'") } })
+      fill = @(@{ properties = [ordered]@{ show = (Lit 'true'); fillColor = (Col $hex); transparency = (Lit '0D') } })
+      outline = (Off)
+    }
+    visualContainerObjects = (Bare)
   }
   Emit $page $id $x $y $w $h $v @()
 }
@@ -129,14 +158,19 @@ function Button($page, $id, $x, $y, $w, $h, $label, $action, $target, $fill, $fi
 }
 
 # ---------- Layout (1280 x 720 canvas) ----------
-# Sidebar (x 0-200): brand, navigation buttons, filter slicers, clear-filters button
-# Main area (x 216-1268): page header, KPI tiles beside the lead chart, then detail visuals
-$SIDE_W = 200; $MX = 216; $MW = 1052; $GAP = 10
-$HEAD_Y = 8; $HEAD_H = 46
-$R1_Y = 60;  $R1_H = 238     # KPI tiles (3 x 2) + lead chart
-$R2_Y = 308; $R2_H = 402     # detail visuals
-$KPI_W = 166; $KPI_H = 114   # 3 tiles + 2 gaps = 518
+# Sidebar (x 0-200): navy brand and navigation panel on top, grey filter panel
+#   from FILTER_Y down to the bottom edge.
+# Header (x 200-1280, y 0-58): white full-width title bar.
+# Main area (x 212-1268): 12 px margin on both sides and at the bottom; KPI tiles
+#   beside the lead chart, then the detail visuals.
+$SIDE_W = 200; $MX = 212; $MW = 1056; $GAP = 10
+$HEAD_H = 58
+$R1_Y = 68;  $R1_H = 232     # KPI tiles (3 x 2) + lead chart
+$R2_Y = 310; $R2_H = 398     # detail visuals (ends at 708)
+$KPI_W = 166; $KPI_H = 111   # 3 tiles + 2 gaps = 518
 $LEAD_X = $MX + 3 * $KPI_W + 3 * $GAP; $LEAD_W = $MX + $MW - $LEAD_X
+$NAV_Y = 74; $NAV_H = 32; $NAV_STEP = 38
+$FILTER_Y = 312              # grey filter panel top
 
 $PAGE_LIST = @(
   @{ name = 'b388af99db000d0b50c6'; label = 'Executive Overview' },
@@ -147,43 +181,36 @@ $PAGE_LIST = @(
 )
 
 function Sidebar($page) {
-  # Navy panel
-  $v = [ordered]@{
-    visualType = 'shape'
-    objects = [ordered]@{
-      shape = @(@{ properties = @{ tileShape = (Lit "'rectangle'") } })
-      fill = @(@{ properties = [ordered]@{ show = (Lit 'true'); fillColor = (Col $NAVY); transparency = (Lit '0D') } })
-      outline = (Off)
-    }
-    visualContainerObjects = (Bare)
-  }
-  Emit $page "${page}_panel" 0 0 $SIDE_W 720 $v @()
-  TextBox $page "${page}_brand" 12 10 176 58 @(
-    @{ t = 'SIJ Logistics'; font = 'Segoe UI Semibold'; size = '16pt'; color = $WHITE },
+  Panel $page "${page}_panel" 0 0 $SIDE_W 720 $NAVY
+  Panel $page "${page}_filterPanel" 0 $FILTER_Y $SIDE_W (720 - $FILTER_Y) $PANEL_GREY
+  TextBox $page "${page}_brand" 12 10 176 54 @(
+    @{ t = 'SIJ Logistics'; font = 'Segoe UI'; size = '16pt'; color = $WHITE; bold = $true },
     @{ t = 'Fleet & freight analytics'; font = 'Segoe UI'; size = '9pt'; color = $MUTED }
   )
   # Navigation: one button per page; the current page is highlighted
-  $y = 80
+  $y = $NAV_Y
   for ($i = 0; $i -lt $PAGE_LIST.Count; $i++) {
     $entry = $PAGE_LIST[$i]
     if ($entry.name -eq $page) { $fill = $TEAL; $fillT = 0; $txt = $WHITE } else { $fill = $NAVY; $fillT = 100; $txt = $MUTED }
-    Button $page "${page}_nav$i" 12 $y 176 34 $entry.label 'PageNavigation' $entry.name $fill $fillT $txt $NAVY_HOVER
-    $y += 40
+    Button $page "${page}_nav$i" 12 $y 176 $NAV_H $entry.label 'PageNavigation' $entry.name $fill $fillT $txt $NAVY_HOVER
+    $y += $NAV_STEP
   }
-  TextBox $page "${page}_filtersLabel" 12 290 176 26 @(@{ t = 'FILTERS'; font = 'Segoe UI Semibold'; size = '9pt'; color = $MUTED })
+  TextBox $page "${page}_filtersLabel" 12 ($FILTER_Y + 8) 176 22 @(@{ t = 'FILTERS'; font = 'Segoe UI'; size = '9pt'; color = $INK; bold = $true })
 }
 # Slicer panel: Year, Quarter and Month are synced across pages (the selection
 # carries over between pages); two slicers follow for the page's own categories.
+# The slicers are spread over the grey panel so the clear button sits at the bottom.
 function Slicers($page, $extra) {
   $list = @(
     @{ f = (C 'Calendar' 'Year');    t = 'Year';    sync = 'SyncYear' },
     @{ f = (C 'Calendar' 'Quarter'); t = 'Quarter'; sync = 'SyncQuarter' },
     @{ f = (C 'Calendar' 'Month');   t = 'Month';   sync = 'SyncMonth' }
   ) + $extra
-  $y = 316
+  $y = $FILTER_Y + 34
   for ($i = 0; $i -lt $list.Count; $i++) {
     $s = $list[$i]
-    $vco = Bare; $vco.title = (Title $s.t $MUTED)
+    # White rounded card on the grey panel (theme style), without the shadow
+    $vco = [ordered]@{ title = (Title $s.t $LABEL); dropShadow = (Off); padding = (Pad 4 8 4 8) }
     $v = [ordered]@{
       visualType = 'slicer'
       query = [ordered]@{ queryState = [ordered]@{ Values = @{ projections = @((Proj $s.f)) } } }
@@ -193,15 +220,17 @@ function Slicers($page, $extra) {
     }
     if ($s.sync) { $v.syncGroup = [ordered]@{ groupName = $s.sync; fieldChanges = $true; filterChanges = $true } }
     Emit $page "${page}_slicer$i" 12 $y 176 56 $v @($s.f)
-    $y += 60
+    $y += 62
   }
-  Button $page "${page}_clear" 12 ($y + 6) 176 34 'Clear all filters' 'ClearAllSlicers' $null $AMBER 0 $INK '#FBBF24'
+  Button $page "${page}_clear" 12 668 176 36 'Clear all filters' 'ClearAllSlicers' $null $AMBER 0 $INK '#FBBF24'
 }
+# Full-width title bar: bold page title with a one-line description underneath
 function Header($page, $title, $subtitle) {
-  TextBox $page "${page}_header" $MX $HEAD_Y 820 $HEAD_H @(
-    @{ t = $title; font = 'Segoe UI Semibold'; size = '16pt'; color = $INK },
+  $vco = [ordered]@{ background = (Fill $WHITE); border = (Off); dropShadow = (Off); padding = (Pad 6 16 4 16) }
+  TextBox $page "${page}_header" $SIDE_W 0 (1280 - $SIDE_W) $HEAD_H @(
+    @{ t = $title; font = 'Segoe UI'; size = '16pt'; color = $INK; bold = $true },
     @{ t = $subtitle; font = 'Segoe UI'; size = '9pt'; color = $SUBTLE }
-  )
+  ) $vco
 }
 # Six KPI tiles in a 3 x 2 block next to the page's lead chart
 function Kpis($page, $measures, $titles) {
@@ -216,15 +245,27 @@ function Page($name, $display, $subtitle) {
   Sidebar $name
   Header $name $display $subtitle
 }
-# Split the detail row into columns of the given widths (gaps added automatically)
+# Split the detail row into columns of the given widths (gaps added automatically).
+# The last column stretches to the right margin so every page lines up.
 function Cols($widths) {
   $xs = @(); $x = $MX
-  foreach ($w in $widths) { $xs += , @($x, $w); $x += $w + $GAP }
+  for ($i = 0; $i -lt $widths.Count; $i++) {
+    $w = $widths[$i]
+    if ($i -eq $widths.Count - 1) { $w = $MX + $MW - $x }
+    $xs += , @($x, $w); $x += $w + $GAP
+  }
   $xs
 }
 
 # Remove previously generated visuals so the script can be re-run
-Get-ChildItem $PAGES -Directory | ForEach-Object { if (Test-Path "$($_.FullName)\visuals") { Remove-Item "$($_.FullName)\visuals" -Recurse -Force } }
+# Retries because OneDrive can briefly lock folders while it syncs them.
+function RemoveDir($path) {
+  for ($try = 1; Test-Path $path; $try++) {
+    try { Remove-Item $path -Recurse -Force -ErrorAction Stop }
+    catch { if ($try -ge 10) { throw }; Start-Sleep -Milliseconds 500 }
+  }
+}
+Get-ChildItem $PAGES -Directory | ForEach-Object { RemoveDir "$($_.FullName)\visuals" }
 
 # ---------------- Executive Overview (reuses the original blank page) ----------------
 $p = 'b388af99db000d0b50c6'; Page $p 'Executive Overview' 'Revenue, cost, service and safety at a glance - 2022 to 2024'
@@ -238,7 +279,7 @@ Visual $p 'execOnTime' 'lineChart' $c[2][0] $R2_Y $c[2][1] $R2_H ([ordered]@{ Ca
 
 # ---------------- Customers ----------------
 $p = 'customers01'; Page $p 'Customers' 'Who drives revenue, how much potential is captured, and how well we serve them'
-Kpis $p @('Active Customers','Total Revenue','Total Billed Revenue','Avg Revenue per Load','Revenue vs Potential %','Margin after Fuel %') @('Active Customers','Total Revenue','Billed Revenue (incl. surcharges)','Avg Revenue per Load','Revenue vs Potential','Margin after Fuel')
+Kpis $p @('Active Customers','Total Revenue','Total Billed Revenue','Avg Revenue per Load','Revenue vs Potential %','Margin after Fuel %') @('Active Customers','Total Revenue','Billed Revenue','Avg Revenue per Load','Revenue vs Potential','Margin after Fuel')
 Slicers $p @(@{ f = (C 'customers' 'customer_type'); t = 'Customer Type' }, @{ f = (C 'customers' 'account_status'); t = 'Account Status' })
 Visual $p 'custFreight' 'clusteredColumnChart' $LEAD_X $R1_Y $LEAD_W $R1_H ([ordered]@{ Category = @((C 'customers' 'primary_freight_type')); Y = @((M 'Avg Revenue per Load')) }) 'Avg Revenue per Load by Freight Type' (M 'Avg Revenue per Load')
 $c = Cols @(380, 662)
@@ -257,7 +298,7 @@ Visual $p 'fleetTable' 'tableEx' $c[2][0] $R2_Y $c[2][1] $R2_H ([ordered]@{ Valu
 
 # ---------------- Service ----------------
 $p = 'service01'; Page $p 'Service' 'On-time delivery, detention, transit times and safety'
-Kpis $p @('On-Time %','Avg Detention (min)','Avg Actual Transit Days','Avg Planned Transit Days','Incidents per Million Miles','Preventable Incident %') @('On-Time Delivery','Avg Detention (min)','Actual Transit Days','Planned Transit Days','Incidents / Million Miles','Preventable Incidents')
+Kpis $p @('On-Time %','Avg Detention (min)','Avg Actual Transit Days','Avg Planned Transit Days','Incidents per Million Miles','Preventable Incident %') @('On-Time Delivery','Avg Detention (min)','Actual Transit Days','Planned Transit Days','Incidents / M Miles','Preventable Incidents')
 Slicers $p @(@{ f = (C 'facilities' 'facility_type'); t = 'Facility Type' }, @{ f = (C 'routes' 'origin_state'); t = 'Origin State' })
 Visual $p 'svcTrend' 'lineChart' $LEAD_X $R1_Y $LEAD_W $R1_H ([ordered]@{ Category = @((C 'Calendar' 'Year Month')); Y = @((M 'On-Time %')) }) 'On-Time Delivery % by Month' $null
 $c = Cols @(300, 260, 472)
@@ -267,7 +308,7 @@ Visual $p 'svcRoutes' 'tableEx' $c[2][0] $R2_Y $c[2][1] $R2_H ([ordered]@{ Value
 
 # ---------------- Cost ----------------
 $p = 'cost01'; Page $p 'Cost' 'Operating cost, fuel and margin by route - cost covers fuel and maintenance only'
-Kpis $p @('Total Operating Cost','Cost per Mile','Fuel Cost per Mile','Avg Fuel Price per Gallon','Total Claim Amount','Profit') @('Operating Cost*','Cost per Mile*','Fuel Cost per Mile','Avg Fuel Price / Gallon','Incident Claims','Profit*')
+Kpis $p @('Total Operating Cost','Cost per Mile','Fuel Cost per Mile','Avg Fuel Price per Gallon','Total Claim Amount','Profit') @('Operating Cost*','Cost per Mile*','Fuel Cost per Mile','Fuel Price / Gallon','Incident Claims','Profit*')
 Slicers $p @(@{ f = (C 'fuel_purchases' 'location_state'); t = 'Fuel State' }, @{ f = (C 'routes' 'origin_state'); t = 'Origin State' })
 Visual $p 'costTrend' 'lineChart' $LEAD_X $R1_Y $LEAD_W $R1_H ([ordered]@{ Category = @((C 'Calendar' 'Year Month')); Y = @((M 'Cost per Mile'), (M 'Fuel Cost per Mile')) }) 'Cost per Mile by Month' $null
 $c = Cols @(400, 642)

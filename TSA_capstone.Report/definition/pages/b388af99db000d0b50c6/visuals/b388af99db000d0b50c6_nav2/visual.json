@@ -3,11 +3,11 @@
   "name": "b388af99db000d0b50c6_nav2",
   "position": {
     "x": 12,
-    "y": 160,
-    "z": 5000,
+    "y": 150,
+    "z": 6000,
     "width": 176,
-    "height": 34,
-    "tabOrder": 5000
+    "height": 32,
+    "tabOrder": 6000
   },
   "visual": {
     "visualType": "actionButton",
@@ -223,6 +223,40 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "bottom": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
                 }
               }
             }

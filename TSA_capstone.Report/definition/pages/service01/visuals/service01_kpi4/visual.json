@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "service01_kpi4",
   "position": {
-    "x": 392,
-    "y": 184,
-    "z": 14000,
+    "x": 388,
+    "y": 189,
+    "z": 15000,
     "width": 166,
-    "height": 114,
-    "tabOrder": 14000
+    "height": 111,
+    "tabOrder": 15000
   },
   "visual": {
     "visualType": "card",
@@ -48,7 +48,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Incidents / Million Miles'"
+                  "Value": "'Incidents / M Miles'"
                 }
               }
             }

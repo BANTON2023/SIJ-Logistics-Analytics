@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "custTop",
   "position": {
-    "x": 216,
-    "y": 308,
-    "z": 23000,
+    "x": 212,
+    "y": 310,
+    "z": 24000,
     "width": 380,
-    "height": 402,
-    "tabOrder": 23000
+    "height": 398,
+    "tabOrder": 24000
   },
   "visual": {
     "visualType": "clusteredBarChart",

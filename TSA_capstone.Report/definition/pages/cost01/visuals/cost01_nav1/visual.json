@@ -3,11 +3,11 @@
   "name": "cost01_nav1",
   "position": {
     "x": 12,
-    "y": 120,
-    "z": 4000,
+    "y": 112,
+    "z": 5000,
     "width": 176,
-    "height": 34,
-    "tabOrder": 4000
+    "height": 32,
+    "tabOrder": 5000
   },
   "visual": {
     "visualType": "actionButton",
@@ -223,6 +223,40 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "bottom": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
                 }
               }
             }

@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "customers01_kpi2",
   "position": {
-    "x": 568,
-    "y": 60,
-    "z": 12000,
+    "x": 564,
+    "y": 68,
+    "z": 13000,
     "width": 166,
-    "height": 114,
-    "tabOrder": 12000
+    "height": 111,
+    "tabOrder": 13000
   },
   "visual": {
     "visualType": "card",
@@ -48,7 +48,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Billed Revenue (incl. surcharges)'"
+                  "Value": "'Billed Revenue'"
                 }
               }
             }

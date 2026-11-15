@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "b388af99db000d0b50c6_header",
   "position": {
-    "x": 216,
-    "y": 8,
-    "z": 9000,
-    "width": 820,
-    "height": 46,
-    "tabOrder": 9000
+    "x": 200,
+    "y": 0,
+    "z": 10000,
+    "width": 1080,
+    "height": 58,
+    "tabOrder": 10000
   },
   "visual": {
     "visualType": "textbox",
@@ -19,24 +19,25 @@
               {
                 "textRuns": [
                   {
+                    "value": "Executive Overview",
                     "textStyle": {
-                      "fontFamily": "Segoe UI Semibold",
+                      "fontFamily": "Segoe UI",
                       "fontSize": "16pt",
-                      "color": "#0F2A44"
-                    },
-                    "value": "Executive Overview"
+                      "color": "#0F2A44",
+                      "fontWeight": "bold"
+                    }
                   }
                 ]
               },
               {
                 "textRuns": [
                   {
+                    "value": "Revenue, cost, service and safety at a glance - 2022 to 2024",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "9pt",
                       "color": "#64748B"
-                    },
-                    "value": "Revenue, cost, service and safety at a glance - 2022 to 2024"
+                    }
                   }
                 ]
               }
@@ -52,7 +53,25 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
                 }
               }
             }
@@ -79,6 +98,40 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "6D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "16D"
+                }
+              }
+            },
+            "bottom": {
+              "expr": {
+                "Literal": {
+                  "Value": "4D"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "16D"
                 }
               }
             }

@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "svcRoutes",
   "position": {
-    "x": 796,
-    "y": 308,
-    "z": 25000,
-    "width": 472,
-    "height": 402,
-    "tabOrder": 25000
+    "x": 792,
+    "y": 310,
+    "z": 26000,
+    "width": 476,
+    "height": 398,
+    "tabOrder": 26000
   },
   "visual": {
     "visualType": "tableEx",

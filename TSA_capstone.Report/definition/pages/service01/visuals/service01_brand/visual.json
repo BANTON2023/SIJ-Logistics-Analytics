@@ -4,10 +4,10 @@
   "position": {
     "x": 12,
     "y": 10,
-    "z": 2000,
+    "z": 3000,
     "width": 176,
-    "height": 58,
-    "tabOrder": 2000
+    "height": 54,
+    "tabOrder": 3000
   },
   "visual": {
     "visualType": "textbox",
@@ -19,24 +19,25 @@
               {
                 "textRuns": [
                   {
+                    "value": "SIJ Logistics",
                     "textStyle": {
-                      "fontFamily": "Segoe UI Semibold",
+                      "fontFamily": "Segoe UI",
                       "fontSize": "16pt",
-                      "color": "#FFFFFF"
-                    },
-                    "value": "SIJ Logistics"
+                      "color": "#FFFFFF",
+                      "fontWeight": "bold"
+                    }
                   }
                 ]
               },
               {
                 "textRuns": [
                   {
+                    "value": "Fleet & freight analytics",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "9pt",
                       "color": "#CBD5E1"
-                    },
-                    "value": "Fleet & freight analytics"
+                    }
                   }
                 ]
               }
@@ -79,6 +80,40 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "bottom": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
                 }
               }
             }

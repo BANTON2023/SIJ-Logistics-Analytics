@@ -3,11 +3,11 @@
   "name": "fleet01_nav3",
   "position": {
     "x": 12,
-    "y": 200,
-    "z": 6000,
+    "y": 188,
+    "z": 7000,
     "width": 176,
-    "height": 34,
-    "tabOrder": 6000
+    "height": 32,
+    "tabOrder": 7000
   },
   "visual": {
     "visualType": "actionButton",
@@ -223,6 +223,40 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "bottom": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
                 }
               }
             }
