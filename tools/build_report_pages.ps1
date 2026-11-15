@@ -79,6 +79,9 @@ $NAVY = '#0F2A44'; $NAVY_HOVER = '#1E3A5F'; $TEAL = '#14A3A3'; $AMBER = '#F59E0B
 $WHITE = '#FFFFFF'; $MUTED = '#CBD5E1'; $INK = '#0F2A44'; $SUBTLE = '#64748B'
 $PANEL_GREY = '#E2E8F0'; $LABEL = '#334155'
 $BTN_GREY = '#F1F5F9'; $TEAL_PALE = '#CCEFEF'; $TEAL_DARK = '#0F8A8A'
+# Sidebar text colours (no black on the sidebar): brand and buttons in theme blue,
+# panel labels in dark teal, clear-button text in deep amber
+$BRAND_BLUE = '#1F4E79'; $TEAL_TEXT = '#0F6B6B'; $AMBER_TEXT = '#7C2D12'
 
 # ---------- Visual builders ----------
 $script:vis = @()
@@ -203,7 +206,7 @@ function Sidebar($page) {
   Panel $page "${page}_filterPanel" 0 $FILTER_Y $SIDE_W (720 - $FILTER_Y) $PANEL_GREY
   Panel $page "${page}_divider" ($SIDE_W - 1) 0 1 $FILTER_Y $PANEL_GREY
   TextBox $page "${page}_brand" 12 8 176 48 @(
-    @{ t = 'SIJ Logistics'; font = 'Segoe UI'; size = '15pt'; color = $INK; bold = $true },
+    @{ t = 'SIJ Logistics'; font = 'Segoe UI'; size = '15pt'; color = $BRAND_BLUE; bold = $true },
     @{ t = '& Analytics'; font = 'Segoe UI'; size = '10pt'; color = $TEAL; bold = $true }
   )
   # Navigation: one button per page, labelled with the page title; the current
@@ -212,11 +215,11 @@ function Sidebar($page) {
   for ($i = 0; $i -lt $PAGE_LIST.Count; $i++) {
     $entry = $PAGE_LIST[$i]
     if ($entry.name -eq $page) { $fill = $TEAL; $txt = $WHITE; $hf = $TEAL_DARK; $ht = $WHITE }
-    else { $fill = $BTN_GREY; $txt = $INK; $hf = $TEAL_PALE; $ht = $INK }
+    else { $fill = $BTN_GREY; $txt = $BRAND_BLUE; $hf = $TEAL_PALE; $ht = $TEAL_TEXT }
     Button $page "${page}_nav$i" 12 $y 176 $NAV_H $entry.label 'PageNavigation' $entry.name $fill $txt $hf $ht
     $y += $NAV_STEP
   }
-  TextBox $page "${page}_filtersLabel" 12 ($FILTER_Y + 7) 176 20 @(@{ t = 'FILTERS'; font = 'Segoe UI'; size = '9pt'; color = $INK; bold = $true })
+  TextBox $page "${page}_filtersLabel" 12 ($FILTER_Y + 7) 176 20 @(@{ t = 'FILTERS'; font = 'Segoe UI'; size = '9pt'; color = $TEAL_TEXT; bold = $true })
 }
 # Slicer panel: Year, Quarter and Month are synced across pages (the selection
 # carries over between pages); two slicers follow for the page's own categories.
@@ -241,7 +244,7 @@ function Slicers($page, $extra) {
       query = [ordered]@{ queryState = [ordered]@{ Values = @{ projections = @((Proj $s.f)) } } }
       objects = [ordered]@{
         data = @(@{ properties = @{ mode = (Lit "'Dropdown'") } })
-        header = @(@{ properties = [ordered]@{ show = (Lit 'true'); text = (Lit "'$($s.t)'"); fontColor = (Col $LABEL); textSize = (Lit '9D') } })
+        header = @(@{ properties = [ordered]@{ show = (Lit 'true'); text = (Lit "'$($s.t)'"); fontColor = (Col $BRAND_BLUE); textSize = (Lit '9D') } })
       }
       visualContainerObjects = $vco
       drillFilterOtherVisuals = $true
@@ -250,7 +253,7 @@ function Slicers($page, $extra) {
     Emit $page "${page}_slicer$i" 12 $y 176 $SLICER_H $v @($s.f)
     $y += $SLICER_STEP
   }
-  Button $page "${page}_clear" 12 $CLEAR_Y 176 $CLEAR_H 'Clear all filters' 'ClearAllSlicers' $null $AMBER $INK '#FBBF24' $INK
+  Button $page "${page}_clear" 12 $CLEAR_Y 176 $CLEAR_H 'Clear all filters' 'ClearAllSlicers' $null $AMBER $AMBER_TEXT '#FBBF24' $AMBER_TEXT
 }
 # Full-width title bar: bold page title with a one-line description underneath
 function Header($page, $title, $subtitle) {
@@ -311,8 +314,8 @@ Kpis $p @('Active Customers','Total Revenue','Total Billed Revenue','Avg Revenue
 Slicers $p @(@{ f = (C 'customers' 'customer_type'); t = 'Customer Type' }, @{ f = (C 'customers' 'account_status'); t = 'Account Status' })
 Visual $p 'custFreight' 'clusteredColumnChart' $LEAD_X $R1_Y $LEAD_W $R1_H ([ordered]@{ Category = @((C 'customers' 'primary_freight_type')); Y = @((M 'Avg Revenue per Load')) }) 'Avg Revenue per Load by Freight Type' (M 'Avg Revenue per Load')
 $c = Cols @(380, 662)
-Visual $p 'custTop' 'clusteredBarChart' $c[0][0] $R2_Y $c[0][1] $R2_H ([ordered]@{ Category = @((C 'customers' 'customer_name')); Y = @((M 'Total Revenue')) }) 'Revenue by Customer' (M 'Total Revenue')
-Visual $p 'custTable' 'tableEx' $c[1][0] $R2_Y $c[1][1] $R2_H ([ordered]@{ Values = @((C 'customers' 'customer_name'), (C 'customers' 'customer_type'), (M 'Total Revenue'), (M 'Customer Revenue Share %'), (M 'Revenue vs Potential %'), (M 'On-Time %'), (M 'Margin after Fuel %')) }) 'Customer Scorecard' (M 'Total Revenue')
+Visual $p 'custTop' 'clusteredBarChart' $c[0][0] $R2_Y $c[0][1] $R2_H ([ordered]@{ Category = @((C 'customers' 'customer_name')); Y = @((M 'Total Revenue')) }) 'Revenue by Name (merges same-name accounts)' (M 'Total Revenue')
+Visual $p 'custTable' 'tableEx' $c[1][0] $R2_Y $c[1][1] $R2_H ([ordered]@{ Values = @((C 'customers' 'customer_id'), (C 'customers' 'customer_name'), (C 'customers' 'customer_type'), (M 'Total Revenue'), (M 'Customer Revenue Share %'), (M 'Revenue vs Potential %'), (M 'On-Time %'), (M 'Margin after Fuel %')) }) 'Customer Scorecard (one row per account)' (M 'Total Revenue')
 
 # ---------------- Fleet ----------------
 $p = 'fleet01'; Page $p 'Fleet' 'Utilization, fuel efficiency and maintenance across trucks and drivers'
@@ -349,9 +352,9 @@ Visual $p 'costRoutes' 'tableEx' $c[1][0] $R2_Y $c[1][1] $R2_H ([ordered]@{ Valu
 # in docs/Executive_Summary.md - update both together.
 $p = 'summary01'; Page $p 'Summary & Actions' 'What the data says and what to do next - full period, January 2022 to December 2024'
 TextBox $p "${p}_about" 12 ($FILTER_Y + 34) 176 150 @(
-  @{ t = 'Figures on this page cover the full three years and do not change with filters.'; font = 'Segoe UI'; size = '9pt'; color = $LABEL },
+  @{ t = 'Figures on this page cover the full three years and do not change with filters.'; font = 'Segoe UI'; size = '9pt'; color = $BRAND_BLUE },
   @{ t = ' '; font = 'Segoe UI'; size = '6pt'; color = $LABEL },
-  @{ t = 'Use the other pages to explore any number in detail.'; font = 'Segoe UI'; size = '9pt'; color = $LABEL }
+  @{ t = 'Use the other pages to explore any number in detail.'; font = 'Segoe UI'; size = '9pt'; color = $TEAL_TEXT }
 )
 $CARD = [ordered]@{ padding = (Pad 10 14 10 14) }
 function Heading($t, $hex) { @{ t = $t; font = 'Segoe UI'; size = '12pt'; color = $hex; bold = $true } }

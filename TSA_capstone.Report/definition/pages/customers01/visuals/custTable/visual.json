@@ -23,6 +23,20 @@
                       "Entity": "customers"
                     }
                   },
+                  "Property": "customer_id"
+                }
+              },
+              "queryRef": "customers.customer_id",
+              "nativeQueryRef": "customer_id"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "customers"
+                    }
+                  },
                   "Property": "customer_name"
                 }
               },
@@ -150,7 +164,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Customer Scorecard'"
+                  "Value": "'Customer Scorecard (one row per account)'"
                 }
               }
             }

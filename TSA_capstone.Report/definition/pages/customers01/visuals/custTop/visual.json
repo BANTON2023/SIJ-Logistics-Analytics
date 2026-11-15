@@ -84,7 +84,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Revenue by Customer'"
+                  "Value": "'Revenue by Name (merges same-name accounts)'"
                 }
               }
             }
