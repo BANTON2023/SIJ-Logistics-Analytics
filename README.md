@@ -45,10 +45,20 @@ Full write-ups: [Executive summary](docs/Executive_Summary.md) ·
 1. Clone or download this repository.
 2. Open `TSA_capstone.pbip` in Power BI Desktop (current release).
 3. Select **Refresh**. The data downloads from this repository's `data/` folder, so
-   nothing needs to be set up. If Power BI asks about privacy levels, choose **Public**.
+   nothing needs to be set up. The first time, Power BI asks how to connect to
+   `raw.githubusercontent.com`: choose **Anonymous**, then **Connect**. If it asks about
+   privacy levels, choose **Public**.
 
 To work offline, set the `DataSource` parameter (*Transform data › Edit parameters*)
 to your local `data\` folder, ending in `\`.
+
+**If the visuals stay empty after a refresh**
+
+| Message in Power BI | Cause | Fix |
+| --- | --- | --- |
+| *The remote name could not be resolved: 'raw.githubusercontent.com'* | No internet connection, or the network blocks GitHub | Reconnect and refresh, or set `DataSource` to your local `data\` folder |
+| *Please specify how to connect* / credentials prompt | First connection to the web source | Choose **Anonymous** |
+| *404 Not Found* | `DataSource` points at a branch or folder that does not exist | Check the address ends in `/main/data/` |
 
 **SQL**
 
