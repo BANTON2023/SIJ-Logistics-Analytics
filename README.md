@@ -11,15 +11,40 @@ A capstone analytics project for a US trucking company. A Power BI report and a 
 SQL queries answer 16 business questions about **customers**, **fleet**, **service**
 and **cost**, using three years of operating data (85,410 loads, 122 million miles).
 
+**Status: complete** (v1.0.1, November 2026)
+
 Author: **Mbaji Austin** · Licence: [MIT](LICENSE) · Changes: [CHANGELOG](CHANGELOG.md)
 
 ---
 
 ## Screenshots
 
-<!-- Screenshots of each report page go in docs/images/ and are listed here. -->
+Shown filtered to Q1 2022 (the first quarter of data, so the cards read "No prior year
+to compare"; with 2023 or 2024 selected they show the change against the year before).
 
-_Screenshots of the six report pages will be added here._
+**Executive Overview** - headline KPIs with targets, revenue against cost, cost mix and on-time trend
+
+![Executive Overview](docs/images/01-executive-overview.png)
+
+**Customers** - revenue, potential captured, revenue per load by freight type, account scorecard
+
+![Customers](docs/images/02-customers.png)
+
+**Fleet** - utilization, MPG, idle time, maintenance cost per mile by model year, truck scorecard
+
+![Fleet](docs/images/03-fleet.png)
+
+**Service** - on-time pickup and delivery with the late and early split, detention, safety, route service levels
+
+![Service](docs/images/04-service.png)
+
+**Cost** - cost per mile against target, fuel price by state, route margin after fuel
+
+![Cost](docs/images/05-cost.png)
+
+**Summary & Actions** - findings and seven recommendations in plain language
+
+![Summary & Actions](docs/images/06-summary-and-actions.png)
 
 ---
 

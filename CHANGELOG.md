@@ -8,6 +8,12 @@ project uses [Semantic Versioning](https://semver.org/).
 
 ## [1.0.1] - 2026-11-16
 
+Final release: the project is complete.
+
+### Added
+
+- Screenshots of all six report pages in `docs/images/`, shown in the README.
+
 ### Fixed
 
 - Refresh from GitHub timed out on slow connections: each CSV download now allows
