@@ -4,10 +4,10 @@
   "position": {
     "x": 740,
     "y": 68,
-    "z": 25000,
+    "z": 35000,
     "width": 528,
     "height": 232,
-    "tabOrder": 25000
+    "tabOrder": 35000
   },
   "visual": {
     "visualType": "lineChart",
@@ -41,11 +41,39 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "On-Time %"
+                  "Property": "On-Time Delivery %"
                 }
               },
-              "queryRef": "_Measures.On-Time %",
-              "nativeQueryRef": "On-Time %"
+              "queryRef": "_Measures.On-Time Delivery %",
+              "nativeQueryRef": "On-Time Delivery %"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Late Stops %"
+                }
+              },
+              "queryRef": "_Measures.Late Stops %",
+              "nativeQueryRef": "Late Stops %"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Early Stops %"
+                }
+              },
+              "queryRef": "_Measures.Early Stops %",
+              "nativeQueryRef": "Early Stops %"
             }
           ]
         }
@@ -66,7 +94,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'On-Time Delivery % by Month'"
+                  "Value": "'Delivery: On Time, Late and Early by Month'"
                 }
               }
             }

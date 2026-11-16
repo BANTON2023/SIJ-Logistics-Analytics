@@ -3,11 +3,11 @@
   "name": "service01_nav1",
   "position": {
     "x": 12,
-    "y": 102,
-    "z": 6000,
+    "y": 106,
+    "z": 5000,
     "width": 176,
     "height": 36,
-    "tabOrder": 6000
+    "tabOrder": 5000
   },
   "visual": {
     "visualType": "actionButton",

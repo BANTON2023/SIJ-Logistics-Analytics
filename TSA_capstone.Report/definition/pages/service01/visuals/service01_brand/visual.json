@@ -3,11 +3,11 @@
   "name": "service01_brand",
   "position": {
     "x": 12,
-    "y": 8,
-    "z": 4000,
+    "y": 6,
+    "z": 3000,
     "width": 176,
     "height": 48,
-    "tabOrder": 4000
+    "tabOrder": 3000
   },
   "visual": {
     "visualType": "textbox",
@@ -23,7 +23,7 @@
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "15pt",
-                      "color": "#1F4E79",
+                      "color": "#FFFFFF",
                       "fontWeight": "bold"
                     }
                   }
@@ -36,7 +36,7 @@
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "10pt",
-                      "color": "#14A3A3",
+                      "color": "#CCEFEF",
                       "fontWeight": "bold"
                     }
                   }

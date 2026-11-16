@@ -62,10 +62,10 @@ The 16 questions fall into four areas, but the answers keep pointing to three th
 
 | # | Question | Where in the report | Measures | Answer |
 | --- | --- | --- | --- | --- |
-| 9 | What is the on-time rate by customer, facility, route and month? | **Service** › *On-Time Delivery % by Month*, *Route Service Levels*; **Customers** › scorecard; Facility Type slicer | On-Time % | **55.7% overall**: 66.7% of pickups and 44.6% of deliveries. The rate is flat every month and year, and the same at every facility type (55–56%), so the cause is company-wide (theme 1). |
+| 9 | What is the on-time rate by customer, facility, route and month? | **Service** › *On-Time Delivery*, *On-Time Pickup*, *Late Stops* and *Over 2 h Early* KPIs, *Delivery: On Time, Late and Early by Month*, *Route Service Levels*; **Customers** › scorecard; Facility Type slicer | On-Time Delivery %, On-Time Pickup %, Late Stops %, Early Stops % | **55.7% overall**: 66.7% of pickups and 44.6% of deliveries. The rate is flat every month and year, and the same at every facility type (55–56%), so the cause is company-wide (theme 1). |
 | 10 | Where does detention (waiting) time build up, by facility and customer? | **Service** › *Avg Detention by Facility (min)*, *Avg Detention* KPI | Avg Detention (min), Total Detention Hours | The average wait is **92 minutes** per stop, and even the worst facilities are only slightly higher (94 minutes). 36% of stops wait more than 2 hours. Waiting is widespread, so the fix is a policy (charging for waiting time), not a few sites. |
-| 11 | How do actual trip times compare with planned transit days? | **Service** › *Actual Transit Days* and *Planned Transit Days* KPIs, *Route Service Levels* | Avg Actual Transit Days, Avg Planned Transit Days | Trips take about **1.0 day against 2.1 days planned**. 9,382 stops were marked late because they arrived more than 2 hours **early**. Appointment times are not based on real drive times, and this is the root cause behind Q9 (theme 1). |
-| 12 | What are the incident rate, the preventable share and claim costs? | **Service** › *Safety Incidents by Type*, *Incidents / M Miles* and *Preventable Incidents* KPIs | Total Safety Incidents, Incidents per Million Miles, Preventable Incident %, Total Claim Amount | **170 incidents** (1.4 per million miles), 33 with injuries, **$2.65M** in claims. 38% were preventable ($0.9M). DOT violations are the most common (39); equipment damage is the most expensive ($741k). 18 drivers had 3 or more incidents. |
+| 11 | How do actual trip times compare with planned transit days? | **Service** › *Route Service Levels* (actual and planned transit days per route), *Over 2 h Early* KPI | Avg Actual Transit Days, Avg Planned Transit Days | Trips take about **1.0 day against 2.1 days planned**. 9,382 stops were marked late because they arrived more than 2 hours **early**. Appointment times are not based on real drive times, and this is the root cause behind Q9 (theme 1). |
+| 12 | What are the incident rate, the preventable share and claim costs? | **Service** › *Safety Incidents by Type*, *Preventable Incidents* KPI; **Executive Overview** › *Incidents / 100 Trips* KPI | Total Safety Incidents, Incidents per Million Miles, Preventable Incident %, Total Claim Amount | **170 incidents** (1.4 per million miles), 33 with injuries, **$2.65M** in claims. 38% were preventable ($0.9M). DOT violations are the most common (39); equipment damage is the most expensive ($741k). 18 drivers had 3 or more incidents. |
 
 ## Cost
 
@@ -90,6 +90,11 @@ The 16 questions fall into four areas, but the answers keep pointing to three th
 4. **Checks:** totals were checked against the source CSV files. Some breakdowns, such as
    driver experience (Q8) and lateness in minutes (Q11), were worked out from the source
    files to explain what the report shows.
+
+5. **SQL:** every question also has a PostgreSQL query in [`sql/questions/`](../sql/questions)
+   with the same number (`Q1` to `Q16`, plus follow-ups such as `Q12b`, the driver
+   coaching list). `tools/verify_sql.py` runs them all and confirms that 14 headline
+   numbers match the report exactly.
 
 ## Gaps and suggested additions
 

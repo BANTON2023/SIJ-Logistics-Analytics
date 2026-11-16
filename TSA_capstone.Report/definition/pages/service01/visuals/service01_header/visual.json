@@ -4,10 +4,10 @@
   "position": {
     "x": 200,
     "y": 0,
-    "z": 12000,
+    "z": 11000,
     "width": 1080,
     "height": 58,
-    "tabOrder": 12000
+    "tabOrder": 11000
   },
   "visual": {
     "visualType": "textbox",
@@ -32,7 +32,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "On-time delivery, detention, transit times and safety",
+                    "value": "On-time pickup and delivery (late and early split), detention, transit times and safety",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "9pt",

@@ -3,11 +3,11 @@
   "name": "summary01_nav4",
   "position": {
     "x": 12,
-    "y": 222,
-    "z": 9000,
+    "y": 226,
+    "z": 8000,
     "width": 176,
     "height": 36,
-    "tabOrder": 9000
+    "tabOrder": 8000
   },
   "visual": {
     "visualType": "actionButton",

@@ -3,11 +3,11 @@
   "name": "customers01_nav2",
   "position": {
     "x": 12,
-    "y": 142,
-    "z": 7000,
+    "y": 146,
+    "z": 6000,
     "width": 176,
     "height": 36,
-    "tabOrder": 7000
+    "tabOrder": 6000
   },
   "visual": {
     "visualType": "actionButton",

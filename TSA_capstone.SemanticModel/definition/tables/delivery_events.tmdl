@@ -89,7 +89,7 @@ table delivery_events
 		mode: import
 		source =
 				let
-				    Source = Csv.Document(File.Contents("C:\Users\BIG AUSTIN\Downloads\drive-download-20260913T170633Z-1-001\delivery_events.csv"),[Delimiter=",", Columns=11, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    Source = Csv.Document((if Text.StartsWith(DataSource, "http") then Web.Contents(DataSource, [RelativePath = "delivery_events.csv"]) else File.Contents(DataSource & "delivery_events.csv")),[Delimiter=",", Columns=11, Encoding=1252, QuoteStyle=QuoteStyle.None]),
 				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
 				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"event_id", type text}, {"load_id", type text}, {"trip_id", type text}, {"event_type", type text}, {"facility_id", type text}, {"scheduled_datetime", type datetime}, {"actual_datetime", type datetime}, {"detention_minutes", Int64.Type}, {"on_time_flag", type logical}, {"location_city", type text}, {"location_state", type text}}),
 				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"location_state"})

@@ -1,0 +1,39 @@
+{
+  "_about": "KPI cards: comparison with the previous year and targets. Used by tools/build_kpi_measures.ps1 (model measures) and tools/build_report_pages.ps1 (cards). Targets are management assumptions - change them here, then run both scripts with Power BI Desktop closed.",
+  "_fields": {
+    "measure": "Base measure in _Measures",
+    "title": "Card title",
+    "higherIsBetter": "true if an increase is good (green), false if a decrease is good",
+    "points": "true for rates: change shown in percentage points; false: change shown as % change",
+    "target": "Optional target value (same unit as the measure)",
+    "targetLabel": "How the target is shown on the card"
+  },
+  "kpis": [
+    { "measure": "Total Revenue",             "title": "Total Revenue",          "higherIsBetter": true,  "points": false },
+    { "measure": "Total Loads",               "title": "Total Loads",            "higherIsBetter": true,  "points": false },
+    { "measure": "Total Billed Revenue",      "title": "Billed Revenue",         "higherIsBetter": true,  "points": false },
+    { "measure": "Avg Revenue per Load",      "title": "Avg Revenue per Load",   "higherIsBetter": true,  "points": false },
+    { "measure": "Active Customers",          "title": "Active Customers",       "higherIsBetter": true,  "points": false },
+    { "measure": "Revenue vs Potential %",    "title": "Revenue vs Potential",   "higherIsBetter": true,  "points": true,  "target": 0.20, "targetLabel": "Target: at least 20%" },
+    { "measure": "Margin after Fuel %",       "title": "Margin after Fuel %",    "higherIsBetter": true,  "points": true,  "target": 0.65, "targetLabel": "Target: at least 65%" },
+    { "measure": "Margin after Fuel",         "title": "Margin after Fuel",      "higherIsBetter": true,  "points": false },
+    { "measure": "On-Time Delivery %",        "title": "On-Time Delivery",       "higherIsBetter": true,  "points": true,  "target": 0.75, "targetLabel": "Target: at least 75%" },
+    { "measure": "On-Time Pickup %",          "title": "On-Time Pickup",         "higherIsBetter": true,  "points": true,  "target": 0.85, "targetLabel": "Target: at least 85%" },
+    { "measure": "Late Stops %",              "title": "Late Stops",             "higherIsBetter": false, "points": true,  "target": 0.20, "targetLabel": "Target: under 20%" },
+    { "measure": "Early Stops %",             "title": "Over 2 h Early",         "higherIsBetter": false, "points": true },
+    { "measure": "Avg Detention (min)",       "title": "Avg Detention (min)",    "higherIsBetter": false, "points": false, "target": 60,   "targetLabel": "Target: under 60 min" },
+    { "measure": "Preventable Incident %",    "title": "Preventable Incidents",  "higherIsBetter": false, "points": true,  "target": 0.25, "targetLabel": "Target: under 25%" },
+    { "measure": "Incidents per 100 Trips",   "title": "Incidents / 100 Trips",  "higherIsBetter": false, "points": false, "target": 0.15, "targetLabel": "Target: under 0.15" },
+    { "measure": "Active Trucks",             "title": "Active Trucks",          "higherIsBetter": true,  "points": false },
+    { "measure": "Active Drivers",            "title": "Active Drivers",         "higherIsBetter": true,  "points": false },
+    { "measure": "Avg Utilization Rate",      "title": "Avg Utilization",        "higherIsBetter": true,  "points": true,  "target": 0.85, "targetLabel": "Target: at least 85%" },
+    { "measure": "Avg MPG",                   "title": "Avg MPG",                "higherIsBetter": true,  "points": false, "target": 6.8,  "targetLabel": "Target: at least 6.8" },
+    { "measure": "Idle %",                    "title": "Idle Time",              "higherIsBetter": false, "points": true,  "target": 0.20, "targetLabel": "Target: under 20%" },
+    { "measure": "Downtime Hours",            "title": "Downtime Hours",         "higherIsBetter": false, "points": false },
+    { "measure": "Total Operating Cost",      "title": "Operating Cost*",        "higherIsBetter": false, "points": false },
+    { "measure": "Cost per Mile",             "title": "Cost per Mile*",         "higherIsBetter": false, "points": false, "target": 0.80, "targetLabel": "Target: under $0.80" },
+    { "measure": "Fuel Cost per Mile",        "title": "Fuel Cost per Mile",     "higherIsBetter": false, "points": false, "target": 0.75, "targetLabel": "Target: under $0.75" },
+    { "measure": "Avg Fuel Price per Gallon", "title": "Fuel Price / Gallon",    "higherIsBetter": false, "points": false },
+    { "measure": "Total Claim Amount",        "title": "Incident Claims",        "higherIsBetter": false, "points": false }
+  ]
+}

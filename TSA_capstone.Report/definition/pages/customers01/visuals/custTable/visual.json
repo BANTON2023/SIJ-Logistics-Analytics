@@ -4,10 +4,10 @@
   "position": {
     "x": 602,
     "y": 310,
-    "z": 27000,
+    "z": 34000,
     "width": 666,
     "height": 398,
-    "tabOrder": 27000
+    "tabOrder": 34000
   },
   "visual": {
     "visualType": "tableEx",
@@ -107,11 +107,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "On-Time %"
+                  "Property": "On-Time Delivery %"
                 }
               },
-              "queryRef": "_Measures.On-Time %",
-              "nativeQueryRef": "On-Time %"
+              "queryRef": "_Measures.On-Time Delivery %",
+              "nativeQueryRef": "On-Time Delivery %"
             },
             {
               "field": {

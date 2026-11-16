@@ -10,3 +10,6 @@ TSA_original/
 
 # Unrelated workbook (Products/Sales), not part of the TSA capstone
 PowerBI_projectdata.xlsx
+
+# Local screenshots before they are cropped into docs/images
+screenshot for tsa capstone/

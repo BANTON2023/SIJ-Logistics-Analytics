@@ -9,7 +9,7 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
-annotation PBI_QueryOrder = ["customers","delivery_events","driver_monthly_metrics","drivers","facilities","fuel_purchases","loads","maintenance_records","routes","safety_incidents","trailers","trips","truck_utilization_metrics","trucks"]
+annotation PBI_QueryOrder = ["DataSource","customers","delivery_events","driver_monthly_metrics","drivers","facilities","fuel_purchases","loads","maintenance_records","routes","safety_incidents","trailers","trips","truck_utilization_metrics","trucks"]
 
 annotation PBI_ProTooling = ["DevMode","MCP-PBIModeling"]
 
