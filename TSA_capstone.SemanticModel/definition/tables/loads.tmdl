@@ -111,7 +111,7 @@ table loads
 		mode: import
 		source =
 				let
-				    Source = Csv.Document((if Text.StartsWith(DataSource, "http") then Web.Contents(DataSource, [RelativePath = "loads.csv"]) else File.Contents(DataSource & "loads.csv")),[Delimiter=",", Columns=12, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    Source = Csv.Document((if Text.StartsWith(DataSource, "http") then Web.Contents(DataSource, [RelativePath = "loads.csv", Timeout = #duration(0, 0, 30, 0)]) else File.Contents(DataSource & "loads.csv")),[Delimiter=",", Columns=12, Encoding=1252, QuoteStyle=QuoteStyle.None]),
 				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
 				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"load_id", type text}, {"customer_id", type text}, {"route_id", type text}, {"load_date", type date}, {"load_type", type text}, {"weight_lbs", Int64.Type}, {"pieces", Int64.Type}, {"revenue", type number}, {"fuel_surcharge", type number}, {"accessorial_charges", Int64.Type}, {"load_status", type text}, {"booking_type", type text}})
 				in

@@ -101,7 +101,7 @@ table truck_utilization_metrics
 		mode: import
 		source =
 				let
-				    Source = Csv.Document((if Text.StartsWith(DataSource, "http") then Web.Contents(DataSource, [RelativePath = "truck_utilization_metrics.csv"]) else File.Contents(DataSource & "truck_utilization_metrics.csv")),[Delimiter=",", Columns=10, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    Source = Csv.Document((if Text.StartsWith(DataSource, "http") then Web.Contents(DataSource, [RelativePath = "truck_utilization_metrics.csv", Timeout = #duration(0, 0, 30, 0)]) else File.Contents(DataSource & "truck_utilization_metrics.csv")),[Delimiter=",", Columns=10, Encoding=1252, QuoteStyle=QuoteStyle.None]),
 				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
 				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"truck_id", type text}, {"month", type date}, {"trips_completed", Int64.Type}, {"total_miles", Int64.Type}, {"total_revenue", type number}, {"average_mpg", type number}, {"maintenance_events", Int64.Type}, {"maintenance_cost", type number}, {"downtime_hours", type number}, {"utilization_rate", type number}})
 				in

@@ -6,6 +6,14 @@ project uses [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-11-16
+
+### Fixed
+
+- Refresh from GitHub timed out on slow connections: each CSV download now allows
+  up to 30 minutes instead of Power BI's 100-second default (the largest file,
+  `fuel_purchases.csv`, is 20 MB, roughly 4 MB compressed).
+
 ## [1.0.0] - 2026-11-15
 
 First complete release.
@@ -50,5 +58,6 @@ First complete release.
 - KPI comparisons show "No change" instead of "▲ 0.0%" when a value is unchanged.
 - Fuel share and customer concentration figures corrected after SQL reconciliation.
 
-[Unreleased]: ../../compare/v1.0.0...HEAD
+[Unreleased]: ../../compare/v1.0.1...HEAD
+[1.0.1]: ../../compare/v1.0.0...v1.0.1
 [1.0.0]: ../../releases/tag/v1.0.0
