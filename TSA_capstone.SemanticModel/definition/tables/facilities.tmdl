@@ -77,7 +77,7 @@ table facilities
 		mode: import
 		source =
 				let
-				    Source = Csv.Document((if Text.StartsWith(DataSource, "http") then Web.Contents(DataSource, [RelativePath = "facilities.csv"]) else File.Contents(DataSource & "facilities.csv")),[Delimiter=",", Columns=9, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    Source = Csv.Document((if Text.StartsWith(DataSource, "http") then Web.Contents(DataSource, [RelativePath = "facilities.csv", Timeout = #duration(0, 0, 30, 0)]) else File.Contents(DataSource & "facilities.csv")),[Delimiter=",", Columns=9, Encoding=1252, QuoteStyle=QuoteStyle.None]),
 				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
 				in
 				    #"Promoted Headers"

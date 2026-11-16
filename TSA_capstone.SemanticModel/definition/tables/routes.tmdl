@@ -83,7 +83,7 @@ table routes
 		mode: import
 		source =
 				let
-				    Source = Csv.Document((if Text.StartsWith(DataSource, "http") then Web.Contents(DataSource, [RelativePath = "routes.csv"]) else File.Contents(DataSource & "routes.csv")),[Delimiter=",", Columns=9, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    Source = Csv.Document((if Text.StartsWith(DataSource, "http") then Web.Contents(DataSource, [RelativePath = "routes.csv", Timeout = #duration(0, 0, 30, 0)]) else File.Contents(DataSource & "routes.csv")),[Delimiter=",", Columns=9, Encoding=1252, QuoteStyle=QuoteStyle.None]),
 				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
 				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"route_id", type text}, {"origin_city", type text}, {"origin_state", type text}, {"destination_city", type text}, {"destination_state", type text}, {"typical_distance_miles", Int64.Type}, {"base_rate_per_mile", type number}, {"fuel_surcharge_rate", type number}, {"typical_transit_days", Int64.Type}})
 				in
