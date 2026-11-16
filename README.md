@@ -19,8 +19,8 @@ Author: **Mbaji Austin** · Licence: [MIT](LICENSE) · Changes: [CHANGELOG](CHAN
 
 ## Screenshots
 
-Shown filtered to Q1 2022 (the first quarter of data, so the cards read "No prior year
-to compare"; with 2023 or 2024 selected they show the change against the year before).
+Shown for the full period, January 2022 to December 2024, with no filters. Each KPI card
+compares the latest year with the one before (2024 vs 2023), green when the change is good.
 
 **Executive Overview** - headline KPIs with targets, revenue against cost, cost mix and on-time trend
 
