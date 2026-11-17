@@ -11,7 +11,7 @@ A capstone analytics project for a US trucking company. A Power BI report and a 
 SQL queries answer 16 business questions about **customers**, **fleet**, **service**
 and **cost**, using three years of operating data (85,410 loads, 122 million miles).
 
-**Status: complete** (v1.0.1, November 2026)
+**Status: complete** (v1.0.2, November 2026)
 
 Author: **Mbaji Austin** · Licence: [MIT](LICENSE) · Changes: [CHANGELOG](CHANGELOG.md)
 
