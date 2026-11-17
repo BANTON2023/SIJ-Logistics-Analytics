@@ -6,6 +6,13 @@ project uses [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.0.2] - 2026-11-17
+
+### Changed
+
+- README screenshots replaced with full-period views (January 2022 to December 2024,
+  no filters), so every KPI card shows its 2024 vs 2023 comparison and target.
+
 ## [1.0.1] - 2026-11-16
 
 Final release: the project is complete.
@@ -64,6 +71,7 @@ First complete release.
 - KPI comparisons show "No change" instead of "▲ 0.0%" when a value is unchanged.
 - Fuel share and customer concentration figures corrected after SQL reconciliation.
 
-[Unreleased]: ../../compare/v1.0.1...HEAD
+[Unreleased]: ../../compare/v1.0.2...HEAD
+[1.0.2]: ../../compare/v1.0.1...v1.0.2
 [1.0.1]: ../../compare/v1.0.0...v1.0.1
 [1.0.0]: ../../releases/tag/v1.0.0
